@@ -1,11 +1,11 @@
-package movement;
+package movementV2;
 
-import moveables.Movable;
+import entities.Entity;
 
 public class Straight extends Move{
 	//private int testdelta = 0;
 	
-	public Straight(Movable getOwner, double moveX, double moveY) {
+	public Straight(Entity getOwner, double moveX, double moveY) {
 		super(getOwner);
 		nposX = moveX;
 		nposY = moveY;
@@ -13,7 +13,7 @@ public class Straight extends Move{
 	protected void calculateMove(){
 	}
 	protected void makeMove(){
-		owner.posX += nposX;
-		owner.posY += nposY;
+		owner.posX -= nposX;
+		owner.posY -= nposY;
 	}
 }

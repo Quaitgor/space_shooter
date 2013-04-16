@@ -1,16 +1,16 @@
 package observer;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 
 public class DeltaUpdater implements Subject{
 	
-	private ArrayList<Observer> observers;
+	private static Vector<Observer> observers;
 	private double delta;
 	
 	public DeltaUpdater(){
 		//create ArrayList for saving Subscribers;
-		observers = new ArrayList<Observer>();
+		observers = new Vector<Observer>();
 	}
 	
 	// Register Subscriber
@@ -26,9 +26,9 @@ public class DeltaUpdater implements Subject{
 
 	// Send Delta to every Subscriber
 	public void notifyObserver() {
-		for(Observer observer : observers){
-			observer.update(delta);
-		}
+		for(int i=0;i<observers.size();i++){
+			 observers.elementAt(i).update(delta);
+      }
 	}
 	
 	// Set Delta to given Value, Changing Delta fires a notify
@@ -36,5 +36,4 @@ public class DeltaUpdater implements Subject{
 		this.delta = delta;
 		notifyObserver();
 	}
-	
 }

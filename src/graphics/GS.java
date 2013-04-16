@@ -1,4 +1,8 @@
 package graphics;
+import static org.lwjgl.opengl.GL11.GL_BACK;
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.glCullFace;
+import static org.lwjgl.opengl.GL11.glEnable;
 import observer.*;
 
 import org.lwjgl.LWJGLException;
@@ -6,16 +10,19 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import player.Player;
 
-import factory.EnemyFactory;
+import factory.*;
 
 public class GS {
 	
     static boolean isRunning = true;
     static long lastFrame;
-	private static DeltaUpdater deltaUpdater;
+	public static DeltaUpdater deltaUpdater;
 	public static moveables.Player player;
+	public static EnemyFactory ef;
+	public static FactoryEnemy fe;
+	public static ProjectileFactory profac ;
+	public static double delta = 0;
 	
 	public GS(DeltaUpdater getdeltaUpdater) {
 		GS.deltaUpdater = getdeltaUpdater;
@@ -40,7 +47,8 @@ public class GS {
 	private void render(){
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        GS.deltaUpdater.setDelta(getDelta());
+        getDelta();
+        GS.deltaUpdater.setDelta(delta);
 	}
 	private void initGL(int width, int height){
     	//Settings for Graphics, Ortho, Alpha, Color, Depth etc
@@ -56,38 +64,41 @@ public class GS {
         }
 		GL11.glEnable(GL11.GL_TEXTURE_2D);  
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        GL11.glViewport(0,0,width,height); 
+		GL11.glClearDepth(1.0f);
+        //GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthFunc(GL11.GL_ADD); ////// 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glViewport(0,0,width,height);
         GL11.glOrtho(0,width,height,0,0,128);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        //GL11.glBlendEquation( BLENDING_EQUATIONS[blendingEquationIndex]);
+		GL11.glShadeModel(GL11.GL_FLAT);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
         GL11.glAlphaFunc(GL11.GL_GREATER, 0);
-        GL11.glDepthFunc(GL11.GL_ADD);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glCullFace(GL11.GL_BACK);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
         GL11.glLoadIdentity();
         
         
         // Create some Objects for testing
-		EnemyFactory ef = new EnemyFactory(deltaUpdater);
-		ef.create("Standard-Gegner");
-		ef.create("Schwacher-Gegner");
-		//player = new Player(null, deltaUpdater);
-		ef.create("Testenemy");
-		ef.create("Testenemy2");
-		ef.create("Player");
-		ef.create("Moon");
-		ef.create("Background1");
-		ef.create("Background2");
+		//ef = new EnemyFactory(deltaUpdater);
+		profac = new ProjectileFactory(deltaUpdater);
+		
+		fe = new FactoryEnemy(deltaUpdater);
+
+		fe.create("TestenemyV2");
+		fe.create("Moon");
+		
 	}
     private static double getDelta() {
     	// Calculate Delta time (time since last calculation)
         long currentTime = getTime();
-        double delta = (double) (currentTime - lastFrame);
+        double delta1 = (double) (currentTime - lastFrame);
         lastFrame = getTime();
+        delta = delta1;
         return delta;
     }
     
