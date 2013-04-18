@@ -3,9 +3,6 @@ package observer;
 import java.util.Vector;
 
 
-/**
- * @author  vmadmin
- */
 public class DeltaUpdater implements Subject{
 	
 	private static Vector<Observer> observers;
@@ -35,15 +32,8 @@ public class DeltaUpdater implements Subject{
 	}
 	
 	// Set Delta to given Value, Changing Delta fires a notify
-	/**
-	 * @param delta
-	 * @uml.property  name="delta"
-	 */
 	public void setDelta(double delta){
 		this.delta = delta;
 		notifyObserver();
-	}
-	public int getObserverNumber(){
-		return observers.size();
 	}
 }

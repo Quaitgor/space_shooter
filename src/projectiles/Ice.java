@@ -1,19 +1,12 @@
 package projectiles;
 
 import entities.Entity;
-import entities.Moveable;
 import graphics.LayerData2;
 import observer.Subject;
 import movementV2.*;
 
-/**
- * @author  vmadmin
- */
-public class Ice extends Moveable {
-	/**
-	 * @uml.property  name="movement"
-	 * @uml.associationEnd  
-	 */
+public class Ice extends Entity {
+	protected Move movement;
 	//public LayerData2 lights = null;
 	
 	public Ice(double posX, double posY, Subject deltaUpdater) {

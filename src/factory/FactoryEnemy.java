@@ -1,43 +1,22 @@
 package factory;
 
-import entites.decor.*;
+import entites.decor.Moon;
 import entities.*;
+import graphics.GS;
 import observer.*;
 
-/**
- * @author  vmadmin
- */
 public class FactoryEnemy {
-	/**
-	 * @uml.property  name="deltaUpdater"
-	 * @uml.associationEnd  
-	 */
 	private DeltaUpdater deltaUpdater;
 	
 	public FactoryEnemy(DeltaUpdater deltaUpdater){
 		this.deltaUpdater = deltaUpdater;
 	}
-	public Entity create(String Type,Double posX, Double posY){
+	public Entity create(String Type){
 		if(Type.equals("TestenemyV2")){
-			return new Player(posX, posY, deltaUpdater);
+			return new Player(200, 200, deltaUpdater);
 		}
 		if(Type.equals("Moon")){
-			return new Moon(posX, posY, deltaUpdater);
-		}
-		if(Type.equals("AstroidbeltL1")){
-			return new AstroidBelt(posX, posY, deltaUpdater, 2);
-		}
-		if(Type.equals("AstroidbeltL2")){
-			return new AstroidBelt(posX, posY, deltaUpdater, 3);
-		}
-		if(Type.equals("AstroidbeltL3")){
-			return new AstroidBelt(posX, posY, deltaUpdater, 4);
-		}
-		if(Type.equals("Stars")){
-			return new Stars(posX, posY, deltaUpdater);
-		}
-		if(Type.equals("Asteroid")){
-			return new Asteroid(posX, posY, deltaUpdater);
+			return new Moon(400, 300, deltaUpdater);
 		}
 		else{
 			return null;

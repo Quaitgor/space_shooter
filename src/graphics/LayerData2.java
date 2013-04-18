@@ -24,25 +24,22 @@ import entities.Entity;
 
 /**
  * LayerData (V2) is the Texture Handler, inside LayerData are the Data for Animation, texture, Size and Color for a layer of Graphic on an object.
- * Together with other LayerData an Object can be build with multiple layers of textures, each individual size color and position relative to the object
+ * together with other LayerData an Object can be build with multiple layers of textures, each individual size color and position relative to the object
+ * 
  */
 
 public class LayerData2 {
-	/**
-	 * @uml.property  name="owner"
-	 * @uml.associationEnd  
-	 */
 	public Entity owner;
 	public double[] pos = new double[]{0,0};
 	public double rotation = 0;
-	public int layer = 40;
+	public int layer = 20;
 	public Texture tex;
-	public float[] color =  new float[]{0.75f,0.75f,0.75f,1.0f};
+	public float[] color =  new float[] { 0.8f, 0.8f, 0.8f, 1f};
 	public float [] texCords;
 	public boolean enableDepth = false;
 	protected double anitimer = 0;
 	
-	public String texturepath = "";
+	protected String texturepath = "";
     public double spritesV = 1;
     public double spritesH = 1;
     
@@ -51,6 +48,9 @@ public class LayerData2 {
     
     public double spriteDisplayX;
     public double spriteDisplayY;
+    
+    public double boxWidth;
+    public double boxHeight;
     
     public int spriteV = 0;
     public int spriteH = 0;
