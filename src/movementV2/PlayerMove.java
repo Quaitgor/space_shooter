@@ -1,12 +1,25 @@
 package movementV2;
 
 
+import java.util.Random;
+
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+
 import entities.*;
+import graphics.GS;
+import graphics.HUD;
 import graphics.LayerData2;
 import weapons.*;
 
+/**
+ * @author  vmadmin
+ */
 public class PlayerMove extends Move{
+	/**
+	 * @uml.property  name="owner"
+	 * @uml.associationEnd  
+	 */
 	protected Entity owner;
 	protected int player;
 	protected boolean charging = false;
@@ -32,17 +45,20 @@ public class PlayerMove extends Move{
 	protected int moveDown;
 	protected int moveLeft;
 	protected int moveRight;
+	public HUD hud = null;
 	
 	
 	//testing
 	private float reverse = 0.1f;
+	boolean mousefree = true;
 	
 
 	public PlayerMove(Entity owner, int player){
 		super(owner);
 		this.owner = owner;
 		this.player = player;
-		
+		//HUD init
+		hud = new HUD(100, 50, GS.deltaUpdater, this);
 
 		//  get Control for Player from database
 		firekey = Keyboard.KEY_A;
@@ -55,38 +71,50 @@ public class PlayerMove extends Move{
 		
 	}
 	protected void calculateMove(){
-    	
+		speedX = 0;
+		speedY = 0;
     	int tempAccel = 1;
-		if(movingLeft && !movingRight){
-			if (speedX > 0) tempAccel = 2;
-			if (speedX > -1*maxSpeed)speedX -= owner.delta/1000*tempAccel*accel;
+		if(movingRight){
+			if (nposX < 0) tempAccel = 2;
+			speedX += owner.delta/1000*tempAccel*accel;
 		}
-		else if (movingRight && !movingLeft){
-			if (speedX < 0)  tempAccel = 2;
-			if (speedX < maxSpeed)speedX += owner.delta/1000*tempAccel*accel;
+		if(movingLeft){
+			if (nposX > 0) tempAccel = 2;
+			speedX -= owner.delta/1000*tempAccel*accel;
 		}
-		if(!movingLeft && !movingRight){
-			if(speedX > 0) speedX -= owner.delta/1000*accel/2;
-			if(speedX < 0) speedX += owner.delta/1000*accel/2;
-			if(Math.abs(speedX) > 0 && (Math.abs(speedX) < owner.delta/1000*accel)) speedX = 0;
+		if(movingDown){
+			if (nposY < 0) tempAccel = 2;
+			speedY += owner.delta/1000*tempAccel*accel;
+		}
+		if(movingUp){
+			if (nposY > 0) tempAccel = 2;
+			speedY -= owner.delta/1000*tempAccel*accel;
 		}
 
-		if(movingUp && !movingDown){
-			if (speedY < 0)  tempAccel = 2;
-			if (speedY > -1*maxSpeed) speedY -= owner.delta/1000*tempAccel*accel;
+		if (!movingRight && ! movingLeft){
+			if(Math.abs(nposX) > 0 && Math.abs(nposX) > owner.delta/1000*accel) {
+				if (nposX > 0){
+					speedX -= owner.delta/1000*accel;
+				}else{
+					speedX += owner.delta/1000*accel;
+				}
+			}else{
+				nposX = 0;
+			}
 		}
-		else if (movingDown && !movingUp){
-			if (speedY > 0)  tempAccel = 2;
-			if (speedY < maxSpeed)speedY += owner.delta/1000*tempAccel*accel;
-			
+		if (!movingDown && !movingUp){
+			if(Math.abs(nposY) > 0 && Math.abs(nposY) > owner.delta/1000*accel) {
+				if (nposY > 0){
+					speedY -= owner.delta/1000*accel;
+				}else{
+					speedY += owner.delta/1000*accel;
+				}
+			}else{
+				nposY = 0;
+			}
 		}
-		if(!movingUp && !movingDown){
-			if(speedY > 0) speedY -= owner.delta/1000*accel/2;
-			if(speedY < 0) speedY += owner.delta/1000*accel/2;
-			if(Math.abs(speedY) > 0 && (Math.abs(speedY) < owner.delta/1000*accel)) speedY = 0;
-		}
-    	nposX = speedX;
-    	nposY = speedY;
+    	nposX += speedX;
+    	nposY += speedY;
 
 
         //rotation test
@@ -99,7 +127,12 @@ public class PlayerMove extends Move{
         if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD5)) {
         	owner.LayerDatas.get(0).rotation = 0.0;
         }
-        
+        if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)) {
+    		Random r = new Random();
+    		double randomValueY = 0 + 768 * r.nextDouble();
+    		GS.fe.create("Asteroid",1400.0, randomValueY);
+        }
+
     	// weapon controls & variables
     	if (weapondelay > 0) weapondelay -= owner.delta;
     	if (fastshot){
@@ -109,7 +142,25 @@ public class PlayerMove extends Move{
     		}
     	}
     	if (charging){
-    		chargedelta += owner.delta;
+    		if(chargedelta < 2000){
+    			chargedelta += owner.delta;
+    			double percent = 0.05 * chargedelta/100;
+    			double bigBarPos = hud.hideBBarValue -(hud.hideBBarValue * percent);
+    			if (percent*100 >= 60) {
+        			float[] color = hud.int_BBar.color;
+        			if (color[0] < 1.0f) color[0] += 0.01f;
+        			if (color[1] > 0.5f) color[1] -= 0.01f;
+    			}
+    			if(percent*100 >= 95){
+    				if(hud.int_BBarGlow.color[3] < 1.0f) hud.int_BBarGlow.color[3] += 0.05f;
+    			}
+    			hud.int_BBar.pos = new double[]{bigBarPos, 0.0};
+    		}else{
+    			chargedelta = 2000;
+				if(hud.int_BBarGlow.color[3] > 0.0f) hud.int_BBarGlow.color[3] -= 0.01f;
+    		}
+			
+    		
     		float[] x = ((Player)owner).lights.color;
     		if (x[0] <= 1.0f) x[0] += 0.01f;
     		if (x[1] >= 0.1f) x[1] -= 0.01f;
@@ -117,7 +168,6 @@ public class PlayerMove extends Move{
     		if (x[3] <= 1.0f) x[3] += 0.01f;
 			
     	}
-    	
         while (Keyboard.next()) {
         	if (Keyboard.getEventKeyState()) {
             	//these Keys in this loop fire ONCE when PRESSED
@@ -149,6 +199,11 @@ public class PlayerMove extends Move{
         			if(!fastshot) {
         				charging = true;
         				System.out.println("Charging!!");
+        				System.out.println(hud.defaultColor[0]);
+
+        				System.arraycopy( hud.defaultColor, 0, hud.int_BBar.color, 0, hud.defaultColor.length );
+        				
+        				
         	    		float[] x = ((Player)owner).lights.color;
         	    		x[0] = 0.2f;
         	    		x[1] = 0.4f;
@@ -171,7 +226,7 @@ public class PlayerMove extends Move{
         			System.out.println("Default");
         			((Player)owner).changeWeapon("Default");
         		}
-        		
+
         		// Color Test??
         		LayerData2 x = owner.LayerDatas.get(owner.LayerDatas.indexOf(((Player)owner).lights));
     			float r = x.color[0];
@@ -227,6 +282,8 @@ public class PlayerMove extends Move{
         			if (!fastshot) {
             			charging = false;
             			System.out.println("Charging released: "+chargedelta);
+            			hud.int_BBar.pos = new double[]{hud.hideBBarValue, 0.0};
+        				hud.int_BBarGlow.color[3] = 0.0f;
 
                 		float[] x = ((Player)owner).lights.color;
                 		x[0] = 0.2f;
@@ -248,5 +305,18 @@ public class PlayerMove extends Move{
 	protected void makeMove(){
 		owner.posX += nposX;
 		owner.posY += nposY;
+		
+		if (owner.posX < 0 || owner.posX > 1280){
+			if(owner.posX < 0) owner.posX = 0;
+			if(owner.posX > 1280) owner.posX = 1280;
+			nposX = 0;
+			speedX = 0;
+		}
+		if (owner.posY < 0 || owner.posY > 768){
+			if(owner.posY < 0) owner.posY = 0;
+			if (owner.posY > 768) owner.posY = 768;
+			nposY = 0;
+			speedY = 0;
+		}
 	}
 }

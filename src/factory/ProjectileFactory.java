@@ -3,7 +3,14 @@ package factory;
 import entities.*;
 import observer.*;
 
+/**
+ * @author  vmadmin
+ */
 public class ProjectileFactory {
+	/**
+	 * @uml.property  name="deltaUpdater"
+	 * @uml.associationEnd  
+	 */
 	private DeltaUpdater deltaUpdater;
 	
 	public ProjectileFactory(DeltaUpdater deltaUpdater){

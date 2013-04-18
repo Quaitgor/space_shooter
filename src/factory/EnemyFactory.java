@@ -4,7 +4,14 @@ import graphics.GS;
 import moveables.*;
 import observer.*;
 
+/**
+ * @author  vmadmin
+ */
 public class EnemyFactory {
+	/**
+	 * @uml.property  name="deltaUpdater"
+	 * @uml.associationEnd  
+	 */
 	private DeltaUpdater deltaUpdater;
 	
 	public EnemyFactory(DeltaUpdater deltaUpdater){

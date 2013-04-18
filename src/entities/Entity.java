@@ -10,14 +10,18 @@ import movementV2.Move;
 import observer.*;
 
 /**
- * Entitiy is the superclass of each visual object, together with LayerData and with objects added to the subclasses via strategic pattern
- * the objects can move, change visual (animation) and fire
- * */
+ * Entitiy is the superclass of each visual object, together with LayerData and with objects added to the subclasses via strategic pattern the objects can move, change visual (animation) and fire
+ */
 public abstract class Entity implements Observer {
 	protected int health;
 	public double delta;
+	/**
+	 * @uml.property  name="deltaUpdater"
+	 * @uml.associationEnd  
+	 */
 	protected Subject deltaUpdater;
-    public double posX, posY;
+    public double posX;
+	public double posY;
 	// Graphics Variables
     protected int anitimer = 0;
 	public Vector<LayerData2> LayerDatas;
@@ -31,13 +35,14 @@ public abstract class Entity implements Observer {
 		this.posX = newPosX;
 		this.posY = newPosY;
 	}
+	/*
 	public Entity(double newPosX, double newPosY) {
 		this.deltaUpdater = GS.deltaUpdater;
 		this.deltaUpdater.register(this);
 		this.posX = newPosX;
 		this.posY = newPosY;
 	}
-	
+	*/
 	/**
 	 * update is the core of timing, the observer sends to update and the update-method uses it
 	 * */
@@ -49,7 +54,7 @@ public abstract class Entity implements Observer {
 	/**
 	 * addNewLayer adds a new graphical layer to LayerDatas, LayerDatas is a the collection of GraphicLayers
 	 * */
-	protected void addNewLayer(LayerData2 newLayer){
+	public void addNewLayer(LayerData2 newLayer){
 		LayerDatas.add(newLayer);
 	}
 	
