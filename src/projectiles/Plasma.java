@@ -1,13 +1,11 @@
 package projectiles;
 
-import entities.Entity;
+import entities.*;
 import graphics.LayerData2;
 import observer.Subject;
 import movementV2.*;
 
-public class Plasma extends Entity {
-	protected Move movement;
-	//public LayerData2 lights = null;
+public class Plasma extends Moveable {
 	
 	public Plasma(double posX, double posY, Subject deltaUpdater) {
 		super(posX, posY, deltaUpdater);

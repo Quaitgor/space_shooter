@@ -10,9 +10,11 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-
 import factory.*;
 
+/**
+ * @author  vmadmin
+ */
 public class GS {
 	
     static boolean isRunning = true;
@@ -23,6 +25,8 @@ public class GS {
 	public static FactoryEnemy fe;
 	public static ProjectileFactory profac ;
 	public static double delta = 0;
+	int fps;
+	long lastFPS;
 	
 	public GS(DeltaUpdater getdeltaUpdater) {
 		GS.deltaUpdater = getdeltaUpdater;
@@ -38,18 +42,36 @@ public class GS {
            		isRunning = false;
             }
             render();
+            updateFPS();
             Display.update();
             Display.sync(60);
         }
         Display.destroy();
         System.exit(0);
     }
+	
+	
+	public void updateFPS() {
+		/* not working ??
+		if (getTime() - lastFPS > 1000) {
+			Display.setTitle("FPS: " + fps);
+			fps = 0;
+			lastFPS += 1000;
+		}
+		fps++;
+		*/
+
+		Display.setTitle("ObsCount: " + deltaUpdater.getObserverNumber());
+	}
+	
+	
 	private void render(){
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         getDelta();
         GS.deltaUpdater.setDelta(delta);
 	}
+	
 	private void initGL(int width, int height){
     	//Settings for Graphics, Ortho, Alpha, Color, Depth etc
         try {
@@ -89,10 +111,18 @@ public class GS {
 		
 		fe = new FactoryEnemy(deltaUpdater);
 
-		fe.create("TestenemyV2");
-		fe.create("Moon");
+		fe.create("TestenemyV2", 200.0, 200.0);
+		fe.create("Moon", 300.0, 400.0);
+		fe.create("AstroidbeltL1", 512.0, 400.0);
+		fe.create("AstroidbeltL2", 512.0, 460.0);
+		fe.create("AstroidbeltL3", 512.0, 620.0);
+		fe.create("Stars", 640.0, 384.0);
 		
 	}
+    /**
+	 * @return
+	 * @uml.property  name="delta"
+	 */
     private static double getDelta() {
     	// Calculate Delta time (time since last calculation)
         long currentTime = getTime();

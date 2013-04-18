@@ -5,8 +5,19 @@ import moveables.*;
 import movement.*;
 import observer.*;
 
+/**
+ * @author  vmadmin
+ */
 public class Default extends Movable {
+	/**
+	 * @uml.property  name="movement"
+	 * @uml.associationEnd  
+	 */
 	protected Move movement;
+	/**
+	 * @uml.property  name="behaviour"
+	 * @uml.associationEnd  
+	 */
 	protected Behave behaviour;
 	
 	public Default(double posX, double posY, Subject deltaUpdater) {

@@ -3,6 +3,9 @@ package entities;
 import movementV2.Move;
 import observer.Subject;
 
+/**
+ * @author  vmadmin
+ */
 public abstract class Moveable extends Entity {
 	protected Move movement;
 	
