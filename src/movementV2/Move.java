@@ -1,4 +1,6 @@
-package entities;
+package movementV2;
+
+import entities.Entity;
 
 /** Move is the superclass of the movement Strategy Pattern, objects extending this class will be able to be used as movement pattern for movement on (and off)screen
  * the movement Strategy Pattern has direct control over its owner, allowing it control more than only Position X/Y if needed, even allowing to replace itself with another movement pattern

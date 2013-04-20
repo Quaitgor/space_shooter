@@ -10,8 +10,8 @@ public class BarrierHit extends Entity {
 	private LayerData2 tex;
 	int speed = 100;
 	
-	public BarrierHit(double posX, double posY, Subject deltaUpdater, double rotation) {
-		super(posX, posY, deltaUpdater);
+	public BarrierHit(double posX, double posY, double rotation) {
+		super(posX, posY);
 		System.out.println("Hit Animation");
 		// get Data from database?
 		tex = new LayerData2(this, "barrierHit", 1, 8);
@@ -62,7 +62,7 @@ public class BarrierHit extends Entity {
 	}
 	public void update(double delta) {
 		super.update(delta);
-		//this.changeAni();
+		this.changeAni();
 	}
 	private void changeAni(){
 		livetime += delta;

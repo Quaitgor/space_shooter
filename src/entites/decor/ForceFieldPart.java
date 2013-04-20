@@ -7,8 +7,8 @@ import observer.Subject;
 public class ForceFieldPart extends Entity {
 	private double livetime;
 	private LayerData2 tex;
-	public ForceFieldPart(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public ForceFieldPart(double posX, double posY) {
+		super(posX, posY);
 		// get Data from database?
 		tex = new LayerData2(this, "field", 8, 1);
 		tex.disableAnimation = true;

@@ -3,17 +3,16 @@ package movementV2;
 import java.util.Random;
 
 import entities.Entity;
-import entities.Move;
 
 public class Straight extends Move{
 	//private int testdelta = 0;
 	public boolean randomRotate = false;
 	private double rotation = 0;
 	
-	public Straight(Entity getOwner, double moveX, double moveY) {
+	public Straight(Entity getOwner, double angle, double speed) {
 		super(getOwner);
-		nposX = moveX;
-		nposY = moveY;
+		nposX = 3;
+		nposY = 3;
 	}
 	protected void calculateMove(){
 	}

@@ -7,15 +7,15 @@ import observer.Subject;
 
 public class ForceField extends Entity {
 	
-	public ForceField(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public ForceField(double posX, double posY) {
+		super(posX, posY);
 		
 		for(int i=0;i<9;i++){
 			for(int j=0; j<3;j++){
-				new ForceFieldPart(posX+(i*14), posY+(j*14), deltaUpdater);
-				new ForceFieldPart(posX+(i*14), posY-(j*14), deltaUpdater);
-				new ForceFieldPart(posX-(i*14), posY+(j*14), deltaUpdater);
-				new ForceFieldPart(posX-(i*14), posY-(j*14), deltaUpdater);
+				new ForceFieldPart(posX+(i*14), posY+(j*14));
+				new ForceFieldPart(posX+(i*14), posY-(j*14));
+				new ForceFieldPart(posX-(i*14), posY+(j*14));
+				new ForceFieldPart(posX-(i*14), posY-(j*14));
 				
 			}
 		}

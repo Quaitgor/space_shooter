@@ -1,7 +1,6 @@
 package entities.combat;
 
 import entities.Offensive;
-import behaviours.*;
 import graphics.LayerData2;
 import observer.Subject;
 import weapons.*;
@@ -15,15 +14,12 @@ import movementV2.*;
 
 public class Player extends Offensive {
 	
-
-	protected Behave behaviour;
 	public LayerData2 lights = null;
 	int defaultLayer = 40;
 	
-	public Player(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
-		// get Data from database?
-		weapon = new Weapon("Fire");
+	public Player(double posX, double posY) {
+		super(posX, posY);
+		weapon = new Weapon_Fire(this);
 		movement = new TestingControl(this, 1);
 		LayerData2 tex = new LayerData2(this, "player", 1, 1);
 		tex.layer= defaultLayer;
@@ -34,8 +30,9 @@ public class Player extends Offensive {
 		addNewLayer(lights);
 	}
 	
-	
+	/*
 	public void changeWeapon(String newWeapon ) {
 		this.weapon.changeWeapon(newWeapon);
 	}
+	*/
 }

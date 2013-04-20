@@ -21,7 +21,6 @@ public class GS {
     static long lastFrame;
 	public static DeltaUpdater deltaUpdater;
 	public static FactoryEnemy fe;
-	public static ProjectileFactory profac ;
 	public static double delta = 0;
 	int fps;
 	long lastFPS;
@@ -112,7 +111,6 @@ public class GS {
         GL11.glLoadIdentity();
         
         // Create some Objects for testing
-		profac = new ProjectileFactory(deltaUpdater);
 		fe = new FactoryEnemy(deltaUpdater);
 
 		fe.create("TestenemyV2", 200.0, 200.0);

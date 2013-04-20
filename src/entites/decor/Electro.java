@@ -6,8 +6,8 @@ import observer.Subject;
 
 public class Electro extends Entity {
 	private LayerData2 tex;
-	public Electro(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public Electro(double posX, double posY) {
+		super(posX, posY);
 		// get Data from database?
 		tex = new LayerData2(this, "electro", 2, 2);
 		tex.layer = 35;

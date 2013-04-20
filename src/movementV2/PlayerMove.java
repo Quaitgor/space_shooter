@@ -2,6 +2,8 @@ package movementV2;
 
 
 import org.lwjgl.input.Keyboard;
+
+import weapons.*;
 import entities.*;
 import entities.combat.Player;
 import graphics.GS;
@@ -55,6 +57,8 @@ public class PlayerMove extends Move{
 		//  get HUDPositon & Control for Player from database
 		hudX = 100;
 		hudY = 50;
+		
+		
 		firekey = Keyboard.KEY_A;
 		chargekey = Keyboard.KEY_S;
 		keepFiring = Keyboard.KEY_D;
@@ -63,7 +67,7 @@ public class PlayerMove extends Move{
 		moveLeft = Keyboard.KEY_LEFT;
 		moveRight = Keyboard.KEY_RIGHT;
 		//setup the HUD
-		hud = new HUD(hudX, hudY, GS.deltaUpdater, this, player);
+		hud = new HUD(hudX, hudY, this, player);
 		
 	}
 	
@@ -76,19 +80,19 @@ public class PlayerMove extends Move{
 		speedY = 0;
     	int tempAccel = 1;
 		if(movingRight){
-			if (nposX < 0) tempAccel = 2;
+			if (nposX < 0) tempAccel = 4;
 			speedX += owner.delta/1000*tempAccel*accel;
 		}
 		if(movingLeft){
-			if (nposX > 0) tempAccel = 2;
+			if (nposX > 0) tempAccel = 4;
 			speedX -= owner.delta/1000*tempAccel*accel;
 		}
 		if(movingDown){
-			if (nposY < 0) tempAccel = 2;
+			if (nposY < 0) tempAccel = 4;
 			speedY += owner.delta/1000*tempAccel*accel;
 		}
 		if(movingUp){
-			if (nposY > 0) tempAccel = 2;
+			if (nposY > 0) tempAccel = 4;
 			speedY -= owner.delta/1000*tempAccel*accel;
 		}
 
@@ -135,7 +139,7 @@ public class PlayerMove extends Move{
     	if (fastshot){
     		if (weapondelay <= 0){
     			((Player)owner).fire();
-    			weapondelay = ((Player)owner).weapon.weapondelay;
+    			weapondelay = ((Player)owner).weapon.weaponDelay;
     		}
     	}
     	
@@ -187,19 +191,19 @@ public class PlayerMove extends Move{
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
         			System.out.println("Plasma");
-        			((Player)owner).changeWeapon("Plasma");
+        			((Player)owner).weapon = new Weapon_Plasma(owner);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD2) {
         			System.out.println("Ice");
-        			((Player)owner).changeWeapon("Ice");
+        			((Player)owner).weapon = new Weapon_Ice(owner);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD3) {
         			System.out.println("Fire");
-        			((Player)owner).changeWeapon("Fire");
+        			((Player)owner).weapon = new Weapon_Fire(owner);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD4) {
         			System.out.println("Default");
-        			((Player)owner).changeWeapon("Default");
+        			//((Player)owner).changeWeapon("Default");
         		}
         		LayerData2 x = owner.LayerDatas.get(owner.LayerDatas.indexOf(((Player)owner).lights));
     			float r = x.color[0];
@@ -258,7 +262,7 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == firekey) {
         			if (!fastshot && !charging && weapondelay <= 0) {
         				((Player)owner).fire();
-            			weapondelay = ((Player)owner).weapon.weapondelay;
+            			weapondelay = ((Player)owner).weapon.weaponDelay;
         			}
         		}
         		if (Keyboard.getEventKey() == keepFiring) {

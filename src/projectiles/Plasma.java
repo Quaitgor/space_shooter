@@ -5,10 +5,11 @@ import graphics.LayerData2;
 import observer.Subject;
 import movementV2.*;
 
-public class Plasma extends Moveable {
+public class Plasma extends Projectiles {
 	
-	public Plasma(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public Plasma(double posX, double posY, double moveX, double moveY) {
+		super(posX, posY, moveX, moveY);
+		
 		// get Data from database?
 		movement = new Straight(this, -12, 0);
 		LayerData2 tex = new LayerData2(this, "projectile/plasma", 4, 1);

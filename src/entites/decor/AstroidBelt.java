@@ -7,8 +7,8 @@ import movementV2.*;
 
 public class AstroidBelt extends MoveableDecor {
 	
-	public AstroidBelt(double posX, double posY, Subject deltaUpdater, int factor) {
-		super(posX, posY, deltaUpdater);
+	public AstroidBelt(double posX, double posY, int factor) {
+		super(posX, posY);
 
 		LayerData2 texture1 = new LayerData2(this, "astroidbelt", 1, 1);
 		texture1.spriteDisplayX *= factor;

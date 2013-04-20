@@ -2,6 +2,7 @@ package projectiles;
 
 import entities.Entity;
 import entities.Moveable;
+import entities.Projectiles;
 import graphics.LayerData2;
 import observer.Subject;
 import movementV2.*;
@@ -9,17 +10,14 @@ import movementV2.*;
 /**
  * @author  vmadmin
  */
-public class Ice extends Moveable {
-	/**
-	 * @uml.property  name="movement"
-	 * @uml.associationEnd  
-	 */
-	//public LayerData2 lights = null;
+
+public class Ice extends Projectiles {
 	
-	public Ice(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public Ice(double posX, double posY, double moveX, double moveY) {
+		super(posX, posY, moveX, moveY);
+		
 		// get Data from database?
-		movement = new Straight(this, -12, 0);
+		System.out.println("Ice");
 		LayerData2 tex = new LayerData2(this, "projectile/ice", 8, 2);
 		tex.color = new float[]{1f, 1f, 1f, 1f};
 		addNewLayer(tex);

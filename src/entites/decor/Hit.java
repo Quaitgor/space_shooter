@@ -7,8 +7,8 @@ import observer.Subject;
 public class Hit extends Entity {
 	private double livetime;
 	private LayerData2 tex;
-	public Hit(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public Hit(double posX, double posY) {
+		super(posX, posY);
 		System.out.println("Hit Animation");
 		// get Data from database?
 		tex = new LayerData2(this, "hit", 1, 8);
