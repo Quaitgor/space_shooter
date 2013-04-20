@@ -1,0 +1,7 @@
+{
+	"ls":	[
+				{"ts":0,"Movable":"standardenemy","position":20.0},
+				{"ts":1,"Movable":"meteor","position":10.0},
+				{"ts":3,"Movable":"moon","position":5.0}
+			]
+}

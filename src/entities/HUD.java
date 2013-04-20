@@ -37,11 +37,11 @@ public class HUD extends Entity{
 		int_BBarGlow.color[3] = 0.0f;
 		int_BBarGlow.disableDepth = true;
 		
-		int_SBar = new LayerData2(this, "interface/int_Sbar", 1, 1);
+		int_SBar = new LayerData2(this, "interface/int_SBar", 1, 1);
 		int_SBar.spriteDisplayX *= scale;
 		int_SBar.spriteDisplayY *= scale;
 		int_SBar.layer = 10;
-
+		 
 		int_BBar = new LayerData2(this, "interface/int_BBar", 1, 1);
 		int_BBar.spriteDisplayX *= scale;
 		int_BBar.spriteDisplayY *= scale;

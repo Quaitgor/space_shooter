@@ -1,0 +1,10 @@
+{
+	"health":30,
+	"weapon":"laser",
+	"picture":"raumschiff",
+	"textures:[
+				{"Layerbild":"...."},
+				{},
+				{}	
+			]
+}

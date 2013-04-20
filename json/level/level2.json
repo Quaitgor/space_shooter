@@ -1,0 +1,5 @@
+{
+	1:[{"Movable":"Asteroid","x":10.0,"y":10.0},{"Movable":"Asteroid","x":20.0,"y":20.0},{"Movable":"Asteroid","x":30.0,"y":30.0}],
+	3:[{"Movable":"Asteroid","x":40.0,"y":40.0},{"Movable":"Asteroid","x":50.0,"y":50.0},{"Movable":"Asteroid","x":60.0,"y":60.0}],
+	8:[{"Movable":"Asteroid","x":70.0,"y":70.0},{"Movable":"Asteroid","x":80.0,"y":80.0},{"Movable":"Asteroid","x":90.0,"y":90.0}]
+}
