@@ -1,5 +1,6 @@
 package entities;
 
+import graphics.GS;
 import graphics.LayerData2;
 
 import java.util.Vector;
@@ -23,8 +24,8 @@ public abstract class Entity implements Observer {
 	protected double offscreen = 15000;
 	protected double offscreenLive = 0;
 
-	public Entity(double newPosX, double newPosY, Subject getdeltaUpdater){
-		this.deltaUpdater = getdeltaUpdater;
+	public Entity(double newPosX, double newPosY){
+		this.deltaUpdater = GS.deltaUpdater;
 		this.deltaUpdater.register(this);
 		LayerDatas = new Vector<LayerData2>();
 		this.posX = newPosX;

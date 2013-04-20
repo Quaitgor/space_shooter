@@ -8,7 +8,7 @@ import observer.Subject;
  * */
 public class MoveableDecor extends Moveable {
 	protected int defaultLayer = 60;
-	public MoveableDecor(double newPosX, double newPosY, Subject getdeltaUpdater) {
-		super(newPosX, newPosY, getdeltaUpdater);
+	public MoveableDecor(double newPosX, double newPosY) {
+		super(newPosX, newPosY);
 	}
 }

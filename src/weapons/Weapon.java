@@ -1,20 +1,14 @@
 package weapons;
 
+import entities.Entity;
 import graphics.GS;
 
-public class Weapon {
-	protected int damage;
-	public int weapondelay = 200;
-	public String weapon = "Default";
+public abstract class Weapon {
+	protected Entity owner;
+	public int weaponDelay = 200;
 	
-	public Weapon(String weapon){
-		this.weapon = weapon;
+	public Weapon(Entity owner){
+		this.owner= owner;
 	}
-	public void fire(double posX,double posY){
-		GS.profac.create(this.weapon,posX,posY);
-	}
-	public void changeWeapon(String newWeapon){
-		this.weapon = newWeapon;
-	}
-	
+	public abstract void fire();
 }

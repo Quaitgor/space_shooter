@@ -1,6 +1,5 @@
 package entities;
 
-import observer.Subject;
 import weapons.Weapon;
 
 /**
@@ -13,8 +12,8 @@ public abstract class Offensive extends Moveable{
 	protected int offsetX = 0;
 	protected int offsetY = 0;
 
-	public Offensive(double newPosX, double newPosY, Subject getdeltaUpdater) {
-		super(newPosX, newPosY, getdeltaUpdater);
+	public Offensive(double newPosX, double newPosY) {
+		super(newPosX, newPosY);
 	}
 	
 	/**
@@ -22,7 +21,7 @@ public abstract class Offensive extends Moveable{
 	 * with the weapon Strategy Pattern the weapon can be switched
 	 * */
 	public void fire(){
-		weapon.fire(posX+offsetX, posY+offsetY);
+		this.weapon.fire();
 	}
 
 }

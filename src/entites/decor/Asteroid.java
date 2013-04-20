@@ -11,8 +11,8 @@ public class Asteroid extends MoveableDecor {
 	double rangeMin = 5;
 	double rangeMax = 0.2;
 	
-	public Asteroid(double posX, double posY, Subject deltaUpdater) {
-		super(posX, posY, deltaUpdater);
+	public Asteroid(double posX, double posY) {
+		super(posX, posY);
 		Random r = new Random();
 		String tex = "";
 		int X = 1;
@@ -35,6 +35,5 @@ public class Asteroid extends MoveableDecor {
 		double randomValue2 = -2.0 + ( 2.0 - -2.0) * r.nextDouble();
 		movement = new Straight(this, randomValue, randomValue2);
 		((Straight) movement).randomRotate(true);
-		
 	}
 }

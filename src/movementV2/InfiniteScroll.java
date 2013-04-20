@@ -1,7 +1,6 @@
 package movementV2;
 
 import entities.Entity;
-import entities.Move;
 import graphics.LayerData2;
 
 public class InfiniteScroll extends Move{
