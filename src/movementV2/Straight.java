@@ -3,6 +3,7 @@ package movementV2;
 import java.util.Random;
 
 import entities.Entity;
+import entities.Move;
 
 public class Straight extends Move{
 	//private int testdelta = 0;

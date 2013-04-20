@@ -10,7 +10,7 @@ public class Fire extends Moveable {
 	public Fire(double posX, double posY, Subject deltaUpdater) {
 		super(posX, posY, deltaUpdater);
 		// get Data from database?
-		movement = new Straight(this, -12, 0);
+		movement = new Straight(this, -12, 5);
 		LayerData2 firetex = new LayerData2(this, "projectile/fire", 1, 3);
 		firetex.color = new float[]{1f, 1f, 1f, 1f};
 		firetex.disableDepth = true;

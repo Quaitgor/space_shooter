@@ -13,15 +13,13 @@ import org.lwjgl.opengl.GL11;
 import factory.*;
 
 /**
- * @author  vmadmin
- */
-public class GS {
-	
+ * GS is the Graphics-Synchronizer, GS controls the speed of the game, and keeps every element in sync
+ * GS creates the Display and sets basic options for the Graphics and its resolution and speed
+ * */
+public class GS {	
     static boolean isRunning = true;
     static long lastFrame;
 	public static DeltaUpdater deltaUpdater;
-	public static moveables.Player player;
-	public static EnemyFactory ef;
 	public static FactoryEnemy fe;
 	public static ProjectileFactory profac ;
 	public static double delta = 0;
@@ -33,6 +31,10 @@ public class GS {
 		getDelta();
 	}
     
+	/**
+	 * start creates the display with the set options and keeps it open until a close is requested,
+	 * every Frame the Loop inside the method updates the deltaUpdater Observer, which in turn updates every graphical element with the Observer Pattern
+	 * */
 	public void start() {
 		// Run Graphics window until close request (X or Alt-F4), while running send out Delta to DeltaObserver
 		initGL(1280,768);
@@ -42,7 +44,7 @@ public class GS {
            		isRunning = false;
             }
             render();
-            updateFPS();
+            updateInfo();
             Display.update();
             Display.sync(60);
         }
@@ -50,8 +52,10 @@ public class GS {
         System.exit(0);
     }
 	
-	
-	public void updateFPS() {
+	/**
+	 * updateInfo() displays information in the Titlebar of the Window
+	 * */
+	public void updateInfo() {
 		/* not working ??
 		if (getTime() - lastFPS > 1000) {
 			Display.setTitle("FPS: " + fps);
@@ -60,11 +64,12 @@ public class GS {
 		}
 		fps++;
 		*/
-
 		Display.setTitle("ObsCount: " + deltaUpdater.getObserverNumber());
 	}
 	
-	
+	/**
+	 * render() calulates readys the screen for the next frame and calulates the timediffrence since the last calulation (delta) and updates the deltaUpdater with this delta
+	 * */
 	private void render(){
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -72,8 +77,10 @@ public class GS {
         GS.deltaUpdater.setDelta(delta);
 	}
 	
+	/**
+	 * initGL() sets GL options and prepares the screen for starting the game 
+	 * */
 	private void initGL(int width, int height){
-    	//Settings for Graphics, Ortho, Alpha, Color, Depth etc
         try {
 			Display.setDisplayMode(new DisplayMode(width,height));
 			Display.setFullscreen(true);
@@ -104,11 +111,8 @@ public class GS {
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
         
-        
         // Create some Objects for testing
-		//ef = new EnemyFactory(deltaUpdater);
 		profac = new ProjectileFactory(deltaUpdater);
-		
 		fe = new FactoryEnemy(deltaUpdater);
 
 		fe.create("TestenemyV2", 200.0, 200.0);
@@ -117,14 +121,14 @@ public class GS {
 		fe.create("AstroidbeltL2", 512.0, 460.0);
 		fe.create("AstroidbeltL3", 512.0, 620.0);
 		fe.create("Stars", 640.0, 384.0);
+		fe.create("Electro", 300.0, 200.0);
 		
 	}
-    /**
-	 * @return
-	 * @uml.property  name="delta"
-	 */
+	
+	/**
+	 * getDelta() calulates the time since last calulation (delta) and returns it
+	 * */
     private static double getDelta() {
-    	// Calculate Delta time (time since last calculation)
         long currentTime = getTime();
         double delta1 = (double) (currentTime - lastFrame);
         lastFrame = getTime();
@@ -132,6 +136,9 @@ public class GS {
         return delta;
     }
     
+    /**
+     * getTime() grabs the system Time and returns it
+     * */
     private static long getTime() {
     	// get Systemtime
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();

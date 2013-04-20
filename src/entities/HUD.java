@@ -1,9 +1,12 @@
-package graphics;
+package entities;
 
-import entities.Entity;
+import graphics.LayerData2;
 import observer.Subject;
-import movementV2.*;
 
+/**
+ * HUD is a Head-up-Display, a Display for showing information to the User
+ * HUD sets up the graphical elements of the HUD, the HUD itself is controled by the Player Object (and its PlayerMove)
+ * */
 public class HUD extends Entity{
 	private LayerData2 int_BG;
 	public LayerData2 int_SBar;
@@ -14,9 +17,11 @@ public class HUD extends Entity{
 	private Move owner;
 	public float[] defaultColor;
 	public double hideBBarValue = -190;
+	private int player = 1;
 	
-	public HUD(double newPosX, double newPosY, Subject getdeltaUpdater, Move owner) {
+	public HUD(double newPosX, double newPosY, Subject getdeltaUpdater, Move owner, int player) {
 		super(newPosX, newPosY, getdeltaUpdater);
+		this.player = player;
 		defaultColor = new float[]{0.5f, 1.0f, 0.5f, 1.0f};
 		int scale = 2;
 		this.owner = owner;
@@ -55,8 +60,6 @@ public class HUD extends Entity{
 		int_Dot2.spriteDisplayY *= scale;
 		int_Dot2.layer = 8;
 		int_Dot2.pos = new double[]{ 54, 10};
-		
-		
 
 		addNewLayer(int_BG);
 		addNewLayer(int_BBar);

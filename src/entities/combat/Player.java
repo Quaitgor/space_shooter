@@ -1,16 +1,21 @@
-package entities;
+package entities.combat;
 
+import entities.Offensive;
 import behaviours.*;
-import graphics.HUD;
 import graphics.LayerData2;
 import observer.Subject;
 import weapons.*;
 import movementV2.*;
 
+/**
+ * Player extens Offensive, together with the movement Strategy Pattern the User can control this Object.
+ * the PlayerMove movement has special control over this object and its weapon and grapics
+ * PlayerControl is the PlayerMove class
+ * */
+
 public class Player extends Offensive {
 	
 
-	public Weapon weapon;
 	protected Behave behaviour;
 	public LayerData2 lights = null;
 	int defaultLayer = 40;
@@ -19,7 +24,7 @@ public class Player extends Offensive {
 		super(posX, posY, deltaUpdater);
 		// get Data from database?
 		weapon = new Weapon("Fire");
-		movement = new PlayerMove(this, 1);
+		movement = new TestingControl(this, 1);
 		LayerData2 tex = new LayerData2(this, "player", 1, 1);
 		tex.layer= defaultLayer;
 		addNewLayer(tex);
@@ -30,9 +35,6 @@ public class Player extends Offensive {
 	}
 	
 	
-	public void fire(){
-		weapon.fire(posX, posY);
-	}
 	public void changeWeapon(String newWeapon ) {
 		this.weapon.changeWeapon(newWeapon);
 	}

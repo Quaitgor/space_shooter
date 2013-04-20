@@ -1,9 +1,8 @@
 package entites.decor;
 
-import entities.Entity;
+import entities.StaticDecor;
 import graphics.LayerData2;
 import observer.Subject;
-import movementV2.*;
 
 public class Moon extends StaticDecor {
 	

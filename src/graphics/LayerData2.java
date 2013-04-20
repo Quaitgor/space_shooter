@@ -23,15 +23,13 @@ import entities.Entity;
 
 
 /**
- * LayerData (V2) is the Texture Handler, inside LayerData are the Data for Animation, texture, Size and Color for a layer of Graphic on an object.
- * Together with other LayerData an Object can be build with multiple layers of textures, each individual size color and position relative to the object
+ * LayerData (V2) is the Main Texture Handler of this Program
+ * LayerData saves and controls the data for the animation, texture, size and color for single layer of Graphic on an object.
+ * Together with other LayerData an Object can be build with multiple layers of textures, 
+ * each individual in size color and position and its own sets of animation
  */
 
 public class LayerData2 {
-	/**
-	 * @uml.property  name="owner"
-	 * @uml.associationEnd  
-	 */
 	public Entity owner;
 	public double[] pos = new double[]{0,0};
 	public double rotation = 0;
@@ -79,7 +77,7 @@ public class LayerData2 {
 		// Create and save textures and its data
 	}
 	/**
-	 * setupTexture calulates important variables and saves them for other methods, normaly only executed once
+	 * setupTexture calulates important variables and saves them, normaly executed only once
 	 * */
 	private void setupTexture() {
 		BufferedImage bimg = null;
@@ -111,7 +109,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * drawLayer draws checks the animation(if any) and draws the layer
+	 * drawLayer draws checks the animation(if any) and draws the according sprite
 	 * */
 	public void drawLayer(){
 		if(!disableAnimation){
@@ -124,7 +122,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * checkAnimation checks if another Sprite needs to be set for the next draw, it uses the Arraylist and arrays inside it  and the delta of its owner
+	 * checkAnimation checks if another Sprite needs to be set for the next draw, it uses the animationList
 	 * to check for any change needed
 	 * */
 	protected void checkAnimation(){
@@ -150,7 +148,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * drawThisLayer is the draw command for GL to draw a textured quad with the texture provided (and with the correct selected sprite)
+	 * drawThisLayer is the draw command to GL to draw a textured quad with the texture provided (and with the correct selected sprite)
 	 * */
 	protected void drawThisLayer(){
 		// Draw the layer final step
@@ -182,7 +180,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * changeSprite is a shorthand method to change spriteH and spriteV and execute calculateSprite
+	 * changeSprite is a shorthand method to change spriteH and spriteV and execute calculateSprite in one command
 	 * */
 	public void changeSprite(int h, int v){
 		this.spriteH = h;
@@ -190,20 +188,20 @@ public class LayerData2 {
 		calculateSprite();
 	}
 	/**
-	 * setSpriteDisplaySize changes the displayed size of the object
+	 * setSpriteDisplaySize changes the displayed size of the object, shorthand method to change both in one command
 	 * */
 	public void setSpriteDisplaySize(double x, double y){
 		spriteDisplayX = x;
 		spriteDisplayY = y;
 	}
 	/**
-	 * getPosX calulates its position relative to the position of its owner
+	 * getPosX calulates its position relative to the position of its owner (without this, the texturelayer will not move together with its owner and will be seperate)
 	 * */
 	public double getPosX(){
 		return owner.posX + pos[0];
 	}
 	/**
-	 * getPosX calulates its position relative to the position of its owner
+	 * getPosY calulates its position relative to the position of its owner  (without this, the texturelayer will not move together with its owner and will be seperate)
 	 * */
 	public double getPosY(){
 		return owner.posY + pos[1];

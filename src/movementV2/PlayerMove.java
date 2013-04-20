@@ -1,25 +1,17 @@
 package movementV2;
 
 
-import java.util.Random;
-
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-
 import entities.*;
+import entities.combat.Player;
 import graphics.GS;
-import graphics.HUD;
 import graphics.LayerData2;
-import weapons.*;
 
 /**
- * @author  vmadmin
- */
+ * PlayerMove is the movment Strategy Pattern the Player uses
+ * this movement pattern does not only control movement of the player, it is used to control the weapon and general input to the player object
+ * */
 public class PlayerMove extends Move{
-	/**
-	 * @uml.property  name="owner"
-	 * @uml.associationEnd  
-	 */
 	protected Entity owner;
 	protected int player;
 	protected boolean charging = false;
@@ -27,7 +19,7 @@ public class PlayerMove extends Move{
 	protected boolean fastshot = false;
 	protected double fastfiredelay = 0;
 	protected double weapondelay = 0;
-	protected double maxSpeed = 5.0;
+	protected double maxSpeed = 7.5;
 	protected double speedX = 0;
 	protected double speedY = 0;
 	protected int accel = 15;
@@ -36,8 +28,11 @@ public class PlayerMove extends Move{
 	protected boolean movingRight = false;
 	protected boolean movingDown= false;
 	
-	//keybinding
 
+	private float reverse = 0.1f;
+	
+	
+	//keybinding
 	protected int firekey;
 	protected int chargekey;
 	protected int keepFiring;
@@ -45,22 +40,21 @@ public class PlayerMove extends Move{
 	protected int moveDown;
 	protected int moveLeft;
 	protected int moveRight;
+	public double hudX;
+	public double hudY;
 	public HUD hud = null;
 	
 	
-	//testing
-	private float reverse = 0.1f;
-	boolean mousefree = true;
 	
 
 	public PlayerMove(Entity owner, int player){
 		super(owner);
 		this.owner = owner;
 		this.player = player;
-		//HUD init
-		hud = new HUD(100, 50, GS.deltaUpdater, this);
-
-		//  get Control for Player from database
+		
+		//  get HUDPositon & Control for Player from database
+		hudX = 100;
+		hudY = 50;
 		firekey = Keyboard.KEY_A;
 		chargekey = Keyboard.KEY_S;
 		keepFiring = Keyboard.KEY_D;
@@ -68,9 +62,16 @@ public class PlayerMove extends Move{
 		moveDown = Keyboard.KEY_DOWN;
 		moveLeft = Keyboard.KEY_LEFT;
 		moveRight = Keyboard.KEY_RIGHT;
+		//setup the HUD
+		hud = new HUD(hudX, hudY, GS.deltaUpdater, this, player);
 		
 	}
+	
+	/**
+	 * calulateMove() grabs all relevant Input of the user and calulates movement and weaponcontrol for the player Object
+	 * */
 	protected void calculateMove(){
+		// maybe exclude the weapon and put it in the weapon design pattern, splitting control in movement and combat segments?
 		speedX = 0;
 		speedY = 0;
     	int tempAccel = 1;
@@ -115,32 +116,29 @@ public class PlayerMove extends Move{
 		}
     	nposX += speedX;
     	nposY += speedY;
-
-
-        //rotation test
-        if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7)) {
-        	owner.LayerDatas.get(0).rotation += 2.0;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)) {
-        	owner.LayerDatas.get(0).rotation -= 2.0;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD5)) {
-        	owner.LayerDatas.get(0).rotation = 0.0;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)) {
-    		Random r = new Random();
-    		double randomValueY = 0 + 768 * r.nextDouble();
-    		GS.fe.create("Asteroid",1400.0, randomValueY);
-        }
-
-    	// weapon controls & variables
+    	if(Math.abs(nposX) > Math.abs(maxSpeed)) {
+    		double reverse = 1;
+    		if(nposX < 1) reverse = -1;
+    		nposX = reverse*maxSpeed;
+    	}
+    	if(Math.abs(nposY) > Math.abs(maxSpeed)){
+    		double reverse = 1;
+    		if(nposY < 1) reverse = -1;
+    		nposY = reverse*maxSpeed;
+    	}
+    	
+    	/**
+    	 * Weapon Controls for Delay and Charge
+    	 * */
     	if (weapondelay > 0) weapondelay -= owner.delta;
+    	
     	if (fastshot){
     		if (weapondelay <= 0){
     			((Player)owner).fire();
     			weapondelay = ((Player)owner).weapon.weapondelay;
     		}
     	}
+    	
     	if (charging){
     		if(chargedelta < 2000){
     			chargedelta += owner.delta;
@@ -160,56 +158,23 @@ public class PlayerMove extends Move{
 				if(hud.int_BBarGlow.color[3] > 0.0f) hud.int_BBarGlow.color[3] -= 0.01f;
     		}
 			
-    		
+    		// temporary? Engine Color Change
     		float[] x = ((Player)owner).lights.color;
     		if (x[0] <= 1.0f) x[0] += 0.01f;
     		if (x[1] >= 0.1f) x[1] -= 0.01f;
     		if (x[2] >= 0.1f) x[2] -= 0.01f;
     		if (x[3] <= 1.0f) x[3] += 0.01f;
-			
     	}
+    	
+    	/**
+    	 * The Events inside while(Keyboard.next()) fire once when key pressed/released
+    	 *  
+    	 *  Keyboard.getEventKeyState() == true  => when Key Pressed
+    	 *  Keyboard.getEventKeyState() == false => when Key Released
+    	 * */
         while (Keyboard.next()) {
-        	if (Keyboard.getEventKeyState()) {
-            	//these Keys in this loop fire ONCE when PRESSED
-        		if (Keyboard.getEventKey() == moveLeft) {
-                	movingLeft = true;
-                }
-        		if (Keyboard.getEventKey() == moveUp) {
-                	movingUp= true;
-                }
-        		if (Keyboard.getEventKey() == moveRight) {
-                	movingRight = true;
-                }
-        		if (Keyboard.getEventKey() == moveDown) {
-                	movingDown = true;
-                }
-        		if (Keyboard.getEventKey() == firekey) {
-        			if (!fastshot && !charging && weapondelay <= 0) {
-        				((Player)owner).fire();
-            			weapondelay = ((Player)owner).weapon.weapondelay;
-        			}
-        		}
-        		if (Keyboard.getEventKey() == keepFiring) {
-        			if(!charging){
-            			this.fastshot = true;
-            			System.out.println("keepFiring");
-        			}
-        		}
-        		if (Keyboard.getEventKey() == chargekey) {
-        			if(!fastshot) {
-        				charging = true;
-        				System.out.println("Charging!!");
-        				System.out.println(hud.defaultColor[0]);
 
-        				System.arraycopy( hud.defaultColor, 0, hud.int_BBar.color, 0, hud.defaultColor.length );
-        				
-        				
-        	    		float[] x = ((Player)owner).lights.color;
-        	    		x[0] = 0.2f;
-        	    		x[1] = 0.4f;
-        	    		x[2] = 0.4f;
-        			}
-        		}
+        	if (Keyboard.getEventKeyState()) {
         		if (Keyboard.getEventKey() == Keyboard.KEY_O) {
         			System.out.println("ForceField Shatter");
         			GS.fe.create("ForceField", owner.posX, owner.posY);
@@ -218,7 +183,7 @@ public class PlayerMove extends Move{
         			GS.fe.create("Hit", owner.posX, owner.posY);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_U) {
-        			GS.fe.create("BarrierHit", owner.posX, owner.posY);
+        			GS.fe.create("BarrierHit", owner.posX, owner.posY, 180.0);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
         			System.out.println("Plasma");
@@ -236,8 +201,6 @@ public class PlayerMove extends Move{
         			System.out.println("Default");
         			((Player)owner).changeWeapon("Default");
         		}
-
-        		// Color Test??
         		LayerData2 x = owner.LayerDatas.get(owner.LayerDatas.indexOf(((Player)owner).lights));
     			float r = x.color[0];
     			float g = x.color[1];
@@ -273,8 +236,55 @@ public class PlayerMove extends Move{
         			}
         		}
         		
+        	
+        		/**
+        		 * switch booleans for movement
+        		 * */
+        		if (Keyboard.getEventKey() == moveLeft) {
+                	movingLeft = true;
+                }
+        		if (Keyboard.getEventKey() == moveUp) {
+                	movingUp= true;
+                }
+        		if (Keyboard.getEventKey() == moveRight) {
+                	movingRight = true;
+                }
+        		if (Keyboard.getEventKey() == moveDown) {
+                	movingDown = true;
+                }
+        		/**
+        		 * Weapon Controls for charging, firing and Fastshot
+        		 * */
+        		if (Keyboard.getEventKey() == firekey) {
+        			if (!fastshot && !charging && weapondelay <= 0) {
+        				((Player)owner).fire();
+            			weapondelay = ((Player)owner).weapon.weapondelay;
+        			}
+        		}
+        		if (Keyboard.getEventKey() == keepFiring) {
+        			if(!charging){
+            			this.fastshot = true;
+        			}
+        		}
+        		if (Keyboard.getEventKey() == chargekey) {
+        			if(!fastshot) {
+        				charging = true;
+        				System.arraycopy( hud.defaultColor, 0, hud.int_BBar.color, 0, hud.defaultColor.length );
+        				
+        				/*
+        				// temporary? Engine Color change        				
+        	    		float[] x = ((Player)owner).lights.color;
+        	    		x[0] = 0.2f;
+        	    		x[1] = 0.4f;
+        	    		x[2] = 0.4f;.
+        	    		*/
+        			}
+        		}
+        		
         	}else{
-        		// Release Key
+        		/**
+        		 * Movement Keys released booleans
+        		 * */
         		if (Keyboard.getEventKey() == moveLeft) {
                 	movingLeft = false;
                 }
@@ -287,7 +297,9 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == moveDown) {
                 	movingDown = false;
                 }
-            	//these Keys in this loop fire ONCE when RELEASED
+        		/**
+        		 * Weapon controls when Keys released for Charging and Fastshot
+        		 * */
         		if (Keyboard.getEventKey() == chargekey) {
         			if (!fastshot) {
             			charging = false;
@@ -312,21 +324,33 @@ public class PlayerMove extends Move{
         	}
         }
 	}
+	
+	/**
+	 * makeMove() executes the calulated movements & stops the player from leaving the window
+	 * */
 	protected void makeMove(){
-		owner.posX += nposX;
-		owner.posY += nposY;
-		
-		if (owner.posX < 0 || owner.posX > 1280){
-			if(owner.posX < 0) owner.posX = 0;
-			if(owner.posX > 1280) owner.posX = 1280;
+
+		if (owner.posX > 1280 || owner.posX < 0){
 			nposX = 0;
 			speedX = 0;
+			if(owner.posX > 1280){
+				owner.posX = 1280;
+			}
+			if(owner.posX < 0){
+				owner.posX = 0;
+			}
 		}
-		if (owner.posY < 0 || owner.posY > 768){
-			if(owner.posY < 0) owner.posY = 0;
-			if (owner.posY > 768) owner.posY = 768;
+		if (owner.posY > 768 || owner.posY < 0){
 			nposY = 0;
 			speedY = 0;
-		}
+			if(owner.posY > 768){
+				owner.posY = 768;
+			}
+			if(owner.posY < 0){
+				owner.posY = 0;
+			}
+		}	
+		owner.posX += nposX;
+		owner.posY += nposY;		
 	}
 }

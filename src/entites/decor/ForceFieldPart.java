@@ -10,7 +10,7 @@ public class ForceFieldPart extends Entity {
 	public ForceFieldPart(double posX, double posY, Subject deltaUpdater) {
 		super(posX, posY, deltaUpdater);
 		// get Data from database?
-		tex = new LayerData2(this, "hit", 8, 1);
+		tex = new LayerData2(this, "field", 8, 1);
 		tex.disableAnimation = true;
 		tex.layer = 35;
     	double[][] shatter = new double[7][7];

@@ -1,10 +1,12 @@
-package entites.decor;
+package entities;
 
 import observer.Subject;
-import entities.Entity;
 
+/**
+ * StaticDecor extends Entity for the use with static Decorations (not moving elements on the screen like a background)
+ * */
 public class StaticDecor extends Entity {
-	int defaultLayer = 62;
+	protected int defaultLayer = 62;
 	public StaticDecor(double newPosX, double newPosY, Subject getdeltaUpdater) {
 		super(newPosX, newPosY, getdeltaUpdater);
 		// TODO Auto-generated constructor stub

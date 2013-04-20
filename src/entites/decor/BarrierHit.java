@@ -1,5 +1,6 @@
 package entites.decor;
 
+import movementV2.Straight;
 import entities.*;
 import graphics.LayerData2;
 import observer.Subject;
@@ -9,13 +10,17 @@ public class BarrierHit extends Entity {
 	private LayerData2 tex;
 	int speed = 100;
 	
-	public BarrierHit(double posX, double posY, Subject deltaUpdater) {
+	public BarrierHit(double posX, double posY, Subject deltaUpdater, double rotation) {
 		super(posX, posY, deltaUpdater);
 		System.out.println("Hit Animation");
 		// get Data from database?
 		tex = new LayerData2(this, "barrierHit", 1, 8);
 		tex.layer = 35;
-    	double[][] hit = new double[8][8];
+		tex.rotation = rotation;
+		
+		
+		
+    	double[][] hit = new double[9][9];
     	hit[0][0] = 0.5*speed;
     	hit[1][0] = 0;
     	hit[2][0] = 0;
@@ -47,20 +52,23 @@ public class BarrierHit extends Entity {
     	hit[0][7] = 6*speed;
     	hit[1][7] = 0;
     	hit[2][7] = 7;
+    	hit[0][8] = 12*speed;
+    	hit[1][8] = 0;
+    	hit[2][8] = 7;
     	
     	tex.animationList.add(hit);
 		addNewLayer(tex);
 
 	}
 	public void update(double delta) {
-		this.delta = delta;
-		this.draw();
-		this.changeAni();
+		super.update(delta);
+		//this.changeAni();
 	}
 	private void changeAni(){
 		livetime += delta;
 		if(livetime >= 6*speed){
-			tex.changeSprite(-1, -1);
+			tex.changeSprite(0, 7);
+			tex.color = new float[]{0f,0f,0f,0f};
 			tex.disableAnimation = true;
 			this.deltaUpdater.unregister(this);
 		}
