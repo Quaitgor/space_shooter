@@ -11,8 +11,8 @@ public class Straight extends Move{
 	
 	public Straight(Entity getOwner, double angle, double speed) {
 		super(getOwner);
-		nposX = 3;
-		nposY = 3;
+		nposX = 0;
+		nposY = 0;
 	}
 	protected void calculateMove(){
 	}

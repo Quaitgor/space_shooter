@@ -1,8 +1,8 @@
 package factory;
 
-import entites.decor.*;
 import entities.*;
 import entities.combat.Player;
+import entities_decor.*;
 import observer.*;
 
 /**
