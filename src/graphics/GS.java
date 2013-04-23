@@ -14,6 +14,9 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import entites.decor.Hit;
+import entities.Collision;
+import entities.Moveable;
 import entities.Offensive;
 import factory.*;
 
@@ -26,13 +29,16 @@ public class GS {
     static long lastFrame;
 	public static DeltaUpdater deltaUpdater;
 	public static double delta = 0;
-	public static Vector<Offensive> offensive;
+	public static Vector<Moveable> enemys;
+	public static Vector<Moveable> friendlys;
+	protected Collision colchecker = new Collision();
 	int fps;
 	long lastFPS;
 	
 	public GS(DeltaUpdater getdeltaUpdater) {
 		deltaUpdater = getdeltaUpdater;
-		offensive = new Vector<Offensive>();
+		enemys = new Vector<Moveable>();
+		friendlys = new Vector<Moveable>();
 		getDelta();
 	}
     
@@ -49,6 +55,7 @@ public class GS {
            		isRunning = false;
             }
             render();
+            checkCollision();
             updateInfo();
             Display.update();
             Display.sync(60);
@@ -56,6 +63,28 @@ public class GS {
         Display.destroy();
         System.exit(0);
     }
+	
+	
+
+	protected void checkCollision(){
+    		for (Moveable friendlys: GS.friendlys){
+    			Moveable friend = (Moveable) friendlys;
+
+        		for (Moveable enemys: GS.enemys){
+        			Moveable enemy= (Moveable) enemys;
+        			colchecker.intersects(friend,enemy);
+        		}
+    		}
+			/*
+    		if(crashed){
+				new Hit(posX, posY);
+				crashed = false;
+			}
+			*/
+			//if(health <= 0) this.unsubscribe();
+	}
+	
+	
 	
 	/**
 	 * updateInfo() displays information in the Titlebar of the Window

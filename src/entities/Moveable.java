@@ -1,5 +1,11 @@
 package entities;
 
+import graphics.GS;
+import graphics.LayerData2;
+
+import java.awt.Rectangle;
+import java.util.Vector;
+
 import movementV2.Move;
 
 /**
@@ -7,6 +13,10 @@ import movementV2.Move;
  * */
 public abstract class Moveable extends Entity {
 	protected Move movement;
+	protected boolean friendly = false;
+	protected LayerData2 mainTexture = null;
+	protected Rectangle hitbox;
+	protected int[] hitboxOffset = new int[]{1,1,1,1};
 	
 	public Moveable(double newPosX, double newPosY) {
 		super(newPosX, newPosY);
@@ -19,5 +29,15 @@ public abstract class Moveable extends Entity {
 	public void update(double delta) {
 		super.update(delta);
 		movement.move();
+	}
+	public void addToCollision(){
+		Vector target = null;
+		if(friendly){
+			target = GS.friendlys;
+		}else{
+			target = GS.enemys;
+		}
+		target.add(this);
+		System.out.println("added");
 	}
 }

@@ -10,32 +10,33 @@ import javax.imageio.ImageIO;
 
 public class Collision {
 	
-	public void intersects(Offensive origin, Offensive other) {
-		double twidth = origin.mainTexture.spriteDisplayX;
-		double theight = origin.mainTexture.spriteDisplayY;
-		double owidth = other.mainTexture.spriteDisplayX;
-		double oheight = other.mainTexture.spriteDisplayY;
+	public void intersects(Moveable friend, Moveable enemy) {
+		double twidth = friend.mainTexture.spriteDisplayX;
+		double theight = friend.mainTexture.spriteDisplayY;
+		double owidth = enemy.mainTexture.spriteDisplayX;
+		double oheight = enemy.mainTexture.spriteDisplayY;
 		
-		if(origin.posX+twidth/2 > other.posX - owidth/2 && origin.posX-twidth/2 < other.posX + owidth/2 && origin.posY+theight/2 > other.posY - oheight/2 && origin.posY-theight/2 < other.posY + oheight/2){
-			if( origin.hitbox.width > other.hitbox.x && origin.hitbox.x < other.hitbox.width && origin.hitbox.height > other.hitbox.y && origin.hitbox.y < other.hitbox.height){
+		if(friend.posX+twidth/2 > enemy.posX - owidth/2 && friend.posX-twidth/2 < enemy.posX + owidth/2 && friend.posY+theight/2 > enemy.posY - oheight/2 && friend.posY-theight/2 < enemy.posY + oheight/2){
+			if( friend.hitbox.width > enemy.hitbox.x && friend.hitbox.x < enemy.hitbox.width && friend.hitbox.height > enemy.hitbox.y && friend.hitbox.y < enemy.hitbox.height){
 				Rectangle crasher1 = new Rectangle();
 				Rectangle crasher2 = new Rectangle();
 				crasher1.setRect(
-					origin.posX-twidth/2,
-					origin.posY-theight/2,
-					origin.posX+twidth/2,
-					origin.posY+theight/2
+					friend.posX-twidth/2,
+					friend.posY-theight/2,
+					friend.posX+twidth/2,
+					friend.posY+theight/2
 				);
 				crasher2.setRect(
-					other.posX - owidth/2,
-					other.posY - oheight/2,
-					other.posX + owidth/2,
-					other.posY + oheight/2
+					enemy.posX - owidth/2,
+					enemy.posY - oheight/2,
+					enemy.posX + owidth/2,
+					enemy.posY + oheight/2
 				);
-				File file1 = new File("res/sprites/"+origin.mainTexture.texturepath+".png");
-				File file2 = new File("res/sprites/"+other.mainTexture.texturepath+".png");
+				File file1 = new File("res/sprites/"+friend.mainTexture.texturepath+".png");
+				File file2 = new File("res/sprites/"+enemy.mainTexture.texturepath+".png");
 				if (isPixelCollide(crasher1, file1, crasher2, file2)){
-					origin.crashed = true;					
+					//friend.crashed = true;	
+        			System.out.println("crash");				
 				}
 			}
 		}
@@ -66,7 +67,6 @@ public class Collision {
 		int toty = Math.abs(yend - ystart);
 		// loop through each pixel in the intersection and check if both are alpha, if not => collision
 		for (int y=1; y < toty-1;y++){
-			System.out.println(y);
 			int ny = Math.abs(ystart - (int) y1) + y;
 			int ny1 = Math.abs(ystart - (int) y2) + y;
 			for (int x=1;x < totx-1;x++) {

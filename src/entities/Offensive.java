@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -25,22 +26,16 @@ public abstract class Offensive extends Moveable{
 	protected int health = 1;
 	protected int offsetX = 0;
 	protected int offsetY = 0;
-	protected LayerData2 mainTexture = null;
 	protected boolean crashed = false;
-	protected Rectangle hitbox;
-	protected int[] hitboxOffset = new int[]{1,1,1,1};
-	protected Collision colchecker = new Collision();
 
 	public Offensive(double newPosX, double newPosY) {
 		super(newPosX, newPosY);
-		GS.offensive.add(this);
 		hitbox = new Rectangle();
 	}
+	
 	public void update(double delta){
 		updateHitbox();
 		super.update(delta);
-		checkCollision();
-		
 		/*
 		//temp texturebg for hitbox
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -62,27 +57,20 @@ public abstract class Offensive extends Moveable{
 	}
 	protected void unsubscribe(){
 		super.unsubscribe();
-		int offensiveIndex = GS.offensive.indexOf(this);
-		GS.offensive.remove(offensiveIndex);
+		Vector target = null;
+		if(friendly){
+			target = GS.friendlys;
+		}else{
+			target = GS.enemys;
+		}
+		int index = target.indexOf(this);
+		target.remove(index);
 	}
 	protected void updateHitbox(){
 		hitbox.x = (int)(posX)+ hitboxOffset[0];
 		hitbox.y = (int)(posY)+hitboxOffset[1];
 		hitbox.width = (int)(posX)+hitboxOffset[2];
 		hitbox.height= (int)(posY)+hitboxOffset[3];
-	}
-	protected void checkCollision(){
-    		for (Offensive off: GS.offensive){
-    			Offensive other = (Offensive) off;
-    			if (!this.equals(other)) colchecker.intersects(this,other);
-    		}
-			/*
-    		if(crashed){
-				new Hit(posX, posY);
-				crashed = false;
-			}
-			*/
-			//if(health <= 0) this.unsubscribe();
 	}
 	
 	/**

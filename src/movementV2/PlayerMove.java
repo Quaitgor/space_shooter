@@ -313,6 +313,7 @@ public class PlayerMove extends Move{
         			if (!fastshot) {
             			charging = false;
             			System.out.println("Charging released: "+chargedelta);
+            			chargedelta = 0;
             			hud.int_BBar.pos = new double[]{hud.hideBBarValue, 0.0};
         				hud.int_BBarGlow.color[3] = 0.0f;
         				/*

@@ -24,8 +24,8 @@ public class Player extends Offensive {
 		mainTexture = new LayerData2(this, "player", 1, 1);
 		mainTexture.layer= defaultLayer;
 		addNewLayer(mainTexture);
-		
-		
+		friendly = true;
+		addToCollision();
 		hitboxOffset = new int[]{-68, -22, 68, 18};
 		//lights = new LayerData2(this, "playerlight", 1, 1);
 		//lights.layer = defaultLayer -1;
