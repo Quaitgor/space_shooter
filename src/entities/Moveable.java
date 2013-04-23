@@ -12,7 +12,7 @@ import movementV2.Move;
  * Moveable extends Entity with the moevment Strategy Pattern
  * */
 public abstract class Moveable extends Entity {
-	protected Move movement;
+	public Move movement;
 	protected boolean friendly = false;
 	protected LayerData2 mainTexture = null;
 	protected Rectangle hitbox;
@@ -38,6 +38,5 @@ public abstract class Moveable extends Entity {
 			target = GS.enemys;
 		}
 		target.add(this);
-		System.out.println("added");
 	}
 }

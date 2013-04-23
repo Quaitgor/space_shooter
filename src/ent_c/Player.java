@@ -1,6 +1,7 @@
 package ent_c;
 
 import entities.Offensive;
+import graphics.GS;
 import graphics.LayerData2;
 import observer.Subject;
 import weapons.*;
@@ -19,6 +20,7 @@ public class Player extends Offensive {
 	
 	public Player(double posX, double posY) {
 		super(posX, posY);
+		GS.player1 = this;
 		weapon = new Weapon_Fire(this);
 		movement = new PlayerMove(this, 1);
 		mainTexture = new LayerData2(this, "player", 1, 1);

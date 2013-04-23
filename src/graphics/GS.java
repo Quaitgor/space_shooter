@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import entites.decor.Hit;
 import entities.Collision;
+import entities.Entity;
 import entities.Moveable;
 import entities.Offensive;
 import factory.*;
@@ -31,6 +32,8 @@ public class GS {
 	public static double delta = 0;
 	public static Vector<Moveable> enemys;
 	public static Vector<Moveable> friendlys;
+	public static Entity player1;
+	public static Entity player2;
 	protected Collision colchecker = new Collision();
 	int fps;
 	long lastFPS;

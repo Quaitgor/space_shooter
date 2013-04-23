@@ -19,7 +19,6 @@ public class Enemy1 extends Offensive {
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-32, -16, 32, 16};
 		addNewLayer(mainTexture);
-		
 	}
 	
 	/*
