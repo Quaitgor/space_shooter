@@ -4,8 +4,9 @@ package movementV2;
 import java.util.Random;
 
 import org.lwjgl.input.Keyboard;
+
+import ent_c.Player;
 import entities.*;
-import entities.combat.Player;
 import graphics.GS;
 import graphics.LayerData2;
 
@@ -33,10 +34,10 @@ public class TestingControl extends PlayerMove{
         if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)) {
     		Random r = new Random();
     		double randomValueY = 0 + 768 * r.nextDouble();
-    		GS.fe.create("Asteroid",1400.0, randomValueY);
+    		//GS.fe.create("Asteroid",1400.0, randomValueY);
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)) {
-    		GS.fe.create("BarrierHit", owner.posX-100, owner.posY, 180.0);
+    		//GS.fe.create("BarrierHit", owner.posX-100, owner.posY, 180.0);
         }
 
         while (Keyboard.next()) {

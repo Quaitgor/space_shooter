@@ -11,7 +11,7 @@ public class Plasma extends Projectiles {
 		super(posX, posY, moveX, moveY);
 		
 		// get Data from database?
-		movement = new Straight(this, -12, 0);
+		movement = new Straight(this, -12);
 		LayerData2 tex = new LayerData2(this, "projectile/plasma", 4, 1);
 		tex.color = new float[]{1f, 1f, 1f, 1f};
 		

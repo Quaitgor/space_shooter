@@ -33,7 +33,7 @@ public class Asteroid extends MoveableDecor {
 
 		double randomValue = 2 + ( 6 - 2) * r.nextDouble();
 		double randomValue2 = -2.0 + ( 2.0 - -2.0) * r.nextDouble();
-		movement = new Straight(this, randomValue, randomValue2);
+		movement = new Straight(this, randomValue);
 		((Straight) movement).randomRotate(true);
 	}
 }

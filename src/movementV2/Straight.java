@@ -9,9 +9,9 @@ public class Straight extends Move{
 	public boolean randomRotate = false;
 	private double rotation = 0;
 	
-	public Straight(Entity getOwner, double angle, double speed) {
+	public Straight(Entity getOwner, double speed) {
 		super(getOwner);
-		nposX = 0;
+		nposX = speed;
 		nposY = 0;
 	}
 	protected void calculateMove(){

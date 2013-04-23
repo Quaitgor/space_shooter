@@ -1,5 +1,7 @@
 package observer;
 
+import graphics.GS;
+
 import java.util.Vector;
 
 /**

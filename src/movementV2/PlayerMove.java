@@ -4,8 +4,8 @@ package movementV2;
 import org.lwjgl.input.Keyboard;
 
 import weapons.*;
+import ent_c.Player;
 import entities.*;
-import entities.combat.Player;
 import graphics.GS;
 import graphics.LayerData2;
 
@@ -24,7 +24,7 @@ public class PlayerMove extends Move{
 	protected double maxSpeed = 7.5;
 	protected double speedX = 0;
 	protected double speedY = 0;
-	protected int accel = 15;
+	protected int accel = 50;
 	protected boolean movingLeft = false;
 	protected boolean movingUp = false;
 	protected boolean movingRight = false;
@@ -163,11 +163,13 @@ public class PlayerMove extends Move{
     		}
 			
     		// temporary? Engine Color Change
+    		/*
     		float[] x = ((Player)owner).lights.color;
     		if (x[0] <= 1.0f) x[0] += 0.01f;
     		if (x[1] >= 0.1f) x[1] -= 0.01f;
     		if (x[2] >= 0.1f) x[2] -= 0.01f;
     		if (x[3] <= 1.0f) x[3] += 0.01f;
+    		*/
     	}
     	
     	/**
@@ -181,13 +183,13 @@ public class PlayerMove extends Move{
         	if (Keyboard.getEventKeyState()) {
         		if (Keyboard.getEventKey() == Keyboard.KEY_O) {
         			System.out.println("ForceField Shatter");
-        			GS.fe.create("ForceField", owner.posX, owner.posY);
+        			//GS.fe.create("ForceField", owner.posX, owner.posY);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_I) {
-        			GS.fe.create("Hit", owner.posX, owner.posY);
+        			//GS.fe.create("Hit", owner.posX, owner.posY);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_U) {
-        			GS.fe.create("BarrierHit", owner.posX, owner.posY, 180.0);
+        			//GS.fe.create("BarrierHit", owner.posX, owner.posY, 180.0);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
         			System.out.println("Plasma");
@@ -205,12 +207,14 @@ public class PlayerMove extends Move{
         			System.out.println("Default");
         			//((Player)owner).changeWeapon("Default");
         		}
+        		
+        		/*
         		LayerData2 x = owner.LayerDatas.get(owner.LayerDatas.indexOf(((Player)owner).lights));
     			float r = x.color[0];
     			float g = x.color[1];
     			float b = x.color[2];
     			float a = x.color[3];
-    			
+        		
         		if (Keyboard.getEventKey() == Keyboard.KEY_F1) {
         			r = x.color[0] +reverse;
         			x.color = new float[]{r, g, b, a};
@@ -239,6 +243,7 @@ public class PlayerMove extends Move{
         				reverse = 0.2f;
         			}
         		}
+    			*/
         		
         	
         		/**
@@ -310,13 +315,14 @@ public class PlayerMove extends Move{
             			System.out.println("Charging released: "+chargedelta);
             			hud.int_BBar.pos = new double[]{hud.hideBBarValue, 0.0};
         				hud.int_BBarGlow.color[3] = 0.0f;
-
+        				/*
                 		float[] x = ((Player)owner).lights.color;
                 		x[0] = 0.2f;
                 		x[1] = 0.2f;
                 		x[2] = 0.2f;
                 		x[3] = 0.2f;
             			chargedelta = 0;
+            			*/
         			}
         		}
         		if (Keyboard.getEventKey() == keepFiring) {

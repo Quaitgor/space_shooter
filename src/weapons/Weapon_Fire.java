@@ -10,7 +10,7 @@ public class Weapon_Fire extends Weapon {
 
 	@Override
 	public void fire() {
-		new projectiles.Fire(owner.posX, owner.posY, 2, 4);
+		new projectiles.Fire(owner.posX, owner.posY, -10, 4);
 	}
 
 }

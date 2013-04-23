@@ -66,10 +66,13 @@ public abstract class Entity implements Observer {
 		if(this.posX > 2*1280 || this.posX < 0-1280||this.posY > 2*768 || this.posY < 0-768){
 			this.offscreenLive += delta;
 			if(offscreenLive > offscreen){
-				deltaUpdater.unregister(this);
+				unsubscribe();
 			}
 		}else{
 			offscreenLive = 0;
 		}
+	}
+	protected void unsubscribe(){
+		deltaUpdater.unregister(this);
 	}
 }

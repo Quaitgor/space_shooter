@@ -3,6 +3,9 @@ import static org.lwjgl.opengl.GL11.GL_BACK;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.glCullFace;
 import static org.lwjgl.opengl.GL11.glEnable;
+
+import java.util.Vector;
+
 import observer.*;
 
 import org.lwjgl.LWJGLException;
@@ -10,6 +13,8 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+
+import entities.Offensive;
 import factory.*;
 
 /**
@@ -20,13 +25,14 @@ public class GS {
     static boolean isRunning = true;
     static long lastFrame;
 	public static DeltaUpdater deltaUpdater;
-	public static FactoryEnemy fe;
 	public static double delta = 0;
+	public static Vector<Offensive> offensive;
 	int fps;
 	long lastFPS;
 	
 	public GS(DeltaUpdater getdeltaUpdater) {
-		GS.deltaUpdater = getdeltaUpdater;
+		deltaUpdater = getdeltaUpdater;
+		offensive = new Vector<Offensive>();
 		getDelta();
 	}
     
@@ -71,7 +77,7 @@ public class GS {
 	 * */
 	private void render(){
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        GL11.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         getDelta();
         GS.deltaUpdater.setDelta(delta);
 	}
@@ -91,7 +97,7 @@ public class GS {
             System.exit(1);
         }
 		GL11.glEnable(GL11.GL_TEXTURE_2D);  
-		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		//GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glClearDepth(1.0f);
         //GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDepthFunc(GL11.GL_ADD); ////// 
@@ -108,19 +114,17 @@ public class GS {
         GL11.glCullFace(GL11.GL_BACK);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-        GL11.glLoadIdentity();
+        //GL11.glLoadIdentity();
         
         // Create some Objects for testing
-		fe = new FactoryEnemy(deltaUpdater);
-
-		fe.create("TestenemyV2", 200.0, 200.0);
+		/*
 		fe.create("Moon", 300.0, 400.0);
 		fe.create("AstroidbeltL1", 512.0, 400.0);
 		fe.create("AstroidbeltL2", 512.0, 460.0);
 		fe.create("AstroidbeltL3", 512.0, 620.0);
 		fe.create("Stars", 640.0, 384.0);
 		fe.create("Electro", 300.0, 200.0);
-		
+		*/
 	}
 	
 	/**

@@ -175,6 +175,25 @@ public class LayerData2 {
         	glVertex2f( (int)spriteDisplayX, 0);
         }
         glEnd();
+        /*
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.getTextureID());
+        //GL11.glColor3f(glC[0], glC[1], glC[2]);
+        GL11.glColor4f(color[0], color[1], color[2], color[3]);
+        glBegin(GL_QUADS);
+        {
+        	glTexCoord2f(texX, texY);
+        	glVertex2f(0, 0);
+        	glTexCoord2f(texX, texYp);
+        	glVertex2f(0, (int)spriteDisplayY);
+        	glTexCoord2f(texXp, texYp);
+        	glVertex2f( (int)spriteDisplayX, (int)spriteDisplayY);
+        	glTexCoord2f(texXp, texY);
+        	glVertex2f( (int)spriteDisplayX, 0);
+        }
+        glEnd();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        */
         if (!disableDepth) GL11.glDisable(GL11.GL_DEPTH_TEST);
         glPopMatrix();
 	}

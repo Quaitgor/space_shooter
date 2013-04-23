@@ -47,13 +47,9 @@ public class Spawner implements Observer{
 		bd = bd.setScale(1, RoundingMode.DOWN);
 		//BigDecimal bd = new BigDecimal(delta/1000 + time);
 		//time = ().add(time).setScale(1, RoundingMode.DOWN);
-		System.out.println(bd);
 		if(LevelMap.containsKey(bd)){
 			LevelSet[] currentSet = LevelMap.get(bd);
 			for(LevelSet ls : currentSet){
-				System.out.println(ls.Movable);
-				System.out.println(ls.x);
-				System.out.println(ls.y);
 				EnemyFactory.create(ls.Movable,ls.x,ls.y);
 			}
 			LevelMap.remove(bd);
