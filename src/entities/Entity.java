@@ -46,10 +46,6 @@ public abstract class Entity implements Observer {
 	public void addNewLayer(LayerData2 newLayer){
 		LayerDatas.add(newLayer);
 	}
-	public void removeLayer(LayerData2 layer){
-		int index = LayerDatas.indexOf(layer);
-		LayerDatas.remove(index);
-	}
 	
 	/**
 	 * draw commands every LayerData to draw itself according to its setup

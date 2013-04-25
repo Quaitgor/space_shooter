@@ -1,6 +1,5 @@
 package ent_c;
 
-import entities.Entity;
 import entities.Offensive;
 import graphics.GS;
 import graphics.LayerData2;
@@ -17,13 +16,11 @@ import movementV2.*;
 public class Player extends Offensive {
 	
 	//public LayerData2 lights = null;
-	private int defaultLayer = 40;
-	public int shieldCharges = 2;
+	int defaultLayer = 40;
 	
 	public Player(double posX, double posY) {
 		super(posX, posY);
 		GS.player1 = this;
-		setDmg(10000);
 		weapon = new Weapon_Fire(this);
 		movement = new PlayerMove(this, 1);
 		mainTexture = new LayerData2(this, "player", 1, 1);
@@ -36,14 +33,6 @@ public class Player extends Offensive {
 		//lights.layer = defaultLayer -1;
 		//lights.color = new float[]{0.2f, 0.2f, 0,2f, 1.0f};
 		//addNewLayer(lights);
-	}
-	public void playerHit(Entity other){
-		if (shieldCharges > 0) {
-			shieldCharges -= 1;
-		}
-		if(other != null){
-			((Offensive)other).health -= damage;
-		}
 	}
 	
 	/*

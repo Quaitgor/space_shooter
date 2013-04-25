@@ -6,7 +6,7 @@ import entities.Entity;
  * the movement Strategy Pattern has direct control over its owner, allowing it control more than only Position X/Y if needed, even allowing to replace itself with another movement pattern
  */
 public abstract class Move {
-	public Entity owner;
+	protected Entity owner;
 	protected double nposX;
 	protected double nposY;
 	

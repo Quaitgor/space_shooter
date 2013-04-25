@@ -13,13 +13,10 @@ public class EnemyDummy extends Offensive {
 	
 	public EnemyDummy(double posX, double posY) {
 		super(posX, posY);
-		//mind = new FireWhenRange(this, 400);
-		setDmg(1);
-		weapon = new Enemy_Weapon1(this);
-		//movement = new Nothing(this);
-		//movement = new TargetPosition(this, 1, 500, 200);
-		//mind = new RandomFlying(this, 2, 400);
+		mind = new TestDetectRange(this);
+		weapon = new Weapon_Fire(this);
 		movement = new Nothing(this);
+		//movement = new Nothing(this);
 		mainTexture= new LayerData2(this, "enemy1", 1, 1);
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-32, -16, 32, 16};
@@ -28,7 +25,7 @@ public class EnemyDummy extends Offensive {
 	}
 	public void update(double delta){
 		super.update(delta);
-		//		mind.update();
+		mind.update();
 	}
 	/*
 	public void changeWeapon(String newWeapon ) {

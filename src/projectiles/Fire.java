@@ -7,9 +7,7 @@ public class Fire extends Projectiles {
 	
 	public Fire(double posX, double posY, double moveX, double moveY) {
 		super(posX, posY, moveX, moveY);
-		setDmg(1);
-		friendly = true;
-		addToCollision();
+		
 		// get Data from database?
 		System.out.println("Fire");
 		hitboxOffset = new int[]{-16, -16, 20, 16};

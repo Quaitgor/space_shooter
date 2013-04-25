@@ -3,7 +3,7 @@ package weapons;
 import entities.Entity;
 
 public class Weapon_Fire extends Weapon {
-	
+
 	public Weapon_Fire(Entity owner) {
 		super(owner);
 	}
