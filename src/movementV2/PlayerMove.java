@@ -14,10 +14,10 @@ import graphics.LayerData2;
  * this movement pattern does not only control movement of the player, it is used to control the weapon and general input to the player object
  * */
 public class PlayerMove extends Move{
-	protected Entity owner;
+	public Entity owner;
 	protected int player;
 	protected boolean charging = false;
-	protected double chargedelta = 0;
+	public double chargedelta = 0;
 	protected boolean fastshot = false;
 	protected double fastfiredelay = 0;
 	protected double weapondelay = 0;
@@ -29,10 +29,7 @@ public class PlayerMove extends Move{
 	protected boolean movingUp = false;
 	protected boolean movingRight = false;
 	protected boolean movingDown= false;
-	
-
-	private float reverse = 0.1f;
-	
+	public double chargeTime = 2000;
 	
 	//keybinding
 	protected int firekey;
@@ -144,23 +141,8 @@ public class PlayerMove extends Move{
     	}
     	
     	if (charging){
-    		if(chargedelta < 2000){
-    			chargedelta += owner.delta;
-    			double percent = 0.05 * chargedelta/100;
-    			double bigBarPos = hud.hideBBarValue -(hud.hideBBarValue * percent);
-    			if (percent*100 >= 60) {
-        			float[] color = hud.int_BBar.color;
-        			if (color[0] < 1.0f) color[0] += 0.01f;
-        			if (color[1] > 0.5f) color[1] -= 0.01f;
-    			}
-    			if(percent*100 >= 95){
-    				if(hud.int_BBarGlow.color[3] < 1.0f) hud.int_BBarGlow.color[3] += 0.05f;
-    			}
-    			hud.int_BBar.pos = new double[]{bigBarPos, 0.0};
-    		}else{
-    			chargedelta = 2000;
-				if(hud.int_BBarGlow.color[3] > 0.0f) hud.int_BBarGlow.color[3] -= 0.01f;
-    		}
+    		if(chargedelta < chargeTime)chargedelta += owner.delta;
+			if(chargedelta > chargeTime)chargedelta = chargeTime;
 			
     		// temporary? Engine Color Change
     		/*
@@ -204,7 +186,7 @@ public class PlayerMove extends Move{
         			((Player)owner).weapon = new Weapon_Fire(owner);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD4) {
-        			System.out.println("Default");
+        			((Player)owner).playerHit(null);
         			//((Player)owner).changeWeapon("Default");
         		}
         		
@@ -278,8 +260,6 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == chargekey) {
         			if(!fastshot) {
         				charging = true;
-        				System.arraycopy( hud.defaultColor, 0, hud.int_BBar.color, 0, hud.defaultColor.length );
-        				
         				/*
         				// temporary? Engine Color change        				
         	    		float[] x = ((Player)owner).lights.color;
@@ -314,8 +294,6 @@ public class PlayerMove extends Move{
             			charging = false;
             			System.out.println("Charging released: "+chargedelta);
             			chargedelta = 0;
-            			hud.int_BBar.pos = new double[]{hud.hideBBarValue, 0.0};
-        				hud.int_BBarGlow.color[3] = 0.0f;
         				/*
                 		float[] x = ((Player)owner).lights.color;
                 		x[0] = 0.2f;

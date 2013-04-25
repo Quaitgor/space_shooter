@@ -117,10 +117,16 @@ public class LayerData2 {
 				checkAnimation();
 			}			
 		}
-		drawThisLayer();
+		if(insideScreen())drawThisLayer();
 		
 	}
-	
+	protected boolean insideScreen(){
+		if(owner.posX-this.spriteDisplayX/2 > 1280 || owner.posX+this.spriteDisplayX/2 < 0|| owner.posY-this.spriteDisplayY/2 > 768 || owner.posY+this.spriteDisplayY/2 < 0){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	/**
 	 * checkAnimation checks if another Sprite needs to be set for the next draw, it uses the animationList
 	 * to check for any change needed

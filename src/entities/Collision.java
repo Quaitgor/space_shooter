@@ -1,11 +1,13 @@
 package entities;
 
+import graphics.GS;
+
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import ent_c.Player;
 import javax.imageio.ImageIO;
 
 public class Collision {
@@ -35,8 +37,13 @@ public class Collision {
 				File file1 = new File("res/sprites/"+friend.mainTexture.texturepath+".png");
 				File file2 = new File("res/sprites/"+enemy.mainTexture.texturepath+".png");
 				if (isPixelCollide(crasher1, file1, crasher2, file2)){
-					//friend.crashed = true;	
-        			System.out.println("crash");				
+					((Offensive)friend).crashed = true;
+        			System.out.println("crash");
+        			if (friend.equals(GS.player1)){
+        				((Player)friend).playerHit(enemy);
+        			}else{
+        				((Offensive)friend).exchangeCollision(enemy);
+        			}
 				}
 			}
 		}
