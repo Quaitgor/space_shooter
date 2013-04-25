@@ -16,9 +16,9 @@ public class TestDetectRange extends Behave {
 			double y = GS.player1.posY - owner.posY;
 			double distance = Math.sqrt(Math.pow(x,  2)+Math.pow(y, 2));
 			if(distance < 300){
-				//System.out.println("shoot");
 				if (!once){
 					((Offensive)owner).fire();
+					System.out.println("sada");
 				}
 			}
 			

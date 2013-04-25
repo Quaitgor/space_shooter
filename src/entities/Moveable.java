@@ -14,7 +14,7 @@ import movementV2.Move;
 public abstract class Moveable extends Entity {
 	public Move movement;
 	protected boolean friendly = false;
-	protected LayerData2 mainTexture = null;
+	public LayerData2 mainTexture = null;
 	protected Rectangle hitbox;
 	protected int[] hitboxOffset = new int[]{1,1,1,1};
 	

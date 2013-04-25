@@ -1,6 +1,5 @@
 package projectiles;
 
-import moveables.Movable;
 import movementV2.TargetPosition;
 import entities.*;
 import graphics.GS;
@@ -11,13 +10,12 @@ public class FireTest extends Offensive {
 	public FireTest(Entity owner, double posX, double posY, double moveX, double moveY) {
 		super(posX, posY);
 
-		movement = new TargetPosition(this, 8, GS.player1.posX, GS.player1.posY);
 		// get Data from database?
 		hitboxOffset = new int[]{-16, -16, 20, 16};
 		mainTexture = new LayerData2(this, "projectile/fire", 1, 3);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
 		mainTexture.disableDepth = true;
-		friendly = false;
+		movement = new TargetPosition(this, 8, GS.player1.posX, GS.player1.posY, true);
 		addToCollision();
 		//addNewLayer(new LayerData2(this, "projectile/glow", 1,1));
     	

@@ -4,7 +4,6 @@ import java.util.Random;
 
 import entities.*;
 import graphics.LayerData2;
-import observer.Subject;
 import movementV2.*;
 
 public class Asteroid extends MoveableDecor {
@@ -32,7 +31,6 @@ public class Asteroid extends MoveableDecor {
 		addNewLayer(texture1);
 
 		double randomValue = 2 + ( 6 - 2) * r.nextDouble();
-		double randomValue2 = -2.0 + ( 2.0 - -2.0) * r.nextDouble();
 		movement = new Straight(this, randomValue);
 		((Straight) movement).randomRotate(true);
 	}

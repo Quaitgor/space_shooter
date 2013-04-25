@@ -14,11 +14,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-import entites.decor.Hit;
-import entities.Collision;
-import entities.Entity;
-import entities.Moveable;
-import entities.Offensive;
+import entities.*;
+import entities_decor.*;
 import factory.*;
 
 /**
@@ -35,6 +32,7 @@ public class GS {
 	public static Entity player1;
 	public static Entity player2;
 	protected Collision colchecker = new Collision();
+	protected Spawner levelgen;
 	int fps;
 	long lastFPS;
 	
@@ -52,7 +50,7 @@ public class GS {
 	public void start() {
 		// Run Graphics window until close request (X or Alt-F4), while running send out Delta to DeltaObserver
 		initGL(1280,768);
-		
+		initGame();
         while (isRunning) {
             if (Display.isCloseRequested()) {
            		isRunning = false;
@@ -67,7 +65,16 @@ public class GS {
         System.exit(0);
     }
 	
-	
+	protected void initGame(){
+		//levelgen = new Spawner("menu", deltaUpdater);
+		
+		new Moon(300, 400);
+		new AstroidBelt(512,400, 2);
+		new AstroidBelt(512,470, 3);
+		new AstroidBelt(512,640, 4);
+		new Stars(649, 384);
+		
+	}
 
 	protected void checkCollision(){
     		for (Moveable friendlys: GS.friendlys){
@@ -150,11 +157,6 @@ public class GS {
         
         // Create some Objects for testing
 		/*
-		fe.create("Moon", 300.0, 400.0);
-		fe.create("AstroidbeltL1", 512.0, 400.0);
-		fe.create("AstroidbeltL2", 512.0, 460.0);
-		fe.create("AstroidbeltL3", 512.0, 620.0);
-		fe.create("Stars", 640.0, 384.0);
 		fe.create("Electro", 300.0, 200.0);
 		*/
 	}

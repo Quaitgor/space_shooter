@@ -3,7 +3,9 @@ package entities;
 import java.awt.Rectangle;
 import java.util.Vector;
 
-import entites.decor.Explode;
+import org.lwjgl.opengl.GL11;
+
+import entities_decor.Explode;
 
 import graphics.GS;
 import weapons.Weapon;
@@ -30,8 +32,8 @@ public abstract class Offensive extends Moveable{
 		updateHitbox();
 		super.update(delta);
 		checkHP();
-		/*
 		//temp texturebg for hitbox
+		/*
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(1f,1f,1f,0.5f);
         GL11.glBegin(GL11.GL_QUADS);

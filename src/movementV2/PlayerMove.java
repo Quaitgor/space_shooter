@@ -163,6 +163,7 @@ public class PlayerMove extends Move{
         while (Keyboard.next()) {
 
         	if (Keyboard.getEventKeyState()) {
+        		System.out.println(Keyboard.getEventKey());
         		if (Keyboard.getEventKey() == Keyboard.KEY_O) {
         			System.out.println("ForceField Shatter");
         			//GS.fe.create("ForceField", owner.posX, owner.posY);
@@ -189,45 +190,6 @@ public class PlayerMove extends Move{
         			((Player)owner).playerHit(null);
         			//((Player)owner).changeWeapon("Default");
         		}
-        		
-        		/*
-        		LayerData2 x = owner.LayerDatas.get(owner.LayerDatas.indexOf(((Player)owner).lights));
-    			float r = x.color[0];
-    			float g = x.color[1];
-    			float b = x.color[2];
-    			float a = x.color[3];
-        		
-        		if (Keyboard.getEventKey() == Keyboard.KEY_F1) {
-        			r = x.color[0] +reverse;
-        			x.color = new float[]{r, g, b, a};
-        			System.out.println(r +"/"+g+"/"+b+"/"+a);
-        		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_F2) {
-        			g = x.color[1] +reverse;
-        			x.color = new float[]{r, g, b, a};
-        			System.out.println(r +"/"+g+"/"+b+"/"+a);
-        		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_F3) {
-        			b = x.color[2] + reverse;
-        			x.color = new float[]{r, g, b, a};
-        			System.out.println(r +"/"+g+"/"+b+"/"+a);
-        		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_F4) {
-        			a = ((Player)owner).LayerDatas.get(1).color[3] + reverse;
-        			((Player)owner).LayerDatas.get(1).color = new float[]{r, g, b, a};
-        			System.out.println(r +"/"+g+"/"+b+"/"+a);
-        		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_F5) {
-        			System.out.println("reverse");
-        			if(reverse == 0.2f) {
-        				reverse = -0.2f; 
-        			}else{
-        				reverse = 0.2f;
-        			}
-        		}
-    			*/
-        		
-        	
         		/**
         		 * switch booleans for movement
         		 * */
@@ -269,7 +231,6 @@ public class PlayerMove extends Move{
         	    		*/
         			}
         		}
-        		
         	}else{
         		/**
         		 * Movement Keys released booleans

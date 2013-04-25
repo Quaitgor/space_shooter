@@ -1,31 +1,32 @@
 package ent_c;
 
-import behaviours.*;
+import behaviours.Behave;
+import behaviours.FireWhenRange;
+import behaviours.RandomFlying;
 import entities.Offensive;
 import graphics.LayerData2;
-import observer.Subject;
 import weapons.*;
 import movementV2.*;
 
-public class EnemyDummy extends Offensive {
+public class Boss1 extends Offensive {
 	public Behave mind;
 	int defaultLayer = 40;
 	
-	public EnemyDummy(double posX, double posY) {
+	public Boss1(double posX, double posY) {
 		super(posX, posY);
-		//mind = new FireWhenRange(this, 400);
-		setDmg(1);
+		health = 200;
 		weapon = new Enemy_Weapon1(this);
-		//movement = new Nothing(this);
-		//movement = new TargetPosition(this, 1, 500, 200);
+		weapon.weaponOffset = new double[]{-100, -35};
 		mind = new RandomFlying(this, 2000, 1200, 740, 740, 0, 0, 8);
 		movement = new TargetPosition(this, 5, posX, posY, false);
-		mainTexture= new LayerData2(this, "enemy1", 1, 1);
+		//movement = new Nothing(this);
+		mainTexture= new LayerData2(this, "boss1", 1, 1);
 		mainTexture.layer= defaultLayer;
-		hitboxOffset = new int[]{-32, -16, 32, 16};
+		hitboxOffset = new int[]{-172, -76, 172, 76};
 		addNewLayer(mainTexture);
 		addToCollision();
 	}
+
 	public void update(double delta){
 		super.update(delta);
 		mind.update();

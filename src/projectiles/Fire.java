@@ -7,7 +7,7 @@ public class Fire extends Projectiles {
 	
 	public Fire(double posX, double posY, double moveX, double moveY) {
 		super(posX, posY, moveX, moveY);
-		setDmg(1);
+		setDmg(50);
 		friendly = true;
 		addToCollision();
 		// get Data from database?
