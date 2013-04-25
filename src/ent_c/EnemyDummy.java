@@ -18,8 +18,8 @@ public class EnemyDummy extends Offensive {
 		weapon = new Enemy_Weapon1(this);
 		//movement = new Nothing(this);
 		//movement = new TargetPosition(this, 1, 500, 200);
-		mind = new RandomFlying(this, 2000, 1200, 740, 740, 0, 0, 8);
-		movement = new TargetPosition(this, 5, posX, posY, false);
+		mind = new Suicidal(this, 400, 100);
+		movement = new StraightTrigonometry(this, 5, 180);
 		mainTexture= new LayerData2(this, "enemy1", 1, 1);
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-32, -16, 32, 16};

@@ -1,4 +1,4 @@
-package entites.decor;
+package entites_decor;
 
 import movementV2.Straight;
 import entities.*;

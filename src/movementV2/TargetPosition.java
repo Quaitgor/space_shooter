@@ -6,22 +6,27 @@ import entities.*;
 
 public class TargetPosition extends Move{
 	private boolean rotation = false;
-	
+	private double speed;
 	public TargetPosition(Entity getOwner, double speed, double x, double y, boolean rotation) {
 		super(getOwner);
+		this.speed = speed;
 		this.rotation = rotation;
-		changeTarget(speed, x, y);
+		changeTarget(x, y);
 		
 	}
 	public void changeTarget(double speed, double x, double y){
+		this.speed = speed;
+		changeTarget(x,y);
+	}
+	public void changeTarget(double x, double y){
 		double xdiff = owner.posX -x;
 		double ydiff = owner.posY -y;
 		if (xdiff != 0 && ydiff != 0){
 			double angle = Math.atan(ydiff/xdiff);
 			double reverse = -1;
 			if(xdiff > 0)reverse = 1;
-			nposX = Math.cos(angle)*speed*reverse;
-			nposY = Math.sin(angle)*speed*reverse;
+			nposX = Math.cos(angle)*this.speed*reverse;
+			nposY = Math.sin(angle)*this.speed*reverse;
 			
 			if(rotation){
 				double reverse2 = 0;
