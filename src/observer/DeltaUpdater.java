@@ -38,8 +38,8 @@ public class DeltaUpdater implements Subject{
 	 * */
 	public void notifyObserver() {
 		for(int i=0;i<observers.size();i++){
-			 observers.elementAt(i).update(delta);
-      }
+			observers.elementAt(i).update(delta);
+		}
 	}
 
 	/**
