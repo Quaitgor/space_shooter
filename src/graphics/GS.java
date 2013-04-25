@@ -13,9 +13,8 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-
-import entities.*;
 import entities_decor.*;
+import entities.*;
 import factory.*;
 
 /**
@@ -23,7 +22,7 @@ import factory.*;
  * GS creates the Display and sets basic options for the Graphics and its resolution and speed
  * */
 public class GS {	
-    static boolean isRunning = true;
+    public static boolean isRunning = true;
     static long lastFrame;
 	public static DeltaUpdater deltaUpdater;
 	public static double delta = 0;
@@ -32,7 +31,7 @@ public class GS {
 	public static Entity player1;
 	public static Entity player2;
 	protected Collision colchecker = new Collision();
-	protected Spawner levelgen;
+	protected static Spawner levelgen;
 	int fps;
 	long lastFPS;
 	
@@ -67,15 +66,18 @@ public class GS {
 	
 	protected void initGame(){
 		//levelgen = new Spawner("menu", deltaUpdater);
-		
 		new Moon(300, 400);
 		new AstroidBelt(512,400, 2);
 		new AstroidBelt(512,470, 3);
 		new AstroidBelt(512,640, 4);
-		new Stars(649, 384);
+		new Stars(640, 384);
+		new MenuControler();
+	}
+	public static void startGame(){
+		System.out.println("Starting");
+		levelgen = new Spawner("level1", deltaUpdater);
 		
 	}
-
 	protected void checkCollision(){
     		for (Moveable friendlys: GS.friendlys){
     			Moveable friend = (Moveable) friendlys;

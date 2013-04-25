@@ -23,7 +23,7 @@ public class Player extends Offensive {
 	public Player(double posX, double posY) {
 		super(posX, posY);
 		GS.player1 = this;
-		setDmg(10000);
+		//setDmg(10000);
 		weapon = new Weapon_Fire(this);
 		movement = new PlayerMove(this, 1);
 		mainTexture = new LayerData2(this, "player", 1, 1);
@@ -32,10 +32,6 @@ public class Player extends Offensive {
 		friendly = true;
 		addToCollision();
 		hitboxOffset = new int[]{-68, -22, 68, 18};
-		//lights = new LayerData2(this, "playerlight", 1, 1);
-		//lights.layer = defaultLayer -1;
-		//lights.color = new float[]{0.2f, 0.2f, 0,2f, 1.0f};
-		//addNewLayer(lights);
 	}
 	public void playerHit(Entity other){
 		if (shieldCharges > 0) {
@@ -45,10 +41,4 @@ public class Player extends Offensive {
 			((Offensive)other).health -= damage;
 		}
 	}
-	
-	/*
-	public void changeWeapon(String newWeapon ) {
-		this.weapon.changeWeapon(newWeapon);
-	}
-	*/
 }
