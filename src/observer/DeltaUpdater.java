@@ -28,7 +28,7 @@ public class DeltaUpdater implements Subject{
 	 * */
 	public void unregister(Observer deleteObserver) {
 		int observerIndex = observers.indexOf(deleteObserver);
-		observers.remove(observerIndex);
+		if(observerIndex >= 0)observers.remove(observerIndex);
 	}
 
 	/**

@@ -36,14 +36,25 @@ public class Collision {
 				);
 				File file1 = new File("res/sprites/"+friend.mainTexture.texturepath+".png");
 				File file2 = new File("res/sprites/"+enemy.mainTexture.texturepath+".png");
-				if (isPixelCollide(crasher1, file1, crasher2, file2)){
-					((Offensive)friend).crashed = true;
-        			System.out.println("crash");
+				
+				boolean isHit = false;
+				if(friend.dontPixelCheck || enemy.dontPixelCheck){
+					isHit = true;
+				}
+				else if (isPixelCollide(crasher1, file1, crasher2, file2)){
+					isHit = true;
+        			/*
         			if (friend.equals(GS.player1)){
         				((Player)friend).playerHit(enemy);
         			}else{
         				((Offensive)friend).exchangeCollision(enemy);
         			}
+        			*/
+				}
+				if(isHit){
+        			enemy.getDamage(friend.damage);
+        			friend.getDamage(enemy.damage);
+        			System.out.println(enemy.health);
 				}
 			}
 		}
@@ -73,6 +84,8 @@ public class Collision {
 		int totx = Math.abs(xend - xstart);
 		int toty = Math.abs(yend - ystart);
 		// loop through each pixel in the intersection and check if both are alpha, if not => collision
+
+		boolean check = false;
 		for (int y=1; y < toty-1;y++){
 			int ny = Math.abs(ystart - (int) y1) + y;
 			int ny1 = Math.abs(ystart - (int) y2) + y;
@@ -84,10 +97,11 @@ public class Collision {
 				Color pixelColour2 = new Color(image2.getRGB(nx1, ny1), true);
 				int color2 = pixelColour2.getAlpha();
 				if((color1 != 0) && color2 != 0){
-					return true;
+					check = true;
 				}
+				if(check)continue;
 			}	
 		}
-		return false;
+		return check;
 	}
 }

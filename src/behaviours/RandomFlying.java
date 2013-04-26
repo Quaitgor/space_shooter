@@ -37,7 +37,6 @@ public class RandomFlying extends Behave {
 			int ry = rnd.nextInt(768-limitY);
 			rx += addX;
 			rx -= addY;
-			System.out.println(rx+"/"+ry);
 			((TargetPosition)owner.movement).changeTarget(8, rx, ry);
 			timer = staytime;			
 		}

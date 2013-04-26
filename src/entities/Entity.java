@@ -23,6 +23,7 @@ public abstract class Entity implements Observer {
 	protected int maintexture = 0;
 	protected double offscreen = 15000;
 	protected double offscreenLive = 0;
+	public boolean isAlive = true;
 
 	public Entity(double newPosX, double newPosY){
 		this.deltaUpdater = GS.deltaUpdater;
@@ -35,9 +36,11 @@ public abstract class Entity implements Observer {
 	 * update is the core of timing, the delta Value is synced with every Entity to sync rendering and speed
 	 * */
 	public void update(double delta) {
-		this.delta = delta;
-		this.draw();
-		this.checkUnsubscribe();
+		if(isAlive){
+			this.delta = delta;
+			this.draw();
+			this.checkUnsubscribe();
+		}
 	}
 	
 	/**
@@ -78,5 +81,8 @@ public abstract class Entity implements Observer {
 	}
 	protected void unsubscribe(){
 		deltaUpdater.unregister(this);
+		for(int i=0;i<LayerDatas.size();i++){
+			LayerDatas.remove(i);
+		}
 	}
 }

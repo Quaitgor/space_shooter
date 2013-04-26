@@ -75,17 +75,23 @@ public class GS {
 	}
 	public static void startGame(){
 		System.out.println("Starting");
-		levelgen = new Spawner("level1", deltaUpdater);
+		levelgen = new Spawner("boss", deltaUpdater);
+		
 		
 	}
 	protected void checkCollision(){
     		for (Moveable friendlys: GS.friendlys){
+    			
     			Moveable friend = (Moveable) friendlys;
 
-        		for (Moveable enemys: GS.enemys){
-        			Moveable enemy= (Moveable) enemys;
-        			colchecker.intersects(friend,enemy);
-        		}
+    			if(friend.isAlive == true){
+            		for (Moveable enemys: GS.enemys){
+            			if(enemys.isAlive == true){
+                			Moveable enemy= (Moveable) enemys;
+                			colchecker.intersects(friend,enemy);
+                		}
+        			}
+    			}
     		}
 			/*
     		if(crashed){
@@ -155,7 +161,7 @@ public class GS {
         GL11.glCullFace(GL11.GL_BACK);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-        //GL11.glLoadIdentity();
+        GL11.glLoadIdentity();
         
         // Create some Objects for testing
 		/*

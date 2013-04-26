@@ -2,8 +2,6 @@ package movementV2;
 
 import java.util.Random;
 
-import moveables.Movable;
-
 import entities.Entity;
 import graphics.GS;
 

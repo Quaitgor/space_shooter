@@ -104,7 +104,6 @@ public class HUD extends Entity{
 			shieldRechargeLeft += delta;
 			double percentt = 100/shieldRechargeTime;
 			double percent = percentt * shieldRechargeLeft/100;
-			System.out.println(percent);
 			double smallBarPos = hideSBarValue -(hideSBarValue * percent);
 			int_SBar.pos = new double[]{smallBarPos, 0.0};
 			if(shieldRechargeLeft >= shieldRechargeTime){

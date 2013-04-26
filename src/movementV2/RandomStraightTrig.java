@@ -6,11 +6,11 @@ import entities.Entity;
 
 public class RandomStraightTrig extends Move{
 	
-	public RandomStraightTrig(Entity getOwner) {
+	public RandomStraightTrig(Entity getOwner, int randomRange) {
 		super(getOwner);
 		Random r = new Random();
 		double randomSpeed = 2 + 4* r.nextDouble();
-		double ramdomAngle = 180+r.nextInt(30);
+		double ramdomAngle = 180+r.nextInt(randomRange);
 		if(r.nextBoolean()){
 			ramdomAngle *= -1;
 		}

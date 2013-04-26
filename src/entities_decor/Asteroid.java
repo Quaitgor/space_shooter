@@ -29,8 +29,5 @@ public class Asteroid extends MoveableDecor {
 		texture1.spriteDisplayY *= Y;
 		texture1.layer = defaultLayer-1;
 		addNewLayer(texture1);
-
-	
-		movement = new RandomStraightTrig(this);
 	}
 }

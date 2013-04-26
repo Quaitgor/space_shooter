@@ -21,7 +21,7 @@ public class TargetPosition extends Move{
 	public void changeTarget(double x, double y){
 		double xdiff = owner.posX -x;
 		double ydiff = owner.posY -y;
-		if (xdiff != 0 && ydiff != 0){
+		if (!(xdiff == 0 && ydiff == 0)){
 			double angle = Math.atan(ydiff/xdiff);
 			double reverse = -1;
 			if(xdiff > 0)reverse = 1;

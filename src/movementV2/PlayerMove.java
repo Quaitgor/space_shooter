@@ -19,8 +19,6 @@ public class PlayerMove extends Move{
 	protected boolean charging = false;
 	public double chargedelta = 0;
 	protected boolean fastshot = false;
-	protected double fastfiredelay = 0;
-	protected double weapondelay = 0;
 	protected double maxSpeed = 7.5;
 	protected double speedX = 0;
 	protected double speedY = 0;
@@ -131,13 +129,8 @@ public class PlayerMove extends Move{
     	/**
     	 * Weapon Controls for Delay and Charge
     	 * */
-    	if (weapondelay > 0) weapondelay -= owner.delta;
-    	
     	if (fastshot){
-    		if (weapondelay <= 0){
-    			((Player)owner).fire();
-    			weapondelay = ((Player)owner).weapon.weaponDelay;
-    		}
+    		((Player)owner).fire();
     	}
     	
     	if (charging){
@@ -163,28 +156,23 @@ public class PlayerMove extends Move{
         while (Keyboard.next()) {
 
         	if (Keyboard.getEventKeyState()) {
-        		System.out.println(Keyboard.getEventKey());
         		if (Keyboard.getEventKey() == Keyboard.KEY_O) {
-        			System.out.println("ForceField Shatter");
-        			//GS.fe.create("ForceField", owner.posX, owner.posY);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_I) {
-        			//GS.fe.create("Hit", owner.posX, owner.posY);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_U) {
-        			//GS.fe.create("BarrierHit", owner.posX, owner.posY, 180.0);
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
-        			System.out.println("Plasma");
-        			((Player)owner).weapon = new Weapon_Plasma(owner);
+        			((Player)owner).weapon = new FireWeapon(owner, false);
+        			((Player)owner).weapon .friendly = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD2) {
-        			System.out.println("Ice");
-        			((Player)owner).weapon = new Weapon_Ice(owner);
+        			((Player)owner).weapon = new PlasmaWeapon(owner, false);
+        			((Player)owner).weapon .friendly = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD3) {
-        			System.out.println("Fire");
-        			((Player)owner).weapon = new Weapon_Fire(owner);
+        			((Player)owner).weapon = new IceWeapon(owner, false);
+        			((Player)owner).weapon .friendly = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD4) {
         			((Player)owner).playerHit(null);
@@ -209,9 +197,8 @@ public class PlayerMove extends Move{
         		 * Weapon Controls for charging, firing and Fastshot
         		 * */
         		if (Keyboard.getEventKey() == firekey) {
-        			if (!fastshot && !charging && weapondelay <= 0) {
+        			if (!fastshot && !charging) {
         				((Player)owner).fire();
-            			weapondelay = ((Player)owner).weapon.weaponDelay;
         			}
         		}
         		if (Keyboard.getEventKey() == keepFiring) {

@@ -32,6 +32,6 @@ public class Asteroid extends MoveableDecor {
 
 		double randomValue = 2 + ( 6 - 2) * r.nextDouble();
 		movement = new Straight(this, randomValue);
-		((Straight) movement).randomRotate(true);
+		//((Straight) movement).randomRotate(true);
 	}
 }

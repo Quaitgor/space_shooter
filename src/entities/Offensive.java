@@ -15,12 +15,9 @@ import weapons.Weapon;
  * Objects made with this class can use weapons and have health
  * */
 public abstract class Offensive extends Moveable{
-	public Weapon weapon;
-	public double damage = 0;
-	public int health = 1;
+	public Weapon weapon = null;
 	protected int offsetX = 0;
 	protected int offsetY = 0;
-	protected boolean crashed = false;
 	protected double destroyTimer = 0;
 
 	public Offensive(double newPosX, double newPosY) {
@@ -31,7 +28,7 @@ public abstract class Offensive extends Moveable{
 	public void update(double delta){
 		updateHitbox();
 		super.update(delta);
-		checkHP();
+		if(weapon != null)weapon.update(delta);
 		//temp texturebg for hitbox
 		/*
         GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -51,43 +48,11 @@ public abstract class Offensive extends Moveable{
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         */
 	}
-	protected void unsubscribe(){
-		super.unsubscribe();
-		Vector target = null;
-		if(friendly){
-			target = GS.friendlys;
-		}else{
-			target = GS.enemys;
-		}
-		int index = target.indexOf(this);
-		if(index != -1)target.remove(index);
-	}
-	public void setDmg(double setdmg){
-		 damage = setdmg;
-	}
 	protected void updateHitbox(){
 		hitbox.x = (int)(posX)+ hitboxOffset[0];
 		hitbox.y = (int)(posY)+hitboxOffset[1];
 		hitbox.width = (int)(posX)+hitboxOffset[2];
 		hitbox.height= (int)(posY)+hitboxOffset[3];
-	}
-	
-	public void exchangeCollision(Entity other){
-		this.health -= ((Offensive)other).damage;
-		((Offensive)other).health -= damage;
-	}
-	protected void checkHP(){
-		if(health <= 0){
-			setDmg(0);
-			//destroy animation here
-			if(destroyTimer == 0)new Explode(posX, posY);
-			destroyTimer += delta;
-			mainTexture.color[3] -= 0.2f;
-			if(destroyTimer >= 500){
-				this.unsubscribe();
-				
-			}
-		}
 	}
 	/**
 	 * fire() uses the weapons fire() method to fire the weapon
@@ -95,6 +60,10 @@ public abstract class Offensive extends Moveable{
 	 * */
 	public void fire(){
 		this.weapon.fire();
+	}
+	public void unsubscribe(){
+		super.unsubscribe();
+		weapon = null;
 	}
 
 }

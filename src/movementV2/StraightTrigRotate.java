@@ -2,7 +2,7 @@ package movementV2;
 
 import java.util.Random;
 
-import entities.Entity;
+import entities.*;
 
 public class StraightTrigRotate extends Move{
 	private double rotation = 0;
@@ -18,7 +18,7 @@ public class StraightTrigRotate extends Move{
 	protected void calculateMove(){
 	}
 	protected void makeMove(){
-    	owner.LayerDatas.get(0).rotation += rotation;
+    	((Offensive)owner).mainTexture.rotation += rotation;
 		owner.posX += nposX;
 		owner.posY += nposY;
 	}

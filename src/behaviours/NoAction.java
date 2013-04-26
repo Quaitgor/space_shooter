@@ -4,7 +4,7 @@ import entities.Moveable;
 
 public class NoAction extends Behave{
 
-	NoAction(Moveable getOwner) {
+	public NoAction(Moveable getOwner) {
 		super(getOwner);
 	}
 
