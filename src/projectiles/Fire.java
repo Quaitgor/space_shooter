@@ -1,5 +1,10 @@
 package projectiles;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import movementV2.Move;
+import movementV2.RandomStraightTrig;
 import movementV2.TargetPosition;
 import entities.*;
 import graphics.GS;
@@ -7,7 +12,7 @@ import graphics.LayerData2;
 
 public class Fire extends Offensive {
 	
-	public Fire(Entity owner, double posX, double posY, double moveX, double moveY) {
+	public Fire(Entity owner, double posX, double posY, double moveX, double moveY, Constructor<? extends Move> MovementConstructor, Object[] args) {
 		super(posX, posY);
 
 		// get Data from database?
@@ -15,7 +20,15 @@ public class Fire extends Offensive {
 		mainTexture = new LayerData2(this, "projectile/fire", 1, 3);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
 		mainTexture.disableDepth = true;
-		movement = new TargetPosition(this, 8, GS.player1.posX, GS.player1.posY, true);
+		
+		args[0] = this;
+		try {
+			movement = MovementConstructor.newInstance(args);
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		addToCollision();
 		//addNewLayer(new LayerData2(this, "projectile/glow", 1,1));
     	
@@ -35,5 +48,8 @@ public class Fire extends Offensive {
     	mainTexture.animationList.add(animationTest);
 
 		addNewLayer(mainTexture);
+	}
+	public Fire(Entity owner, double posX, double posY, double moveX, double moveY) {
+		this(owner,posX,posY,moveX,moveY, (Constructor<? extends Move>) TargetPosition.class.getConstructors()[0], new Object[]{null,8, GS.player1.posX, GS.player1.posY, true});
 	}
 }

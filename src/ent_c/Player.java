@@ -24,7 +24,7 @@ public class Player extends Offensive {
 		super(posX, posY);
 		GS.player1 = this;
 		//setDmg(10000);
-		weapon = new PlasmaWeapon(this, false);
+		weapon = new IceWeapon(this, false);
 		weapon.weaponOffset = new double[]{-100, -35};
 		weapon.friendly = true;
 		movement = new PlayerMove(this, 1);

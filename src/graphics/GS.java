@@ -75,7 +75,8 @@ public class GS {
 	}
 	public static void startGame(){
 		System.out.println("Starting");
-		levelgen = new Spawner("boss", deltaUpdater);
+		//levelgen = new Spawner("boss", deltaUpdater);
+		levelgen = new Spawner("levelphilipp", deltaUpdater);
 		
 		
 	}
@@ -147,7 +148,7 @@ public class GS {
 		//GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glClearDepth(1.0f);
         //GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glDepthFunc(GL11.GL_ADD); ////// 
+//        GL11.glDepthFunc(GL11.GL_ADD); //Wenn nicht auskommentiert führt es zu Exception
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glViewport(0,0,width,height);
         GL11.glOrtho(0,width,height,0,0,128);

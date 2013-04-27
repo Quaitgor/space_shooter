@@ -30,7 +30,7 @@ public class Suicidal extends Behave {
 						keepDirection = true;
 					}
 					if(following){
-						((TargetPosition)owner.movement).changeTarget(x, y);
+						((TargetPosition)owner.movement).changeTarget(GS.player1.posX, GS.player1.posY);
 					}
 					else{
 						if(distance < range){
