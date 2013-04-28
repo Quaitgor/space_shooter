@@ -25,10 +25,6 @@ public class Suicidal extends Behave {
 					double x = GS.player1.posX - owner.posX;
 					double y = GS.player1.posY - owner.posY;
 					double distance = Math.sqrt(Math.pow(x,  2)+Math.pow(y, 2));
-					if(distance < maxRange){
-						((TargetPosition)owner.movement).changeTarget(owner.posX,owner.posY);
-						keepDirection = true;
-					}
 					if(following){
 						((TargetPosition)owner.movement).changeTarget(GS.player1.posX, GS.player1.posY);
 					}
@@ -37,6 +33,10 @@ public class Suicidal extends Behave {
 							owner.movement = new TargetPosition(owner, 5, GS.player1.posX, GS.player1.posY, false);
 							following = true;
 						}
+					}
+					if(distance < maxRange){
+						((TargetPosition)owner.movement).changeTarget(owner.posX,owner.posY);
+						keepDirection = true;
 					}
 				}
 		}

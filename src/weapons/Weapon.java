@@ -7,7 +7,7 @@ public abstract class Weapon {
 	protected Entity owner;
 	public int weaponDelay = 200;
 	double counter = 0;
-	private boolean targetPlayer = false;
+	protected boolean targetPlayer = false;
 	public double[] weaponOffset = new double[]{0,0};
 	protected double targetX = 0, targetY = 0;
 	public boolean friendly = false;

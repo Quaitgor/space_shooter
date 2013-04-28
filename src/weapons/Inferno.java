@@ -3,6 +3,7 @@ package weapons;
 import java.lang.reflect.Constructor;
 
 import projectiles.Fire;
+import projectiles.FireProjectile;
 import movementV2.Move;
 import movementV2.RandomStraightTrig;
 import movementV2.SinusWave;
@@ -28,11 +29,11 @@ public class Inferno extends Weapon {
 			Object[] f2args = {null, -5};
 			Object[] f3args = {null, 5,-50};
 			Object[] f4args = {null, 5,-75};
-			new Fire(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f0args);
-			new Fire(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f1args);
-			new Fire(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f1Constructor, f2args);
-			new Fire(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f3args);
-			new Fire(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f4args);
+			new FireProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f0args, targetPlayer);
+			new FireProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f1args, targetPlayer, "projectile/plasma");
+			new FireProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f1Constructor, f2args, targetPlayer);
+			new FireProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f3args, targetPlayer, "projectile/plasma");
+			new FireProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, f0Constructor, f4args, targetPlayer);
 		}
 	}
 }

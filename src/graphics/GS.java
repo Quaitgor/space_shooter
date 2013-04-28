@@ -76,7 +76,7 @@ public class GS {
 	public static void startGame(){
 		System.out.println("Starting");
 		//levelgen = new Spawner("boss", deltaUpdater);
-		levelgen = new Spawner("levelphilipp", deltaUpdater);
+		levelgen = new Spawner("philippboss", deltaUpdater);
 		
 		
 	}
