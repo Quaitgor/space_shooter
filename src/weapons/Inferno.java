@@ -23,7 +23,7 @@ public class Inferno extends Weapon {
 
 			Constructor<? extends Move> f0Constructor = (Constructor<? extends Move>) SinusWave.class.getConstructors()[0];
 			Constructor<? extends Move> f1Constructor = (Constructor<? extends Move>) Straight.class.getConstructors()[0];
-			Object[] f0args = {null, 5,75};
+			Object[] f0args = {null, 5, 75};
 			Object[] f1args = {null, 5, 50};
 			Object[] f2args = {null, -5};
 			Object[] f3args = {null, 5,-50};

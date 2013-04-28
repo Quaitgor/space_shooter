@@ -64,6 +64,7 @@ public class LayerData2 {
 	protected int currentAnimation = 0;
     public boolean disableDepth = false;
     public boolean disableAnimation = false;
+    public boolean deactivateAfter = false;
     
 
 	public LayerData2(Entity moveable, String texturepath, int h, int v) {
@@ -146,6 +147,10 @@ public class LayerData2 {
 				anitimer = 0;
     			tempSpriteX = (int)list[1][0];
     			tempSpriteY = (int)list[2][0];
+    			if(deactivateAfter){
+    				disableAnimation = true;
+    				color[3] = 0.0f;
+    			}
 			}
     	}
     	if(spriteH != tempSpriteX || spriteV != tempSpriteY){
