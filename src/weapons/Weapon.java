@@ -1,6 +1,7 @@
 package weapons;
 
 import entities.Entity;
+import entities.Offensive;
 import graphics.GS;
 
 public abstract class Weapon {
@@ -15,6 +16,7 @@ public abstract class Weapon {
 	public Weapon(Entity owner, boolean targetPlayer){
 		this.owner= owner;
 		this.targetPlayer = targetPlayer;
+		this.weaponOffset= ((Offensive)owner).weaponOffset;
 	}
 	public void update(double delta){
 		if(counter > 0)counter -= delta;

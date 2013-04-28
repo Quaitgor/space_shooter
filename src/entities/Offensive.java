@@ -16,8 +16,7 @@ import weapons.Weapon;
  * */
 public abstract class Offensive extends Moveable{
 	public Weapon weapon = null;
-	protected int offsetX = 0;
-	protected int offsetY = 0;
+	public double[] weaponOffset = new double[]{0,0};
 	protected double destroyTimer = 0;
 
 	public Offensive(double newPosX, double newPosY) {

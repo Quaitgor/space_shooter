@@ -49,6 +49,8 @@ public class Fire extends Offensive {
 
 		addNewLayer(mainTexture);
 	}
+
+	
 	public Fire(Entity owner, double posX, double posY, double moveX, double moveY) {
 		this(owner,posX,posY,moveX,moveY, (Constructor<? extends Move>) TargetPosition.class.getConstructors()[0], new Object[]{null,8, GS.player1.posX, GS.player1.posY, true});
 	}

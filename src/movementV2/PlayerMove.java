@@ -174,6 +174,9 @@ public class PlayerMove extends Move{
         			((Player)owner).weapon = new IceWeapon(owner, false);
         			((Player)owner).weapon .friendly = true;
         		}
+        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD6) {
+        			((Player)owner).weapon = new Inferno(owner, false);
+        		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD4) {
         			((Player)owner).playerHit(null);
         			//((Player)owner).changeWeapon("Default");
@@ -239,8 +242,10 @@ public class PlayerMove extends Move{
         		 * */
         		if (Keyboard.getEventKey() == chargekey) {
         			if (!fastshot) {
+        				System.out.println("released Charge");
             			charging = false;
-            			System.out.println("Charging released: "+chargedelta);
+            			((Player)owner).chargeLevel = chargedelta;
+            			((Player)owner).chargeFire();
             			chargedelta = 0;
         				/*
                 		float[] x = ((Player)owner).lights.color;
