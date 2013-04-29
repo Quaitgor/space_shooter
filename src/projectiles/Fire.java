@@ -14,6 +14,7 @@ public class Fire extends Offensive {
 	
 	public Fire(Entity owner, double posX, double posY, double moveX, double moveY, Constructor<? extends Move> MovementConstructor, Object[] args) {
 		super(posX, posY);
+		isProjectile = true;
 
 		// get Data from database?
 		hitboxOffset = new int[]{-16, -16, 20, 16};

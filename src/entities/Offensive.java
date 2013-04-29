@@ -28,8 +28,14 @@ public abstract class Offensive extends Moveable{
 		updateHitbox();
 		super.update(delta);
 		if(weapon != null)weapon.update(delta);
+        
+	}
+	protected void updateHitbox(){
+		hitbox.x = (int)(posX)+ hitboxOffset[0];
+		hitbox.y = (int)(posY)+hitboxOffset[1];
+		hitbox.width = (int)(posX)+hitboxOffset[2];
+		hitbox.height= (int)(posY)+hitboxOffset[3];
 		//temp texturebg for hitbox
-		/*
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(1f,1f,1f,0.5f);
         GL11.glBegin(GL11.GL_QUADS);
@@ -45,13 +51,6 @@ public abstract class Offensive extends Moveable{
         }
         GL11.glEnd();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        */
-	}
-	protected void updateHitbox(){
-		hitbox.x = (int)(posX)+ hitboxOffset[0];
-		hitbox.y = (int)(posY)+hitboxOffset[1];
-		hitbox.width = (int)(posX)+hitboxOffset[2];
-		hitbox.height= (int)(posY)+hitboxOffset[3];
 	}
 	/**
 	 * fire() uses the weapons fire() method to fire the weapon
@@ -63,6 +62,10 @@ public abstract class Offensive extends Moveable{
 	public void unsubscribe(){
 		super.unsubscribe();
 		weapon = null;
+	}
+	public void changeWeapon(Weapon newWeapon){
+		this.weapon = newWeapon;
+		weapon.friendly = true;
 	}
 
 }

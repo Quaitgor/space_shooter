@@ -13,7 +13,7 @@ public class EnemyDummy extends Offensive {
 	public EnemyDummy(double posX, double posY) {
 		super(posX, posY);
 		setDmg(1);
-		weapon = new FireWeapon(this, true);
+		weapon = new DefaultWeapon(this, true);
 		movement = new Nothing(this);
 		mainTexture= new LayerData2(this, "enemy1", 1, 1);
 		mainTexture.layer= defaultLayer;

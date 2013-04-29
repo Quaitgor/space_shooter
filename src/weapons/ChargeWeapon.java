@@ -19,15 +19,21 @@ public class ChargeWeapon extends Weapon {
 				((Player)owner).fire();
 			}
 			if(chargeLevel <= 1000 && chargeLevel > 500){
-				((Player)owner).playFireAnimation(((Player)owner).projectileFireCharge);
+				if(owner.equals(GS.player1)){
+					((Player)owner).playFireAnimation("projectile/projectilefireCharge", 0);
+				}
 				new projectiles.Chargelvl1Projectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX+40, targetY, friendly);
 			}
 			if(chargeLevel >= 1001 && chargeLevel < 2000){
-				((Player)owner).playFireAnimation(((Player)owner).projectileFireCharge);
+				if(owner.equals(GS.player1)){
+					((Player)owner).playFireAnimation("projectile/projectilefireCharge", 0);
+				}
 				new projectiles.Chargelvl2Projectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX+40, targetY, friendly);
 			}
 			if(chargeLevel >= 2000){
-				((Player)owner).playFireAnimation(((Player)owner).projectileFireCharge);
+				if(owner.equals(GS.player1)){
+					((Player)owner).playFireAnimation("projectile/projectilefireCharge", 0);
+				}
 				new projectiles.Chargelvl3Projectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX+70, targetY, friendly);
 			}
 		}

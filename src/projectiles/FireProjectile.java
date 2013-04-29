@@ -13,6 +13,7 @@ public class FireProjectile extends Offensive {
 	
 	public FireProjectile(Entity owner, double posX, double posY, double moveX, double moveY, Constructor<? extends Move> MovementConstructor, Object[] args, boolean friendOrFoe, String TextureName) {
 		super(posX, posY);
+		isProjectile = true;
 		
 		setDmg(160);
 		// get Data from database?

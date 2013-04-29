@@ -15,7 +15,7 @@ public class DefaultWeapon extends Weapon {
 		if(counter <= 0){
 			super.fire();
 			if(owner.equals(GS.player1)){
-				((Player)owner).playFireAnimation(((Player)owner).projectileFireDefault);
+				((Player)owner).playFireAnimation("projectile/projectilefireCharge", 1);
 			}
 			new projectiles.DefaultProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, friendly);
 		}

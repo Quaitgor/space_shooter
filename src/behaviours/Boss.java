@@ -9,7 +9,7 @@ import entities.Offensive;
 public class Boss extends Behave{
 	private double timeTillNextAction = 1500;
 	private int nextMovement = 0;
-	private final double speed = 10;
+	private final double speed = 3;
 	private Move[] Movements = {
 		new StraightTrigonometry(owner, speed, 0),
 		new StraightTrigonometry(owner, speed, -90),

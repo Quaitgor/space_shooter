@@ -10,7 +10,7 @@ public class SmallIceExplode extends Entity {
 	public SmallIceExplode(double posX, double posY) {
 		super(posX, posY);
 		// get Data from database?
-		tex = new LayerData2(this, "smalliceexplosion", 1, 8);
+		tex = new LayerData2(this, "explosion/smalliceexplosion", 1, 8);
 		tex.layer = 35;
     	double[][] hit = new double[5][5];
 

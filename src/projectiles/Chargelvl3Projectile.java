@@ -9,7 +9,8 @@ public class Chargelvl3Projectile extends Offensive {
 	
 	public Chargelvl3Projectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
-		health = 20;
+		isProjectile = true;
+		health = 10;
 		setDmg(200);
 		// get Data from database?
 		hitboxOffset = new int[]{-64, -64, 64, 64};

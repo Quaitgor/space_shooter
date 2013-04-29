@@ -1,14 +1,15 @@
 package projectiles;
 
 import movementV2.TargetPosition;
-import entites_decor.ExplodeVar;
 import entities.*;
+import entities_decor.ExplodeVar;
 import graphics.LayerData2;
 
 public class PlasmaProjectile extends Offensive {
 	
 	public PlasmaProjectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
+		isProjectile = true;
 		
 		setDmg(80);
 		// get Data from database?

@@ -10,16 +10,17 @@ public class DefaultProjectile extends Offensive {
 	
 	public DefaultProjectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
+		isProjectile = true;
 		
 		setDmg(15);
 		// get Data from database?
-		hitboxOffset = new int[]{-16, -16, 20, 16};
+		hitboxOffset = new int[]{-8, -8, 8, 8};
 		mainTexture = new LayerData2(this, "projectile/chargelvl0", 1, 1);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
 		mainTexture.disableDepth = true;
 		movement = new TargetPosition(this, 12, moveX, moveY, true);
 		friendly = friendOrFoe;
-		deathSprite = "explosion/iceexplosion";
+		deathSprite = "explosion/defaultexplosion";
 		addToCollision();
 		addNewLayer(mainTexture);
 	}
