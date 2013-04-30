@@ -23,6 +23,7 @@ public class FireProjectile extends Offensive {
 		mainTexture.disableDepth = true;
 		movement = new TargetPosition(this, 4, moveX, moveY, true);
 		args[0] = this;
+		/*
 		try {
 			movement = MovementConstructor.newInstance(args);
 		} catch (InstantiationException | IllegalAccessException
@@ -30,6 +31,8 @@ public class FireProjectile extends Offensive {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+		movement = MovementConstructor.newInstance(args);
 		friendly = friendOrFoe;
 		addToCollision();
 		//addNewLayer(new LayerData2(this, "projectile/glow", 1,1));

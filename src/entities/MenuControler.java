@@ -1,10 +1,26 @@
 package entities;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+
 import graphics.GS;
 import graphics.LayerData2;
 import org.lwjgl.input.Keyboard;
+
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+
 import observer.Subject;
 
+/**
+ * Displays the entire menu appearing when the game is started. It also reads
+ * and overwrites the changes done to the control-configurations.
+ */
 public class MenuControler extends Entity{
 	private int mainMenuPoint = 0;
 	private int optionMenuPoint = 0;
@@ -18,6 +34,19 @@ public class MenuControler extends Entity{
 	private LayerData2 mainScreenTex = null;
 	private LayerData2 optionScreenTex = null;
 	
+	private String[] MenuPositions = {
+			"Fire",
+			"Charge",
+			"AutoFire",
+			"Up",
+			"Down",
+			"Right",
+			"Left"
+	};
+	private static HashMap<String, Integer> KeyMap;
+	private Gson GsonParser = new Gson();
+	
+	public static HashMap<String, Integer> getKeyMap(){return KeyMap;}
 	public MenuControler(){
 		super(640,384);
 		System.out.println("created");
@@ -32,6 +61,19 @@ public class MenuControler extends Entity{
 		addNewLayer(mainTexture);
 		addNewLayer(mainScreenTex);
 		addNewLayer(optionScreenTex);
+		
+		/*
+		KeyMap = new HashMap<String, Integer>();
+		KeyMap.put("Fire", 20);
+		KeyMap.put("Charge", 20);
+		KeyMap.put("AutoFire", 20);
+		KeyMap.put("Up", 20);
+		KeyMap.put("Down", 20);
+		KeyMap.put("Right", 20);
+		KeyMap.put("Left", 20);
+		*/
+		readJson();
+		System.out.print(KeyMap.toString());
 	}
 
 	public void update(double delta) {
@@ -100,6 +142,9 @@ public class MenuControler extends Entity{
         		}
         		if(getKey){
         			// JSON READ WRITE HERE
+        			KeyMap.put(MenuPositions[optionMenuPoint]
+        					, Keyboard.getEventKey());
+        			overwriteJson();
         			System.out.println(Keyboard.getEventKey());
         			releaseLock = true;
         		}
@@ -121,11 +166,21 @@ public class MenuControler extends Entity{
         				}
         			}
         			else if (optionscreen){
-        				if (optionMenuPoint==0||optionMenuPoint==1||optionMenuPoint==2||optionMenuPoint==3||optionMenuPoint==4||optionMenuPoint==5||optionMenuPoint==6){
+        				if (optionMenuPoint==0||optionMenuPoint==1||
+        						optionMenuPoint==2||optionMenuPoint==3||
+        						optionMenuPoint==4||optionMenuPoint==5||
+        						optionMenuPoint==6){
         					getKey = true;
         				}
         				else if(optionMenuPoint==7){
-        					//reset Settings HERE
+        					KeyMap.put("Fire", Keyboard.KEY_A);
+        					KeyMap.put("Charge", Keyboard.KEY_S);
+        					KeyMap.put("AutoFire", Keyboard.KEY_D);
+        					KeyMap.put("Up", Keyboard.KEY_UP);
+        					KeyMap.put("Down", Keyboard.KEY_DOWN);
+        					KeyMap.put("Right", Keyboard.KEY_RIGHT);
+        					KeyMap.put("Left", Keyboard.KEY_LEFT);
+        					overwriteJson();
         				}
         				else if(optionMenuPoint==8){
         					mainscreen = true;
@@ -171,5 +226,32 @@ public class MenuControler extends Entity{
         }
 		
 	}
-	
+	private void readJson(){
+		try {
+			KeyMap = GsonParser.fromJson(
+					new FileReader("json/keyconfiguration.json")
+					, (new TypeToken<HashMap<String,Integer>>(){}).getType());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private void overwriteJson(){
+		try {
+			String einstring = GsonParser.toJson(KeyMap);
+			System.out.print(einstring);
+			FileWriter fw = new FileWriter("json/keyconfiguration.json");
+			fw.write(einstring);
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

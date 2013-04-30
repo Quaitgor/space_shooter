@@ -1,6 +1,8 @@
 package movementV2;
 
 
+import java.util.HashMap;
+
 import org.lwjgl.input.Keyboard;
 
 import weapons.*;
@@ -53,7 +55,15 @@ public class PlayerMove extends Move{
 		hudX = 100;
 		hudY = 50;
 		
-		
+		HashMap<String, Integer> KeyMap = MenuControler.getKeyMap();
+		firekey = KeyMap.get("Fire");
+		chargekey = KeyMap.get("Charge");
+		keepFiring = KeyMap.get("AutoFire");
+		moveUp = KeyMap.get("Up");
+		moveDown = KeyMap.get("Down");
+		moveLeft = KeyMap.get("Left");
+		moveRight = KeyMap.get("Right");
+		/*
 		firekey = Keyboard.KEY_A;
 		chargekey = Keyboard.KEY_S;
 		keepFiring = Keyboard.KEY_D;
@@ -61,6 +71,7 @@ public class PlayerMove extends Move{
 		moveDown = Keyboard.KEY_DOWN;
 		moveLeft = Keyboard.KEY_LEFT;
 		moveRight = Keyboard.KEY_RIGHT;
+		*/
 		//setup the HUD
 		hud = new HUD(hudX, hudY, this, player);
 		
