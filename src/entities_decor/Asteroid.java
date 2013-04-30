@@ -7,9 +7,7 @@ import graphics.LayerData2;
 import movementV2.*;
 
 /**
- * An asteroid flying randomly at the player in random speed and rotation.
- * @author philipp
- *
+ * An asteroid flying randomly in random speed and rotation.
  */
 public class Asteroid extends MoveableDecor {
 	double rangeMin = 5;
@@ -37,7 +35,5 @@ public class Asteroid extends MoveableDecor {
 
 		double randomValue = 2 + ( 6 - 2) * r.nextDouble();
 		movement = new RandomStraightTrig(this, 5);
-		//movement = new Straight(this, randomValue);
-		//((Straight) movement).randomRotate(true);
 	}
 }

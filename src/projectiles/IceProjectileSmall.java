@@ -7,16 +7,24 @@ import entities_decor.SmallIceExplode;
 import graphics.GS;
 import graphics.LayerData2;
 
+/**
+ * This is a Projectile with a set graphical design, movement and damage,
+ * depending on the boolean value in the constructor its either friendly or 
+ * enemy
+ * */
 public class IceProjectileSmall extends Offensive {
 	private double livetime = 500;
 	
+	/**
+	 * the small iceProjectile has a special livetime, it destroys itself
+	 * after the set time
+	 * */
 	public IceProjectileSmall(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
 		isProjectile = true;
 		isProjectile = true;
 		setDmg(10);
 		dontPixelCheck = true;
-		// get Data from database?
 		hitboxOffset = new int[]{-16, -16, 20, 16};
 		mainTexture = new LayerData2(this, "projectile/smallice", 1, 1);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1.0f};
@@ -25,11 +33,14 @@ public class IceProjectileSmall extends Offensive {
 		addToCollision();
 		addNewLayer(mainTexture);
 	}
+	
+	/**
+	 * modified update to include the livetime
+	 * */
 	public void update(double delta){
 		super.update(delta);
 		livetime -= delta;
 		if(livetime <= 0) death();
-		
 	}
 	protected void death(){
 		new SmallIceExplode(posX, posY);

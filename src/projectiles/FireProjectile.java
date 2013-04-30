@@ -9,14 +9,17 @@ import entities.*;
 import graphics.GS;
 import graphics.LayerData2;
 
+/**
+ * This is a Projectile with a set graphical design, movement and damage,
+ * depending on the boolean value in the constructor its either friendly or 
+ * enemy
+ * */
 public class FireProjectile extends Offensive {
 	
 	public FireProjectile(Entity owner, double posX, double posY, double moveX, double moveY, Constructor<? extends Move> MovementConstructor, Object[] args, boolean friendOrFoe, String TextureName) {
 		super(posX, posY);
 		isProjectile = true;
-		
 		setDmg(160);
-		// get Data from database?
 		hitboxOffset = new int[]{-16, -16, 20, 16};
 		mainTexture = new LayerData2(this, TextureName, 1, 3);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
@@ -28,14 +31,12 @@ public class FireProjectile extends Offensive {
 			movement = MovementConstructor.newInstance(args);
 		} catch (InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		*/
 		movement = MovementConstructor.newInstance(args);
 		friendly = friendOrFoe;
 		addToCollision();
-		//addNewLayer(new LayerData2(this, "projectile/glow", 1,1));
     	
     	double[][] animationTest = new double[3][3];
     	animationTest[0][0] = 100;

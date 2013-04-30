@@ -1,18 +1,30 @@
 package entities;
 
-import graphics.GS;
-
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import ent_c.Player;
 import ent_c.Powerup;
 import javax.imageio.ImageIO;
 
+/**
+ * This Class checks every frame of the game if objects are colliding and
+ * acts depening on the objects.
+ * The collision is checked in 3 steps:
+ * First: it checks if the objects themselve intersect
+ * Second: it checks if the hitboxes ( a smaller rectangle than the objects
+ * themselve) collide
+ * Third: it checks if the pixels of the objects collide
+ * 
+ * With the 3 step testing the computing power intense pixel check is delayed
+ * until the objects are closer together.
+ * */
 public class Collision {
 	
+	/**
+	 * 
+	 * */
 	public void intersects(Moveable friend, Moveable enemy) {
 		double twidth = friend.mainTexture.spriteDisplayX;
 		double theight = friend.mainTexture.spriteDisplayY;
@@ -65,6 +77,12 @@ public class Collision {
 			}
 		}
 	}
+	
+	/**
+	 * Method for pixelchecking 2 graphics for collision.
+	 * using 2 retangles to reduce the nessesary computing power and 2 files
+	 * this method checks if 2 non-alpha pixels are colliding.
+	 * */
 	public boolean isPixelCollide(Rectangle crasher1, File file1, Rectangle crasher2, File file2) {
 		// initialization
 		BufferedImage image1 = null, image2 = null;
@@ -89,7 +107,8 @@ public class Collision {
 		// intersection rectangle
 		int totx = Math.abs(xend - xstart);
 		int toty = Math.abs(yend - ystart);
-		// loop through each pixel in the intersection and check if both are alpha, if not => collision
+		// loop through each pixel in the intersection and check
+		// if both are alpha, if not => collision
 
 		boolean check = false;
 		for (int y=1; y < toty-1;y++){

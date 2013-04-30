@@ -43,11 +43,13 @@ public class GS {
 	}
     
 	/**
-	 * start creates the display with the set options and keeps it open until a close is requested,
-	 * every Frame the Loop inside the method updates the deltaUpdater Observer, which in turn updates every graphical element with the Observer Pattern
+	 * creates the display with the set options and keeps it open until a close is requested,
+	 * every Frame the Loop inside the method updates the deltaUpdater Observer,
+	 * which in turn updates every graphical element with the Observer Pattern
 	 * */
 	public void start() {
-		// Run Graphics window until close request (X or Alt-F4), while running send out Delta to DeltaObserver
+		// Run Graphics window until close request (X or Alt-F4)
+		// while running send out Delta to DeltaObserver
 		initGL(1280,768);
 		initGame();
         while (isRunning) {
@@ -64,6 +66,9 @@ public class GS {
         System.exit(0);
     }
 	
+	/**
+	 * Starts the menu and its controler
+	 * */
 	protected void initGame(){
 		//levelgen = new Spawner("menu", deltaUpdater);
 		new Moon(300, 400);
@@ -73,11 +78,21 @@ public class GS {
 		new Stars(640, 384);
 		new MenuControler();
 	}
+	
+	/**
+	 * creates the levelgenerator and starts the game itself
+	 * */
 	public static void startGame(){
 		System.out.println("Starting");
 		//levelgen = new Spawner("boss", deltaUpdater);
 		levelgen = new Spawner("philippboss", deltaUpdater);
 	}
+	
+	/**
+	 * checks if any object is making contact with another object
+	 * objects are either friendly (player-side) or enemys, 
+	 * only friendly vs enemy is checked for collisions.
+	 * */
 	protected void checkCollision(){
     		for (Moveable friendlys: GS.friendlys){
     			
@@ -104,22 +119,16 @@ public class GS {
 	
 	
 	/**
-	 * updateInfo() displays information in the Titlebar of the Window
+	 * updateInfo() displays information on the gamewindow
 	 * */
 	public void updateInfo() {
-		/* not working ??
-		if (getTime() - lastFPS > 1000) {
-			Display.setTitle("FPS: " + fps);
-			fps = 0;
-			lastFPS += 1000;
-		}
-		fps++;
-		*/
 		Display.setTitle("ObsCount: " + deltaUpdater.getObserverNumber());
 	}
 	
 	/**
-	 * render() calulates readys the screen for the next frame and calulates the timediffrence since the last calulation (delta) and updates the deltaUpdater with this delta
+	 * render() prepares the screen for the next frame and calulates
+	 * the timedifference since the last calulation (delta) and
+	 * updates the deltaUpdater with this delta
 	 * */
 	private void render(){
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -129,7 +138,7 @@ public class GS {
 	}
 	
 	/**
-	 * initGL() sets GL options and prepares the screen for starting the game 
+	 * initGL() sets up GL options and prepares the screen for starting the game 
 	 * */
 	private void initGL(int width, int height){
         try {
@@ -146,7 +155,7 @@ public class GS {
 		//GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		GL11.glClearDepth(1.0f);
         //GL11.glEnable(GL11.GL_DEPTH_TEST);
-//        GL11.glDepthFunc(GL11.GL_ADD); //Wenn nicht auskommentiert führt es zu Exception
+		//GL11.glDepthFunc(GL11.GL_ADD); //Wenn nicht auskommentiert führt es zu Exception
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glViewport(0,0,width,height);
         GL11.glOrtho(0,width,height,0,0,128);
@@ -161,11 +170,6 @@ public class GS {
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
-        
-        // Create some Objects for testing
-		/*
-		fe.create("Electro", 300.0, 200.0);
-		*/
 	}
 	
 	/**
@@ -183,7 +187,6 @@ public class GS {
      * getTime() grabs the system Time and returns it
      * */
     private static long getTime() {
-    	// get Systemtime
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
     }
 }

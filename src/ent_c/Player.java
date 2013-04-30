@@ -1,6 +1,7 @@
 package ent_c;
 
 import entities.Entity;
+import entities.Moveable;
 import entities.Offensive;
 import graphics.GS;
 import graphics.LayerData2;
@@ -16,7 +17,6 @@ import movementV2.*;
 
 public class Player extends Offensive {
 	
-	//public LayerData2 lights = null;
 	private int defaultLayer = 40;
 	public int shieldCharges = 2;
 	public Weapon secondWeapon;
@@ -26,13 +26,10 @@ public class Player extends Offensive {
 	public Player(double posX, double posY) {
 		super(posX, posY);
 		GS.player1 = this;
-		//setDmg(10000);
 		weapon = new InfernoWeapon(this, true);
 		weapon.weaponOffset = new double[]{-100, -35};
 		weapon.friendly = true;
 		weaponOffset = new double[]{80, 1};
-//		changeWeapon(1, new Inferno(this, false));
-//		changeWeapon(2, new ChargeWeapon(this, false));
 		changeWeapon(new DefaultWeapon(this, false));
 		changeWeapon2(new ChargeWeapon(this, false));
 		movement = new PlayerMove(this, 1);
@@ -74,6 +71,15 @@ public class Player extends Offensive {
     	projectileFire.disableAnimation = true;
 		addNewLayer(projectileFire);
 	}
+
+	public void getDamage(int damage, Moveable target) {
+		if(shieldCharges > 0){
+			playerHit();
+		}else{
+			System.out.println("GAME OVER");
+		}
+		
+	}
 	protected void checkHP(){
 		
 	}
@@ -87,13 +93,16 @@ public class Player extends Offensive {
 		this.weapon = newWeapon;
 		weapon.friendly = true;
 	}
+	
 	public void changeWeapon2(Weapon newWeapon){
 		this.secondWeapon = newWeapon;
 		secondWeapon.friendly = true;
 	}
+	
 	public void chargeFire(){
 		this.secondWeapon.fire();
 	}
+	
 	public void playFireAnimation(String texturepath, int aniNumber){
 		projectileFire.color[3]= 1.0f;
 		if(projectileFire.texturepath != texturepath){
@@ -103,19 +112,11 @@ public class Player extends Offensive {
 		projectileFire.currentAnimation = aniNumber;
 		projectileFire.deactivateAfter = true;
 		projectileFire.disableAnimation = false;
-		/*
-		projectileFireTime += delta;
-		fireAnimation.color[3]= 1.0f;
-		fireAnimation.deactivateAfter = true;
-		fireAnimation.disableAnimation = false;
-		*/
 	}
-	public void playerHit(Entity other){
+	
+	public void playerHit(){
 		if (shieldCharges > 0) {
 			shieldCharges -= 1;
-		}
-		if(other != null){
-			((Offensive)other).health -= damage;
 		}
 	}
 }

@@ -67,6 +67,6 @@ public class Powerup extends Mindless {
 		posX = -1000;
 		posY = -1000;
 		//buggy?
-		//super.unsubscribe();
+		//((Offensive)this).unsubscribe();
 	}
 }

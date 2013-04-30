@@ -3,8 +3,6 @@ package factory;
 import java.lang.reflect.InvocationTargetException;
 /**
  * Creates objects from strings.
- * @author philipp
- *
  */
 public class EnemyFactory{
 	/*

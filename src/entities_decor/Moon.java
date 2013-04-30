@@ -4,6 +4,10 @@ import entities.StaticDecor;
 import graphics.LayerData2;
 import observer.Subject;
 
+/**
+ * A Moon appearing as a visual background which does not interact with
+ * the rest of the game.
+ */
 public class Moon extends StaticDecor {
 	
 	public Moon(double posX, double posY) {

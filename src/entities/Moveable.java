@@ -41,7 +41,10 @@ public abstract class Moveable extends Entity {
 		if(movement != null)movement.move();
 		checkHP();
 	}
-	//Diese Methode muss Christian erklären.
+	/**
+	 * Adds the Object to the Vectors for friendlys or enemys
+	 * depending on the friendly-boolean
+	 * */
 	public void addToCollision(){
 		Vector<Moveable> target = null;
 		if(friendly){
@@ -52,6 +55,10 @@ public abstract class Moveable extends Entity {
 		target.add(this);
 	}
 
+	/**
+	 * Damages the Object, subclasses can use the target to identify the object
+	 * making the damage and can use it to act
+	 * */
 	public void getDamage(int damage, Moveable target) {
 		if(isProjectile){
 			health -= 1;
@@ -59,6 +66,10 @@ public abstract class Moveable extends Entity {
 			health -= damage;		
 		}
 	}
+	
+	/**
+	 * setdmg setter method
+	 * */
 	public void setDmg(int setdmg){
 		 damage = setdmg;
 	}
