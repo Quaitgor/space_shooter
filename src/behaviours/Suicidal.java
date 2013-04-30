@@ -10,13 +10,18 @@ public class Suicidal extends Behave {
 	double maxRange;
 	boolean keepDirection = false;
 	boolean following = false;
-	public Suicidal(Moveable getOwner, double range, double maxRange) {
+	boolean rotation;
+	public Suicidal(Moveable getOwner, double range, double maxRange, boolean ratation) {
 		super(getOwner);
+		this.rotation = ratation;
 		if(maxRange < 100){
 			maxRange = 100;
 		}
 		this.range = range;
 		this.maxRange = maxRange;
+	}
+	public Suicidal(Moveable getOwner, double range, double maxRange) {
+		this(getOwner,range,maxRange,false);
 	}
 
 	protected void checkMind() {
@@ -30,7 +35,7 @@ public class Suicidal extends Behave {
 					}
 					else{
 						if(distance < range){
-							owner.movement = new TargetPosition(owner, 5, GS.player1.posX, GS.player1.posY, false);
+							owner.movement = new TargetPosition(owner, 5, GS.player1.posX, GS.player1.posY, rotation);
 							following = true;
 						}
 					}

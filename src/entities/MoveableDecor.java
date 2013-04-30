@@ -3,8 +3,8 @@ package entities;
 import observer.Subject;
 
 /**
- * MoveableDecor extends Moveable for use as Decorations (Backgrounds, graphic effects, HUD, random flying objects)
- * the Decor extending MoveableDecor can move around with the movement Strategy Pattern
+ * MoveableDecor is used for ornamental entities like backgrounds, 
+ * graphical effects, HUD and randomly flying objects.
  * */
 public class MoveableDecor extends Moveable {
 	protected int defaultLayer = 60;

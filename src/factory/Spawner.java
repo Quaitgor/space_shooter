@@ -17,17 +17,27 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+/**
+ * Spawnes Enemies and the Player from a Level-File.
+ * @author philipp
+ *
+ */
 public class Spawner implements Observer{
 	public HashMap<BigDecimal,LevelSet[]> LevelMap;
 	protected double time = 0;
 	protected DeltaUpdater deltaUpdater;
+	/**
+	 * Parses the Json-File corresponding to the given level, and registers the
+	 * object at the deltaUpdater to receive updates.
+	 */
 	public Spawner(String LevelName, DeltaUpdater deltaUpdater){
 		this.deltaUpdater = deltaUpdater;
 		this.deltaUpdater.register(this);
 		Gson g = new Gson();
 //		TypeToken<List<String>> list = new TypeToken<List<String>>() {};
 		try {
-			LevelMap = g.fromJson(new FileReader("json/level/"+LevelName+".json"), (new TypeToken<HashMap<BigDecimal,LevelSet[]>>(){}).getType());
+			LevelMap = g.fromJson(new FileReader("json/level/"+LevelName+".json")
+			, (new TypeToken<HashMap<BigDecimal,LevelSet[]>>(){}).getType());
 		} catch (JsonIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +50,9 @@ public class Spawner implements Observer{
 		}
 
 	}
-	@Override
+	/**
+	 * Creates the objects specified in the Json-File at the right time.
+	 */
 	public void update(double delta) {
 		time += delta/1000;
 		BigDecimal bd = new BigDecimal(time);

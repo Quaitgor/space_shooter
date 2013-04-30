@@ -2,14 +2,14 @@ package behaviours;
 
 import movementV2.Move;
 import movementV2.StraightTrigonometry;
-import ent_c.EnemyDummyWithMind;
+import ent_c.Rocket;
 import entities.Moveable;
 import entities.Offensive;
 
 public class Boss extends Behave{
 	private double timeTillNextAction = 1500;
 	private int nextMovement = 0;
-	private final double speed = 10;
+	private final double speed = 7;
 	private Move[] Movements = {
 		new StraightTrigonometry(owner, speed, 0),
 		new StraightTrigonometry(owner, speed, -90),
@@ -42,7 +42,7 @@ public class Boss extends Behave{
 		if(timeTillNextAction < 0){
 			owner.movement = Movements[nextMovement];
 			timeTillNextAction = timePerMovement[nextMovement++];
-			new EnemyDummyWithMind(owner.posX, owner.posY);
+			new Rocket(owner.posX, owner.posY);
 			if(nextMovement==Movements.length){
 				nextMovement = 0;
 			}

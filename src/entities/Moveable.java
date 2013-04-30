@@ -11,7 +11,8 @@ import java.util.Vector;
 import movementV2.Move;
 
 /**
- * Moveable extends Entity with the moevment Strategy Pattern
+ * Moveable is a non-static Entity which through the Strategy Pattern is able
+ * to be moved across the screen in different and changeable patterns. 
  * */
 public abstract class Moveable extends Entity {
 	public boolean dontPixelCheck = false;
@@ -29,14 +30,14 @@ public abstract class Moveable extends Entity {
 	}
 	
 	/**
-	 * with the movment Strategy Pattern the Entity can move itself on the screen, and exchange this behaviour with other Movement Patterns
-	 * to sync the movement the update() method is upgraded to include movement
+	 * Moves the entity across the screen when the deltaUpdater calls it.
 	 * */
 	public void update(double delta) {
 		super.update(delta);
 		if(movement != null)movement.move();
 		checkHP();
 	}
+	//Diese Methode muss Christian erklären.
 	public void addToCollision(){
 		Vector target = null;
 		if(friendly){
@@ -53,6 +54,10 @@ public abstract class Moveable extends Entity {
 	public void setDmg(int setdmg){
 		 damage = setdmg;
 	}
+	
+	/**
+	 * Checks whether the Moveable is still alive.
+	 */
 	protected void checkHP(){
 		if(health <= 0){
 			isAlive = false;
@@ -68,6 +73,9 @@ public abstract class Moveable extends Entity {
 			}*/
 		}
 	}
+	/**
+	 * Unsubscribes the Moveable and detonates it visually.
+	 */
 	protected void death(){
 		unsubscribe();
 		new ExplodeVar(posX, posY, deathSprite);

@@ -11,8 +11,7 @@ import graphics.GS;
 import weapons.Weapon;
 
 /**
- * Offensive extends Moveable with the weapon Strategic Pattern
- * Objects made with this class can use weapons and have health
+ * Offensive can have weapons, has health and can therefore die.
  * */
 public abstract class Offensive extends Moveable{
 	public Weapon weapon = null;
@@ -23,7 +22,10 @@ public abstract class Offensive extends Moveable{
 		super(newPosX, newPosY);
 		hitbox = new Rectangle();
 	}
-	
+	/**
+	 * Directs the delta Value to the weapon.
+	 * @see Moveable.update(double);
+	 */
 	public void update(double delta){
 		updateHitbox();
 		super.update(delta);
@@ -47,6 +49,7 @@ public abstract class Offensive extends Moveable{
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         */
 	}
+	//cn
 	protected void updateHitbox(){
 		hitbox.x = (int)(posX)+ hitboxOffset[0];
 		hitbox.y = (int)(posY)+hitboxOffset[1];
@@ -54,8 +57,8 @@ public abstract class Offensive extends Moveable{
 		hitbox.height= (int)(posY)+hitboxOffset[3];
 	}
 	/**
-	 * fire() uses the weapons fire() method to fire the weapon
-	 * with the weapon Strategy Pattern the weapon can be switched
+	 * simply executes the fire()-method of the assigned weapon.
+	 * @see Entity.update(double);
 	 * */
 	public void fire(){
 		this.weapon.fire();

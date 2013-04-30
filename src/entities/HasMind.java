@@ -2,6 +2,12 @@ package entities;
 
 import behaviours.Behave;
 
+/**
+ * Through the assigned Behave-Object the Offensive can have a more complex,
+ * behavior.
+ * @author philipp
+ *
+ */
 public abstract class HasMind extends Offensive{
 	public Behave mind;
 	protected int defaultLayer = 40;

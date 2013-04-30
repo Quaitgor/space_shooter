@@ -36,7 +36,7 @@ public class Player extends Offensive {
 		weapon.friendly = true;
 //=======
 		weaponOffset = new double[]{80, 1};
-		changeWeapon(1, new DefaultWeapon(this, false));
+		changeWeapon(1, new Inferno(this, false));
 		changeWeapon(2, new ChargeWeapon(this, false));
 //>>>>>>> 324015b973ac13810e2a7c62a5fc7cc6c811a5d4
 		movement = new PlayerMove(this, 1);

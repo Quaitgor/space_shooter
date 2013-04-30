@@ -3,7 +3,7 @@ package entities;
 import observer.Subject;
 
 /**
- * StaticDecor extends Entity for the use with static Decorations (not moving elements on the screen like a background)
+ * Used for Visual effects like backgrounds which don't move.
  * */
 public class StaticDecor extends Entity {
 	protected int defaultLayer = 62;

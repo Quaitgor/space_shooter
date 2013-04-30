@@ -6,8 +6,10 @@ import movementV2.PlayerMove;
 import graphics.LayerData2;
 
 /**
- * HUD is a Head-up-Display, a Display for showing information to the User
- * HUD sets up the graphical elements of the HUD, the HUD itself is controled by the Player Object (and its PlayerMove)
+ * HUD means Head-up-Display, a visual element to display status information
+ * about the player-controlled Ship.
+ * HUD sets up the graphical elements of the HUD.
+ * The HUD itself is controlled by a PlayerMove-Object
  * */
 public class HUD extends Entity{
 	private LayerData2 int_BG;
@@ -78,11 +80,17 @@ public class HUD extends Entity{
 		addNewLayer(int_Dot1);
 		addNewLayer(int_Dot2);
 	}
-	
+	/**
+	 * @see Entity.update(double);
+	 */
 	public void update(double delta){
 		super.update(delta);
 		check();
 	}
+	/**
+	 * Updates the bar of the recharcheable shield
+	 * and the projectile being charged.
+	 */
 	protected void check(){
 		Player x = (Player) owner.owner;
 		if (checkShieldCharges != x.shieldCharges){

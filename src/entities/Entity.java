@@ -8,8 +8,9 @@ import java.util.Vector;
 import observer.*;
 
 /**
- * Entitiy is the superclass of each visual class.
- * Every subclass extending this class will have the ability to render itself for the user
+ * Entitiy is the superclass of every class which produces some visual effect.
+ * Every subclass extending this class will have the ability to render and
+ * display itself.
  */
 public abstract class Entity implements Observer {
 	public double delta;
@@ -17,14 +18,23 @@ public abstract class Entity implements Observer {
 	protected Subject deltaUpdater;
     public double posX;
 	public double posY;
+	
 	// Graphics Variables
     protected int anitimer = 0;
+    /**
+     * LayerDatas is a the collection of all GraphicLayers of an Entity.
+     */
 	public Vector<LayerData2> LayerDatas;
 	protected int maintexture = 0;
 	protected double offscreen = 15000;
 	protected double offscreenLive = 0;
 	public boolean isAlive = true;
 
+	/**
+	 * Registers the entity at the deltaUpdater.
+	 * @param newPosX
+	 * @param newPosY
+	 */
 	public Entity(double newPosX, double newPosY){
 		this.deltaUpdater = GS.deltaUpdater;
 		this.deltaUpdater.register(this);
@@ -33,7 +43,8 @@ public abstract class Entity implements Observer {
 		this.posY = newPosY;
 	}
 	/**
-	 * update is the core of timing, the delta Value is synced with every Entity to sync rendering and speed
+	 * The deltaUpdater uses this method to broadcast the delta to all Entities.
+	 * The delta Value is used to syncronize rendering and the speed of Entities.
 	 * */
 	public void update(double delta) {
 		if(isAlive){
@@ -44,7 +55,7 @@ public abstract class Entity implements Observer {
 	}
 	
 	/**
-	 * addNewLayer adds a new graphical layer to the Vector LayerDatas, LayerDatas is a the collection of all GraphicLayers of an Entity
+	 * Adds a new graphical layer to the Vector LayerDatas.
 	 * */
 	public void addNewLayer(LayerData2 newLayer){
 		LayerDatas.add(newLayer);
@@ -55,7 +66,7 @@ public abstract class Entity implements Observer {
 	}
 	
 	/**
-	 * draw commands every LayerData to draw itself according to its setup
+	 * Commands every graphical Layer to draw itself according to its setup.
 	 * */
 	public void draw(){
 		//draw all texturelayers
@@ -66,8 +77,10 @@ public abstract class Entity implements Observer {
 	}
 	
 	/**
-	 * checkUnsubscribe() unregister with the deltaUpdater Observer when the Entity is outside the screen for a defined time
-	 * unregistering the object removes the only reference to this object and will enable the Garbage Collector to remove this object
+	 * Unregisters the Entity at the deltaUpdater-Observer as soon as it is
+	 * outside the screen for a defined amount of time.
+	 * Unregistering the object removes the only reference to this object
+	 * and will cause the Garbage-Collector to destroy it.
 	 * */
 	private void checkUnsubscribe(){
 		if(this.posX > 2*1280 || this.posX < 0-1280||this.posY > 2*768 || this.posY < 0-768){
