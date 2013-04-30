@@ -1,7 +1,5 @@
 package entities;
 
-import observer.Subject;
-
 /**
  * Used for Visual effects like backgrounds which don't move.
  * */

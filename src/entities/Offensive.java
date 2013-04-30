@@ -23,7 +23,8 @@ public abstract class Offensive extends Moveable{
 		hitbox = new Rectangle();
 	}
 	/**
-	 * Directs the delta Value to the weapon.
+	 * Update is extended to include sending the Delta to the weapon
+	 * and update the hitbox of the object.
 	 * @see Moveable.update(double);
 	 */
 	public void update(double delta){
@@ -32,12 +33,16 @@ public abstract class Offensive extends Moveable{
 		if(weapon != null)weapon.update(delta);
         
 	}
+	/**
+	 * Updates the Hitboxes, to move them wit the object itself
+	 * */
 	protected void updateHitbox(){
 		hitbox.x = (int)(posX)+ hitboxOffset[0];
 		hitbox.y = (int)(posY)+hitboxOffset[1];
 		hitbox.width = (int)(posX)+hitboxOffset[2];
 		hitbox.height= (int)(posY)+hitboxOffset[3];
 		//temp texturebg for hitbox
+		/*
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor4f(1f,1f,1f,0.5f);
         GL11.glBegin(GL11.GL_QUADS);
@@ -53,18 +58,11 @@ public abstract class Offensive extends Moveable{
         }
         GL11.glEnd();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-
-        
+		*/
 	}
-	//cn
-//	protected void updateHitbox(){
-//		hitbox.x = (int)(posX)+ hitboxOffset[0];
-//		hitbox.y = (int)(posY)+hitboxOffset[1];
-//		hitbox.width = (int)(posX)+hitboxOffset[2];
-//		hitbox.height= (int)(posY)+hitboxOffset[3];
-//	}
+
 	/**
-	 * simply executes the fire()-method of the assigned weapon.
+	 * Executes the fire()-method of the assigned weapon.
 	 * @see Entity.update(double);
 	 * */
 	public void fire(){

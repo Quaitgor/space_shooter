@@ -5,6 +5,10 @@ import graphics.LayerData2;
 import observer.Subject;
 import movementV2.*;
 
+/**
+ * Stars appearing as a visual background that does not interact with
+ * the rest of the game.
+ */
 public class Stars extends StaticDecor {
 	
 	public Stars(double posX, double posY) {

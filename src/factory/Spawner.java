@@ -19,13 +19,12 @@ import com.google.gson.stream.JsonReader;
 
 /**
  * Spawnes Enemies and the Player from a Level-File.
- * @author philipp
- *
  */
 public class Spawner implements Observer{
 	public HashMap<BigDecimal,LevelSet[]> LevelMap;
 	protected double time = 0;
 	protected DeltaUpdater deltaUpdater;
+	
 	/**
 	 * Parses the Json-File corresponding to the given level, and registers the
 	 * object at the deltaUpdater to receive updates.
@@ -50,6 +49,7 @@ public class Spawner implements Observer{
 		}
 
 	}
+	
 	/**
 	 * Creates the objects specified in the Json-File at the right time.
 	 */
@@ -66,26 +66,5 @@ public class Spawner implements Observer{
 			}
 			LevelMap.remove(bd);
 		}
-		
 	}
-	
-	
-	/*
-	public LevelSpawner(){
-		try {
-			Gson g = new Gson();
-			TypeToken<List<String>> list = new TypeToken<List<String>>() {};
-			Collection<LevelSet> ls = g.fromJson(new FileReader("json/level/level1.json"), (new TypeToken<Collection<LevelSet>>(){}).getType()new TypeToken<LevelSet[]>(){}.getType());
-		} catch (JsonSyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	*/
 }

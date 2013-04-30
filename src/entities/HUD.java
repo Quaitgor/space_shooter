@@ -25,7 +25,6 @@ public class HUD extends Entity{
 	public double shieldRechargeTime = 12000;
 	public double shieldRechargeLeft = 0;
 	public int checkShieldCharges = 0;
-	
 	private int player = 1;
 	
 	public HUD(double newPosX, double newPosY, Move owner, int player) {
@@ -38,27 +37,23 @@ public class HUD extends Entity{
 		int_BG.spriteDisplayX *= scale;
 		int_BG.spriteDisplayY *= scale;
 		int_BG.layer = 9;
-
 		int_BBarGlow = new LayerData2(this, "interface/int_BBarGlow", 1, 1);
 		int_BBarGlow.spriteDisplayX *= scale;
 		int_BBarGlow.spriteDisplayY *= scale;
 		int_BBarGlow.layer = 8;
 		int_BBarGlow.color[3] = 0.0f;
 		int_BBarGlow.disableDepth = true;
-		
 		int_SBar = new LayerData2(this, "interface/int_SBar", 1, 1);
 		int_SBar.spriteDisplayX *= scale;
 		int_SBar.spriteDisplayY *= scale;
 		int_SBar.layer = 10;
 		int_SBar.pos[0] = hideSBarValue;
-		 
 		int_BBar = new LayerData2(this, "interface/int_BBar", 1, 1);
 		int_BBar.spriteDisplayX *= scale;
 		int_BBar.spriteDisplayY *= scale;
 		int_BBar.layer = 10;
 		int_BBar.color = defaultColor;
 		int_BBar.pos[0] = hideBBarValue;
-		
 		int_BBar.color = new float[]{0.5f, 0.5f, 0.5f, 1.0f};
 		int_Dot1 = new LayerData2(this, "interface/int_Dot", 1, 1);
 		int_Dot1.spriteDisplayX *= scale;
@@ -80,23 +75,24 @@ public class HUD extends Entity{
 		addNewLayer(int_Dot1);
 		addNewLayer(int_Dot2);
 	}
+	
 	/**
-	 * @see Entity.update(double);
+	 * modified Update, calling check().
 	 */
 	public void update(double delta){
 		super.update(delta);
 		check();
 	}
+	
 	/**
 	 * Updates the bar of the recharcheable shield
-	 * and the projectile being charged.
+	 * and the chargeing bar for the weapon.
 	 */
 	protected void check(){
 		Player x = (Player) owner.owner;
 		if (checkShieldCharges != x.shieldCharges){
 			shieldRechargeLeft = 0;
 			checkShieldCharges = x.shieldCharges;
-			
 			if (x.shieldCharges < 2){
 				int_Dot2.color = new float[]{1.0f, 1.0f, 1.0f, 0.0f};
 			}
@@ -104,10 +100,6 @@ public class HUD extends Entity{
 				int_Dot1.color = new float[]{1.0f, 1.0f, 1.0f, 0.0f};
 			}
 		}
-		
-		/*
-		 * Shield Recharge Bar Code
-		 * */
 		if (x.shieldCharges < 2){
 			shieldRechargeLeft += delta;
 			double percentt = 100/shieldRechargeTime;
@@ -127,11 +119,9 @@ public class HUD extends Entity{
 		}else{
 			if(int_SBar.pos[0] > hideSBarValue) int_SBar.pos[0] += hideSBarValue/20;			
 		}
-		/*
-		 * Charged Shot Bar Code
-		 * */
+		
+		//Charged Shot Bar Code
 		if(owner.chargedelta <= 2000 && owner.chargedelta != 0){
-
 			double percentage = 100/owner.chargeTime;
 			double percent = percentage * owner.chargedelta/100;
 			double bigBarPos = hideBBarValue -(hideBBarValue * percent);
@@ -151,7 +141,6 @@ public class HUD extends Entity{
 			System.arraycopy(defaultColor, 0,int_BBar.color, 0, defaultColor.length );
 			int_BBar.pos = new double[]{hideBBarValue, 0.0};
 			int_BBarGlow.color[3] = 0.0f;
-		
 		}
 	}
 }

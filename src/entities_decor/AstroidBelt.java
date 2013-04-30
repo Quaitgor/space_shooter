@@ -8,8 +8,6 @@ import movementV2.*;
 /**
  * An asteroid belt appearing as a visual background which does not interact with
  * the rest of the game.
- * @author philipp
- *
  */
 public class AstroidBelt extends MoveableDecor {
 	

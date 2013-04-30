@@ -4,6 +4,10 @@ import entities.Entity;
 import entities.Offensive;
 import graphics.GS;
 
+/**
+ * The Weapon is a Strategic Pattern that allows switching weapons for each offensive Object
+ * in this game. With this Objects can change their weapon ingame (ex. Player).
+ * */
 public abstract class Weapon {
 	protected Entity owner;
 	public int weaponDelay = 200;
@@ -18,9 +22,20 @@ public abstract class Weapon {
 		this.targetPlayer = targetPlayer;
 		this.weaponOffset= ((Offensive)owner).weaponOffset;
 	}
+	
+	/**
+	 * With this Method the weapon recieves Updates of the delta from its owner.
+	 * Used to build delays in firespeed.
+	 * */
 	public void update(double delta){
 		if(counter > 0)counter -= delta;
 	}
+	
+	/**
+	 * fire is called whenever a object trys to fire its weapon.
+	 * depending on the set target the weapon spawns its projectile (subclasses of this Object)
+	 * which target either the player or a direction.
+	 * */
 	public void fire(){
 		if(targetPlayer == true){
 			targetX = GS.player1.posX;

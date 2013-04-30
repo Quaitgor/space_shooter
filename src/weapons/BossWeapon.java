@@ -3,6 +3,9 @@ package weapons;
 import entities.Entity;
 import graphics.GS;
 
+/**
+ * BossWeapon is an extended Weapon built for firing shots designed for the boss-enemy
+ * */
 public class BossWeapon extends Weapon {
 	
 	public BossWeapon(Entity owner, boolean targetPlayer) {
@@ -10,6 +13,9 @@ public class BossWeapon extends Weapon {
 		weaponDelay = 300;
 	}
 
+	/**
+	 * Fires the projectile
+	 * */
 	public void fire() {
 		if(counter <= 0){
 			super.fire();

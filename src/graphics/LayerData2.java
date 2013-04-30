@@ -39,23 +39,18 @@ public class LayerData2 {
 	public float [] texCords;
 	public boolean enableDepth = false;
 	protected double anitimer = 0;
-	
 	public String texturepath = "";
     public double spritesV = 1;
     public double spritesH = 1;
-    
     public double spriteWidth;
     public double spriteHeight;
-    
     public double spriteDisplayX;
     public double spriteDisplayY;
-    
     public int spriteV = 0;
     public int spriteH = 0;
     protected int anispeed = 100;
     protected int imageWidth = 128;
     protected int imageHeight = 128;
-    
     public float texX = 0.0f;
     public float texY = 0.0f;
     public float texXp = 1.0f;
@@ -67,24 +62,24 @@ public class LayerData2 {
     public boolean deactivateAfter = false;
     public String collisionTexPath = "";
     
-
 	public LayerData2(Entity moveable, String texturepath, int h, int v) {
 		this.owner = moveable;
     	this.spritesV = h;
     	this.spritesH = v;
     	this.texturepath = texturepath;
+    	// if this texture is a texture with multiple sprites the layerData
+    	// gets a diffrent pixelcheck file in the hitbox folder
     	if(h > 1 || v > 1){
     		collisionTexPath = "hitbox/"+texturepath;
     	}else{
     		collisionTexPath = texturepath;
-    		
     	}
     	this.texturepath = texturepath;
     	setupTexture();
     	calculateSprite();
     	animationList = new ArrayList<double[][]>();
-		// Create and save textures and its data
 	}
+	
 	/**
 	 * setupTexture calulates important variables and saves them, normaly executed only once
 	 * */
@@ -174,7 +169,8 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * drawThisLayer is the draw command to GL to draw a textured quad with the texture provided (and with the correct selected sprite)
+	 * drawThisLayer is the draw command to GL to draw a textured quad with the
+	 * texture provided (and with the correct selected sprite)
 	 * */
 	protected void drawThisLayer(){
 		// Draw the layer final step
@@ -201,31 +197,13 @@ public class LayerData2 {
         	glVertex2f( (int)spriteDisplayX, 0);
         }
         glEnd();
-        /*
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.getTextureID());
-        //GL11.glColor3f(glC[0], glC[1], glC[2]);
-        GL11.glColor4f(color[0], color[1], color[2], color[3]);
-        glBegin(GL_QUADS);
-        {
-        	glTexCoord2f(texX, texY);
-        	glVertex2f(0, 0);
-        	glTexCoord2f(texX, texYp);
-        	glVertex2f(0, (int)spriteDisplayY);
-        	glTexCoord2f(texXp, texYp);
-        	glVertex2f( (int)spriteDisplayX, (int)spriteDisplayY);
-        	glTexCoord2f(texXp, texY);
-        	glVertex2f( (int)spriteDisplayX, 0);
-        }
-        glEnd();
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        */
         if (!disableDepth) GL11.glDisable(GL11.GL_DEPTH_TEST);
         glPopMatrix();
 	}
 	
 	/**
-	 * changeSprite is a shorthand method to change spriteH and spriteV and execute calculateSprite in one command
+	 * changeSprite is a shorthand method to change spriteH and spriteV
+	 * and execute calculateSprite in one command
 	 * */
 	public void changeSprite(int h, int v){
 		this.spriteH = h;
@@ -233,20 +211,23 @@ public class LayerData2 {
 		calculateSprite();
 	}
 	/**
-	 * setSpriteDisplaySize changes the displayed size of the object, shorthand method to change both in one command
+	 * setSpriteDisplaySize changes the displayed size of the object,
+	 * shorthand method to change both in one command
 	 * */
 	public void setSpriteDisplaySize(double x, double y){
 		spriteDisplayX = x;
 		spriteDisplayY = y;
 	}
 	/**
-	 * getPosX calulates its position relative to the position of its owner (without this, the texturelayer will not move together with its owner and will be seperate)
+	 * getPosX calulates its position relative to the position of its owner
+	 * (without this, the texturelayer will not move together with its owner and will be seperate)
 	 * */
 	public double getPosX(){
 		return owner.posX + pos[0];
 	}
 	/**
-	 * getPosY calulates its position relative to the position of its owner  (without this, the texturelayer will not move together with its owner and will be seperate)
+	 * getPosY calulates its position relative to the position of its owner
+	 * (without this, the texturelayer will not move together with its owner and will be seperate)
 	 * */
 	public double getPosY(){
 		return owner.posY + pos[1];

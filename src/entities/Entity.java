@@ -18,8 +18,6 @@ public abstract class Entity implements Observer {
 	protected Subject deltaUpdater;
     public double posX;
 	public double posY;
-	
-	// Graphics Variables
     protected int anitimer = 0;
     /**
      * LayerDatas is a the collection of all GraphicLayers of an Entity.
@@ -31,10 +29,9 @@ public abstract class Entity implements Observer {
 	public boolean isAlive = true;
 
 	/**
-	 * Registers the entity at the deltaUpdater.
-	 * @param newPosX
-	 * @param newPosY
-	 */
+	 * With the creation of an entity the object registers itself with the 
+	 * observer
+	 * */
 	public Entity(double newPosX, double newPosY){
 		this.deltaUpdater = GS.deltaUpdater;
 		this.deltaUpdater.register(this);
@@ -44,7 +41,7 @@ public abstract class Entity implements Observer {
 	}
 	/**
 	 * The deltaUpdater uses this method to broadcast the delta to all Entities.
-	 * The delta Value is used to syncronize rendering and the speed of Entities.
+	 * The delta value is used to syncronize rendering and the speed of Entities.
 	 * */
 	public void update(double delta) {
 		if(isAlive){
@@ -75,12 +72,9 @@ public abstract class Entity implements Observer {
 			o.drawLayer();
 		}
 	}
-	
 	/**
-	 * Unregisters the Entity at the deltaUpdater-Observer as soon as it is
-	 * outside the screen for a defined amount of time.
-	 * Unregistering the object removes the only reference to this object
-	 * and will cause the Garbage-Collector to destroy it.
+	 * Unregisters the Entity at the deltaUpdater-Observer
+	 * if its outside the screen for a defined amount of time.
 	 * */
 	private void checkUnsubscribe(){
 		if(this.posX > 2*1280 || this.posX < 0-1280||this.posY > 2*768 || this.posY < 0-768){
@@ -92,6 +86,11 @@ public abstract class Entity implements Observer {
 			offscreenLive = 0;
 		}
 	}
+	/**
+	 * Unregisters the Entity at the deltaUpdater-Observer.
+	 * Unregistering the object removes the only reference to this object
+	 * and will cause the Garbage-Collector to destroy it.
+	 * */
 	protected void unsubscribe(){
 		deltaUpdater.unregister(this);
 		for(int i=0;i<LayerDatas.size();i++){

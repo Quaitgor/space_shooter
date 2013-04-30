@@ -4,6 +4,10 @@ import entities.*;
 import graphics.LayerData2;
 import observer.Subject;
 
+/**
+ * A small explosion, used for the small ice projectile, it removes 
+ * itself after playing the animation once
+ * */
 public class SmallIceExplode extends Entity {
 	private double livetime;
 	private LayerData2 tex;

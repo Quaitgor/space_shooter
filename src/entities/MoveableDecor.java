@@ -1,10 +1,8 @@
 package entities;
 
-import observer.Subject;
-
 /**
  * MoveableDecor is used for ornamental entities like backgrounds, 
- * graphical effects, HUD and randomly flying objects.
+ * graphical effects and randomly flying objects.
  * */
 public class MoveableDecor extends Moveable {
 	protected int defaultLayer = 60;
