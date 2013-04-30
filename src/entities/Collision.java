@@ -31,8 +31,14 @@ public class Collision {
 		double owidth = enemy.mainTexture.spriteDisplayX;
 		double oheight = enemy.mainTexture.spriteDisplayY;
 		
-		if(friend.posX+twidth/2 > enemy.posX - owidth/2 && friend.posX-twidth/2 < enemy.posX + owidth/2 && friend.posY+theight/2 > enemy.posY - oheight/2 && friend.posY-theight/2 < enemy.posY + oheight/2){
-			if( friend.hitbox.width > enemy.hitbox.x && friend.hitbox.x < enemy.hitbox.width && friend.hitbox.height > enemy.hitbox.y && friend.hitbox.y < enemy.hitbox.height){
+		if(friend.posX+twidth/2 > enemy.posX - owidth/2 
+				&& friend.posX-twidth/2 < enemy.posX + owidth/2 
+				&& friend.posY+theight/2 > enemy.posY - oheight/2 
+				&& friend.posY-theight/2 < enemy.posY + oheight/2){
+			if( friend.hitbox.width > enemy.hitbox.x 
+					&& friend.hitbox.x < enemy.hitbox.width 
+					&& friend.hitbox.height > enemy.hitbox.y 
+					&& friend.hitbox.y < enemy.hitbox.height){
 				Rectangle crasher1 = new Rectangle();
 				Rectangle crasher2 = new Rectangle();
 				crasher1.setRect(
