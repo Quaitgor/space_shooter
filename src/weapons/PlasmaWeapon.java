@@ -15,7 +15,7 @@ public class PlasmaWeapon extends Weapon {
 		if(counter <= 0){
 			super.fire();
 			if(owner.equals(GS.player1)){
-				((Player)owner).playFireAnimation(((Player)owner).projectileFirePlasma);
+				((Player)owner).playFireAnimation("projectile/projectilefirePlasma", 0);
 			}
 			new projectiles.PlasmaProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, friendly);
 			new projectiles.PlasmaProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY+1, friendly);

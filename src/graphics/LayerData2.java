@@ -61,16 +61,24 @@ public class LayerData2 {
     public float texXp = 1.0f;
     public float texYp = 1.0f;
 	public ArrayList<double[][]> animationList;
-	protected int currentAnimation = 0;
+	public int currentAnimation = 0;
     public boolean disableDepth = false;
     public boolean disableAnimation = false;
     public boolean deactivateAfter = false;
+    public String collisionTexPath = "";
     
 
 	public LayerData2(Entity moveable, String texturepath, int h, int v) {
 		this.owner = moveable;
     	this.spritesV = h;
     	this.spritesH = v;
+    	this.texturepath = texturepath;
+    	if(h > 1 || v > 1){
+    		collisionTexPath = "hitbox/"+texturepath;
+    	}else{
+    		collisionTexPath = texturepath;
+    		
+    	}
     	this.texturepath = texturepath;
     	setupTexture();
     	calculateSprite();
@@ -97,6 +105,13 @@ public class LayerData2 {
     	spriteHeight = imageHeight/spritesV;
     	spriteDisplayX = spriteWidth;
     	spriteDisplayY = spriteHeight;
+	}
+	public void changeTexture(String texturepath){
+		if(this.texturepath != texturepath){
+	    	this.texturepath = texturepath;
+	    	setupTexture();
+	    	calculateSprite();
+		}
 	}
 
 	/**

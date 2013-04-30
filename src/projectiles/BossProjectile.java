@@ -6,9 +6,9 @@ import entities_decor.Explode;
 import graphics.GS;
 import graphics.LayerData2;
 
-public class IceProjectile extends Offensive {
+public class BossProjectile extends Offensive {
 	
-	public IceProjectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
+	public BossProjectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
 		isProjectile = true;
 		

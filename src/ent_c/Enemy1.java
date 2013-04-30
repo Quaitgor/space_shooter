@@ -13,7 +13,7 @@ public class Enemy1 extends HasMind {
 	public Enemy1(double posX, double posY) {
 		super(posX, posY);
 		health = 30;
-		weapon = new FireWeapon(this, true);
+		weapon = new DefaultWeapon(this, true);
 		//mind = new FireWhenRange(this, 800);
 		//movement = new Sway(this, 100, 4, 5.0);
 		mind = new NoAction(this);

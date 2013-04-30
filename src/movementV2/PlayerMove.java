@@ -163,7 +163,7 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == Keyboard.KEY_U) {
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
-        			((Player)owner).weapon = new FireWeapon(owner, false);
+        			((Player)owner).changeWeapon(new InfernoWeapon(owner, false));
         			((Player)owner).weapon .friendly = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD2) {
@@ -175,7 +175,7 @@ public class PlayerMove extends Move{
         			((Player)owner).weapon .friendly = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD6) {
-        			((Player)owner).weapon = new Inferno(owner, false);
+        			((Player)owner).weapon .friendly = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD4) {
         			((Player)owner).playerHit(null);

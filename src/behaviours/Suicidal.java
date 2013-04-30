@@ -36,6 +36,7 @@ public class Suicidal extends Behave {
 					else{
 						if(distance < range){
 							owner.movement = new TargetPosition(owner, 5, GS.player1.posX, GS.player1.posY, rotation);
+
 							following = true;
 						}
 					}

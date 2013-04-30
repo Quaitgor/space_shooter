@@ -13,7 +13,7 @@ public class EnemyDummyWithMind extends HasMind {
 	public EnemyDummyWithMind(double posX, double posY) {
 		super(posX, posY);
 		setDmg(1);
-		weapon = new FireWeapon(this, true);
+		weapon = new DefaultWeapon(this, true);
 		mind = new Suicidal(this, 400, 200);
 		movement = new Straight(this, 5);
 		mainTexture= new LayerData2(this, "enemy1", 1, 1);

@@ -11,7 +11,7 @@ public class Enemy2 extends HasMind {
 	public Enemy2(double posX, double posY) {
 		super(posX, posY);
 		health = 100;
-		weapon = new FireWeapon(this, true);
+		weapon = new DefaultWeapon(this, true);
 		mind = new FireWhenRange(this, 400);
 		movement = new Sway(this, 100, 4, 5.0);
 		mainTexture = new LayerData2(this, "enemy2", 1, 1);

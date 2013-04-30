@@ -77,8 +77,6 @@ public class GS {
 		System.out.println("Starting");
 		//levelgen = new Spawner("boss", deltaUpdater);
 		levelgen = new Spawner("philippboss", deltaUpdater);
-		
-		
 	}
 	protected void checkCollision(){
     		for (Moveable friendlys: GS.friendlys){

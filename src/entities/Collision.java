@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import ent_c.Player;
+import ent_c.Powerup;
 import javax.imageio.ImageIO;
 
 public class Collision {
@@ -34,27 +35,32 @@ public class Collision {
 					enemy.posX + owidth/2,
 					enemy.posY + oheight/2
 				);
-				File file1 = new File("res/sprites/"+friend.mainTexture.texturepath+".png");
-				File file2 = new File("res/sprites/"+enemy.mainTexture.texturepath+".png");
+				File file1 = new File("res/sprites/"+friend.mainTexture.collisionTexPath+".png");
+				File file2 = new File("res/sprites/"+enemy.mainTexture.collisionTexPath+".png");
 				
 				boolean isHit = false;
-				if(friend.dontPixelCheck || enemy.dontPixelCheck){
-					isHit = true;
+				
+				if(!enemy.alreadyHit.contains(friend)){
+					if(friend.dontPixelCheck || enemy.dontPixelCheck){
+						isHit = true;
+					}
+					else if (isPixelCollide(crasher1, file1, crasher2, file2)){
+						enemy.alreadyHit.add(friend);
+						if(!enemy.isPowerup){
+							isHit = true;
+						}else{
+							if(!friend.isProjectile){
+								((Powerup)enemy).pickedUp(friend);
+							}
+						}
+					}else{
+						System.out.println("already hit");
+					}
 				}
-				else if (isPixelCollide(crasher1, file1, crasher2, file2)){
-					isHit = true;
-        			/*
-        			if (friend.equals(GS.player1)){
-        				((Player)friend).playerHit(enemy);
-        			}else{
-        				((Offensive)friend).exchangeCollision(enemy);
-        			}
-        			*/
-				}
-				if(isHit){
-        			enemy.getDamage(friend.damage);
-        			friend.getDamage(enemy.damage);
-        			System.out.println(enemy.health);
+				
+				if(isHit && enemy.isAlive && friend.isAlive){
+					enemy.getDamage(friend.damage, friend);
+        			friend.getDamage(enemy.damage, enemy);
 				}
 			}
 		}

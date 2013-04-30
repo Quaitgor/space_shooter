@@ -29,7 +29,10 @@ public class Asteroid extends MoveableDecor {
 		texture1.spriteDisplayY *= Y;
 		texture1.layer = defaultLayer-1;
 		addNewLayer(texture1);
-		
-		movement = new RandomStraightTrigRotate(this, 30);
+
+		double randomValue = 2 + ( 6 - 2) * r.nextDouble();
+		movement = new RandomStraightTrig(this, 5);
+		//movement = new Straight(this, randomValue);
+		//((Straight) movement).randomRotate(true);
 	}
 }

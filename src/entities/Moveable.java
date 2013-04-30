@@ -1,7 +1,7 @@
 package entities;
 
-import entites_decor.ExplodeVar;
 import entities_decor.Explode;
+import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
 
@@ -17,6 +17,8 @@ import movementV2.Move;
 public abstract class Moveable extends Entity {
 	public boolean dontPixelCheck = false;
 	public Move movement;
+	protected boolean isProjectile = false;
+	protected boolean isPowerup = false;
 	protected boolean friendly = false;
 	public LayerData2 mainTexture = null;
 	protected Rectangle hitbox;
@@ -24,9 +26,11 @@ public abstract class Moveable extends Entity {
 	public int damage = 1;
 	public int health = 1;
 	protected String deathSprite = "explosion/explosion";
+	protected Vector<Moveable> alreadyHit;
 	
 	public Moveable(double newPosX, double newPosY) {
 		super(newPosX, newPosY);
+		alreadyHit = new Vector<Moveable>();
 	}
 	
 	/**
@@ -39,7 +43,7 @@ public abstract class Moveable extends Entity {
 	}
 	//Diese Methode muss Christian erklären.
 	public void addToCollision(){
-		Vector target = null;
+		Vector<Moveable> target = null;
 		if(friendly){
 			target = GS.friendlys;
 		}else{
@@ -48,8 +52,12 @@ public abstract class Moveable extends Entity {
 		target.add(this);
 	}
 
-	public void getDamage(int damage) {
-		health -= damage;		
+	public void getDamage(int damage, Moveable target) {
+		if(isProjectile){
+			health -= 1;
+		}else{
+			health -= damage;		
+		}
 	}
 	public void setDmg(int setdmg){
 		 damage = setdmg;
@@ -62,15 +70,6 @@ public abstract class Moveable extends Entity {
 		if(health <= 0){
 			isAlive = false;
 			this.death();
-			/*
-			setDmg(0);
-			//destroy animation here
-			if(destroyTimer == 0)new Explode(posX, posY);
-			destroyTimer += delta;
-			mainTexture.color[3] -= 0.2f;
-			if(destroyTimer >= 500){
-				
-			}*/
 		}
 	}
 	/**

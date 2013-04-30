@@ -13,7 +13,7 @@ public class Rocket extends HasMind {
 	public Rocket(double posX, double posY) {
 		super(posX, posY);
 		setDmg(1);
-		weapon = new FireWeapon(this, true);
+		weapon = new Weapon_Fire(this);
 		mind = new Suicidal(this, 400, 200, true);
 		movement = new Straight(this, 5);
 		mainTexture= new LayerData2(this, "enemy1", 1, 1);

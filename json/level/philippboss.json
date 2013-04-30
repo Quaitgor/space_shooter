@@ -4,5 +4,9 @@
 	
 	
 	1.0:[
-	{"Movable":"ent_c.PhilippBoss","x":1280.0,"y":400.0}]
+	{"Movable":"ent_c.PhilippBoss","x":1280.0,"y":400.0}],
+	
+	
+	3.0:[
+	{"Movable":"ent_c.Powerup","x":900.0,"y":100.0}]
 }

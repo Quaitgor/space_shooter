@@ -1,9 +1,9 @@
 package projectiles;
 
 import movementV2.TargetPosition;
-import entites_decor.SmallIceExplode;
 import entities.*;
 import entities_decor.Explode;
+import entities_decor.SmallIceExplode;
 import graphics.GS;
 import graphics.LayerData2;
 
@@ -12,6 +12,8 @@ public class IceProjectileSmall extends Offensive {
 	
 	public IceProjectileSmall(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
+		isProjectile = true;
+		isProjectile = true;
 		setDmg(10);
 		dontPixelCheck = true;
 		// get Data from database?
