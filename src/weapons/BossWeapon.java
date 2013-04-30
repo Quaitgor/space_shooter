@@ -13,7 +13,7 @@ public class BossWeapon extends Weapon {
 	public void fire() {
 		if(counter <= 0){
 			super.fire();
-			//new projectiles.BossProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, friendly);
+			new projectiles.BossProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, friendly);
 		}
 	}
 }

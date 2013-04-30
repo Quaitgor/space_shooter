@@ -6,6 +6,11 @@ import entities.*;
 import graphics.LayerData2;
 import movementV2.*;
 
+/**
+ * An asteroid flying randomly at the player in random speed and rotation.
+ * @author philipp
+ *
+ */
 public class Asteroid extends MoveableDecor {
 	double rangeMin = 5;
 	double rangeMax = 0.2;

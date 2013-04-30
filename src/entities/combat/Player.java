@@ -19,7 +19,7 @@ public class Player extends Offensive {
 	
 	public Player(double posX, double posY) {
 		super(posX, posY);
-		weapon = new Weapon_Fire(this);
+		weapon = new DefaultWeapon(this,false);
 		movement = new TestingControl(this, 1);
 		LayerData2 tex = new LayerData2(this, "player", 1, 1);
 		tex.layer= defaultLayer;

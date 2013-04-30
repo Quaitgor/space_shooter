@@ -2,7 +2,6 @@ package weapons;
 
 import java.lang.reflect.Constructor;
 
-import projectiles.Fire;
 import projectiles.FireProjectile;
 import movementV2.Move;
 import movementV2.RandomStraightTrig;
