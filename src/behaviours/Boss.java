@@ -6,6 +6,11 @@ import ent_c.Rocket;
 import entities.Moveable;
 import entities.Offensive;
 
+/**
+ * Makes the owner move on an E-shaped path and shoot rockets.
+ * @author philipp
+ *
+ */
 public class Boss extends Behave{
 	private double timeTillNextAction = 1500;
 	private int nextMovement = 0;

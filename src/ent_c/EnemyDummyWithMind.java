@@ -15,7 +15,7 @@ public class EnemyDummyWithMind extends HasMind {
 		setDmg(1);
 		weapon = new DefaultWeapon(this, true);
 		mind = new Suicidal(this, 400, 200);
-		movement = new Straight(this, 5);
+		movement = new StraightAhead(this, 5);
 		mainTexture= new LayerData2(this, "enemy1", 1, 1);
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-32, -16, 32, 16};

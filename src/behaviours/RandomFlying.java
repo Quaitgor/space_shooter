@@ -6,6 +6,12 @@ import movementV2.*;
 import entities.*;
 import graphics.GS;
 
+/**
+ * Regularely changes the owners movement-pattern towards a randomly determined
+ * direction and fires after reaching the specified distance to the player.
+ * @author philipp
+ *
+ */
 public class RandomFlying extends Behave {
 	private boolean once = false;
 	double staytime = 1000;

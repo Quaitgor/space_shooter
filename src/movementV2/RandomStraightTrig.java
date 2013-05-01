@@ -4,6 +4,11 @@ import java.util.Random;
 
 import entities.Entity;
 
+/**
+ * Moves towards a randomly determined direction not exceeding a certain angle.
+ * @author philipp
+ *
+ */
 public class RandomStraightTrig extends Move{
 
 

@@ -1,6 +1,6 @@
 package entities;
 
-import movementV2.Straight;
+import movementV2.StraightAhead;
 import observer.Subject;
 import weapons.Weapon;
 
@@ -13,6 +13,6 @@ public abstract class Projectiles extends Offensive{
 
 	public Projectiles(double newPosX, double newPosY, double moveX, double moveY) {
 		super(newPosX, newPosY);
-		movement = new Straight(this, moveX);
+		movement = new StraightAhead(this, moveX);
 	}
 }

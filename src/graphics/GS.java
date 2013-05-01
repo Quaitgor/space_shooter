@@ -76,7 +76,7 @@ public class GS {
 		new AstroidBelt(512,470, 3);
 		new AstroidBelt(512,640, 4);
 		new Stars(640, 384);
-		new MenuControler();
+		new MenuController();
 	}
 	
 	/**

@@ -4,6 +4,11 @@ import java.util.Random;
 
 import entities.*;
 
+/**
+ * Moves towards the specified location and can rotate appropriately.
+ * @author philipp
+ *
+ */
 public class TargetPosition extends Move{
 	private boolean rotation = false;
 	private double speed;

@@ -5,6 +5,7 @@ import java.util.Random;
 import entities.Entity;
 import graphics.GS;
 
+//cn
 public class Sway extends Move{
 	//private int testdelta = 0;
 	public double sway, originalX, originalY, range, maxSpeed = 5.0, speed;

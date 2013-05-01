@@ -4,6 +4,11 @@ import java.util.Random;
 
 import entities.Entity;
 
+/**
+ * Moves always in the same direction.
+ * @author philipp
+ *
+ */
 public class KeepDirection extends Move{
 	//private int testdelta = 0;
 	public boolean randomRotate = false;

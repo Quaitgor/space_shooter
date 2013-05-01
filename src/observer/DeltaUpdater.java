@@ -6,6 +6,8 @@ import java.util.Vector;
  * DeltaUpdater is the Observer for the delta, objects registering with this object get updated delta values,
  * needed to keep this game in sync. The observer pattern allows easy access to get the delta and send it out to all
  * objects that need it, and at the same time allows each object registered to the observer to unregister itself, removing
+ * 
+ * Subject-Observer verkehrt herum?
  * */
 public class DeltaUpdater implements Subject{
 	

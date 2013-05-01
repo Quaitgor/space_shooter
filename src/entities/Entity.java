@@ -41,7 +41,7 @@ public abstract class Entity implements Observer {
 	}
 	/**
 	 * The deltaUpdater uses this method to broadcast the delta to all Entities.
-	 * The delta value is used to syncronize rendering and the speed of Entities.
+	 * The delta value is used to synchronize rendering and the speed of Entities.
 	 * */
 	public void update(double delta) {
 		if(isAlive){

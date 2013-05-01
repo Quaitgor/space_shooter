@@ -6,7 +6,7 @@ import projectiles.FireProjectile;
 import movementV2.Move;
 import movementV2.RandomStraightTrig;
 import movementV2.SinusWave;
-import movementV2.Straight;
+import movementV2.StraightAhead;
 import entities.Entity;
 import graphics.GS;
 
@@ -30,7 +30,7 @@ public class InfernoWeapon extends Weapon {
 			super.fire();
 
 			Constructor<? extends Move> f0Constructor = (Constructor<? extends Move>) SinusWave.class.getConstructors()[0];
-			Constructor<? extends Move> f1Constructor = (Constructor<? extends Move>) Straight.class.getConstructors()[0];
+			Constructor<? extends Move> f1Constructor = (Constructor<? extends Move>) StraightAhead.class.getConstructors()[0];
 			Object[] f0args = {null, 5, 65};
 			Object[] f1args = {null, 5, 40};
 			Object[] f2args = {null, -5};

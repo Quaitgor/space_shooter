@@ -10,9 +10,7 @@ import entities.*;
 import graphics.GS;
 import graphics.LayerData2;
 
-/**
- * @author  vmadmin
- */
+//cn
 public class TestingControl extends PlayerMove{
 	
 	

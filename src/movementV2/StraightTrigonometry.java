@@ -2,6 +2,11 @@ package movementV2;
 
 import entities.Entity;
 
+/**
+ * Moves straight into the direction determined by the specified angle.
+ * @author philipp
+ *
+ */
 public class StraightTrigonometry extends Move{
 	
 	public StraightTrigonometry(Entity getOwner, double speed, double angle) {

@@ -4,6 +4,12 @@ import java.util.Random;
 
 import entities.*;
 
+/**
+ * Moves straight into the direction determined by the specified angle and
+ * rotates with random speed.
+ * @author philipp
+ *
+ */
 public class StraightTrigRotate extends Move{
 	private double rotation = 0;
 

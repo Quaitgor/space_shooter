@@ -56,7 +56,7 @@ public class PlayerMove extends Move{
 		hudX = 100;
 		hudY = 50;
 		
-		HashMap<String, Integer> KeyMap = MenuControler.getKeyMap();
+		HashMap<String, Integer> KeyMap = MenuController.getKeyMap();
 		firekey = KeyMap.get("Fire");
 		chargekey = KeyMap.get("Charge");
 		keepFiring = KeyMap.get("AutoFire");

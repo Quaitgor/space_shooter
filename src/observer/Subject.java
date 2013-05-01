@@ -2,8 +2,13 @@ package observer;
 
 /**
  * Subject is interface for the observer in the observer pattern.
- * With this interface other Observer can be built (like DeltaUpdater)
+ * With this interface other Observers can be built (like DeltaUpdater)
  * without the need to adjust the methodcalls to the observer (only reference)
+ * 
+ * 
+ * 
+ * 
+ * Erklärung unklar
  * */
 public interface Subject {
 

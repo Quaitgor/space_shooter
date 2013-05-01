@@ -3,6 +3,13 @@ package behaviours;
 import movementV2.Move;
 import entities.Moveable;
 
+/**
+ * Defines the Behaviour of its owner.
+ * Usually used to regularly change the owners movement-pattern and delaying the 
+ * frequency with which he fires his weapon.
+ * @author philipp
+ *
+ */
 public abstract class Behave {
 	protected Moveable owner;
 	double delta;

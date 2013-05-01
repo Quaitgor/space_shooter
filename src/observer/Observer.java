@@ -1,7 +1,9 @@
 package observer;
 
 /**
- * Observer is an interface that allows the objects implementing this class to get updates on the delta value via the observer pattern
+ * Implementing classes receive updates on the delta value.
+ * 
+ * required to fulfill the Observer-pattern
  * */
 public interface Observer {
 

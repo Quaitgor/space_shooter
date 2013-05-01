@@ -4,6 +4,12 @@ import movementV2.TargetPosition;
 import entities.*;
 import graphics.GS;
 
+/**
+ * Attempts to fly the owner into the player upon reaching the specified range
+ * and thereby killing him.
+ * @author philipp
+ *
+ */
 public class Suicidal extends Behave {
 	private boolean once = false;
 	double range;

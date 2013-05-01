@@ -2,6 +2,11 @@ package movementV2;
 
 import entities.Entity;
 
+/**
+ * Imitates a sin-wave stretched with the specified multiplicator.
+ * @author philipp
+ *
+ */
 public class SinusWave extends Move {
 	private double distanceToOrigin;
 	private double sinusMultiplicator;
