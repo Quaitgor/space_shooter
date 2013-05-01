@@ -4,5 +4,8 @@
 	
 	
 	1.0:[
-	{"Movable":"ent_c.EnemyDummy","x":500.0,"y":500.0}]
+	{"Movable":"ent_c.EnemyDummy","x":500.0,"y":500.0}],
+	
+	1.2:[
+	{"Movable":"entities.LevelChanger","x":500.0,"y":500.0}]
 }

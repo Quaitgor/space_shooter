@@ -31,15 +31,13 @@ public class GS {
 	public static Entity player1;
 	public static Entity player2;
 	protected Collision colchecker = new Collision();
-	protected static Spawner levelgen;
+	public static Spawner levelgen;
+	public static int level = 1;
 	int fps;
 	long lastFPS;
 	
-	public GS(DeltaUpdater getdeltaUpdater) {
-		deltaUpdater = getdeltaUpdater;
-		enemys = new Vector<Moveable>();
-		friendlys = new Vector<Moveable>();
-		getDelta();
+	public GS() {
+		start();
 	}
     
 	/**
@@ -48,6 +46,10 @@ public class GS {
 	 * which in turn updates every graphical element with the Observer Pattern
 	 * */
 	public void start() {
+		deltaUpdater = new DeltaUpdater();
+		enemys = new Vector<Moveable>();
+		friendlys = new Vector<Moveable>();
+		getDelta();
 		// Run Graphics window until close request (X or Alt-F4)
 		// while running send out Delta to DeltaObserver
 		initGL(1280,768);
@@ -69,7 +71,7 @@ public class GS {
 	/**
 	 * Starts the menu and its controler
 	 * */
-	protected void initGame(){
+	protected static void initGame(){
 		//levelgen = new Spawner("menu", deltaUpdater);
 		new Moon(300, 400);
 		new AstroidBelt(512,400, 2);
@@ -78,6 +80,12 @@ public class GS {
 		new Stars(640, 384);
 		new MenuController();
 	}
+	public static void resetGame(){
+		deltaUpdater.clearObserver();
+		enemys.clear();
+		friendlys.clear();
+		initGame();
+	}
 	
 	/**
 	 * creates the levelgenerator and starts the game itself
@@ -85,7 +93,7 @@ public class GS {
 	public static void startGame(){
 		System.out.println("Starting");
 		//levelgen = new Spawner("boss", deltaUpdater);
-		levelgen = new Spawner("philippboss", deltaUpdater);
+		levelgen = new Spawner("level"+level, deltaUpdater);
 	}
 	
 	/**

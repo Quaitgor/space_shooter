@@ -2,7 +2,7 @@ package behaviours;
 
 import movementV2.Move;
 import movementV2.StraightTrigonometry;
-import ent_c.Rocket;
+import ent_c.Mine;
 import entities.Moveable;
 import entities.Offensive;
 
@@ -47,7 +47,7 @@ public class Boss extends Behave{
 		if(timeTillNextAction < 0){
 			owner.movement = Movements[nextMovement];
 			timeTillNextAction = timePerMovement[nextMovement++];
-			new Rocket(owner.posX, owner.posY);
+			new Mine(owner.posX, owner.posY);
 			if(nextMovement==Movements.length){
 				nextMovement = 0;
 			}
