@@ -3,8 +3,8 @@ package test;
 import ent_c.Enemy1;
 import ent_c.Enemy2;
 import entities.Collision;
-import junit.framework.TestCase;
-
+//import junit.framework.TestCase;
+/*
 public class CollisionTest extends TestCase{
 	public void testIntersects(){
 		Collision c = new Collision();
@@ -15,3 +15,4 @@ public class CollisionTest extends TestCase{
 		assertTrue(e2.health == 99);
 	}
 }
+*/

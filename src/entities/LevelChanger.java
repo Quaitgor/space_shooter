@@ -9,6 +9,5 @@ public class LevelChanger extends Mindless {
 		super(posX, posY);
 		String newLevel = "level"+(GS.level+1);
 		GS.levelgen = new Spawner(newLevel, GS.deltaUpdater);
-		health = 30;
 	}
 }

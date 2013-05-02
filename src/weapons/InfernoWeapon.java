@@ -7,6 +7,7 @@ import movementV2.Move;
 import movementV2.RandomStraightTrig;
 import movementV2.SinusWave;
 import movementV2.StraightAhead;
+import ent_c.Player;
 import entities.Entity;
 import graphics.GS;
 
@@ -28,6 +29,9 @@ public class InfernoWeapon extends Weapon {
 	public void fire() {
 		if(counter <= 0){
 			super.fire();
+			if(owner.equals(GS.player1)){
+				((Player)owner).playFireAnimation("projectile/projectileireInferno", 0);
+			}
 
 			Constructor<? extends Move> f0Constructor = (Constructor<? extends Move>) SinusWave.class.getConstructors()[0];
 			Constructor<? extends Move> f1Constructor = (Constructor<? extends Move>) StraightAhead.class.getConstructors()[0];

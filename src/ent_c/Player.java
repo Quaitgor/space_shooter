@@ -1,8 +1,12 @@
 package ent_c;
 
+import java.util.Random;
+
 import entities.Entity;
+import entities.HUD;
 import entities.Moveable;
 import entities.Offensive;
+import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
 import observer.Subject;
@@ -22,9 +26,16 @@ public class Player extends Offensive {
 	public Weapon secondWeapon;
 	public double chargeLevel = 0;
 	public LayerData2 projectileFire;
+	protected Random r;
+	protected double deathTimer;
+	protected double deathExplosions = 10;
+	protected boolean isDying = false;
+	private boolean flyIn = true;
+	public HUD hud = null;
 	
 	public Player(double posX, double posY) {
 		super(posX, posY);
+		r = new Random();
 		GS.player1 = this;
 		weapon = new InfernoWeapon(this, true);
 		weapon.weaponOffset = new double[]{-100, -35};
@@ -32,7 +43,8 @@ public class Player extends Offensive {
 		weaponOffset = new double[]{80, 1};
 		changeWeapon(new DefaultWeapon(this, false));
 		changeWeapon2(new ChargeWeapon(this, false));
-		movement = new PlayerMove(this, 1);
+		//movement = new PlayerMove(this, 1);
+		movement = new TargetPosition(this, 2, 120, 384, false);
 		mainTexture = new LayerData2(this, "player", 1, 1);
 		mainTexture.layer= defaultLayer;
 		addNewLayer(mainTexture);
@@ -42,7 +54,7 @@ public class Player extends Offensive {
 		
 		projectileFire = new LayerData2(this, "projectile/projectilefireCharge", 4, 1);
     	double[][] ani1 = new double[4][4];
-    	ani1[0][0] = 100;
+    	ani1[0][0] = 140;
     	ani1[1][0] = 0;
     	ani1[2][0] = 0;
     	ani1[0][1] = 200;
@@ -76,19 +88,48 @@ public class Player extends Offensive {
 		if(shieldCharges > 0){
 			playerHit();
 		}else{
-			System.out.println("GAME OVER");
+			isDying = true;
 		}
 		
 	}
 	protected void checkHP(){
-		
+		if(isDying)death();
 	}
 
 	public void update(double delta){
 		super.update(delta);
 		secondWeapon.update(delta);
+		if(flyIn){
+			if(posX >200){
+				flyIn = false;
+				movement = new PlayerMove(this, 1);
+				hud = new HUD(100, 50, movement, 1);
+			}
+		}
 	}
 
+	protected void death(){
+		deathTimer += delta;
+		movement = new Nothing(this);
+		if(deathExplosions > 0){
+			if(deathTimer > 100){
+				double rx = r.nextInt(64);
+				double ry = r.nextInt(32);
+				double rxp = -1 + 2*r.nextInt(2);
+				double ryp = -1 + 2*r.nextInt(2);
+				System.out.println(rx +" / "+ry +" / "+rxp +" / "+ryp);
+				new ExplodeVar(posX+(rxp*rx), posY+(ryp*ry), deathSprite);
+				deathTimer = 0;
+				deathExplosions--;
+				if(deathExplosions <= 4){
+					mainTexture.color[3] -= 0.2f;
+				}
+			}
+		}else{
+			unsubscribe();
+			GS.resetGame(2000);
+		}
+	}
 	public void changeWeapon(Weapon newWeapon){
 		this.weapon = newWeapon;
 		weapon.friendly = true;

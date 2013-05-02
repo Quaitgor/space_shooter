@@ -33,6 +33,7 @@ public class MenuController extends Entity{
 	private LayerData2 mainTexture = null;
 	private LayerData2 mainScreenTex = null;
 	private LayerData2 optionScreenTex = null;
+	private LayerData2 optionScreenTex2 = null;
 	
 	private String[] MenuPositions = {
 			"Fire",
@@ -50,7 +51,7 @@ public class MenuController extends Entity{
 	public MenuController(){
 		super(640,384);
 		System.out.println("created");
-		mainTexture = new LayerData2(this, "player_big", 1, 1);
+		mainTexture = new LayerData2(this, "selector", 1, 1);
 		mainTexture.layer = 60;
 		mainScreenTex = new LayerData2(this, "mainscreen", 1, 1);
 		mainScreenTex.layer = 61;
@@ -58,9 +59,15 @@ public class MenuController extends Entity{
 		optionScreenTex = new LayerData2(this, "optionscreen", 1, 1);
 		optionScreenTex.layer = 61;
 		optionScreenTex.pos[1] += 130;
+		optionScreenTex.color[3] = 0f;
+		optionScreenTex2 = new LayerData2(this, "newkey", 1, 1);
+		optionScreenTex2.layer = 61;
+		optionScreenTex2.pos[1] += 130;
+		optionScreenTex2.color[3] = 0f;
 		addNewLayer(mainTexture);
 		addNewLayer(mainScreenTex);
 		addNewLayer(optionScreenTex);
+		addNewLayer(optionScreenTex2);
 		
 		/*
 		KeyMap = new HashMap<String, Integer>();
@@ -83,51 +90,73 @@ public class MenuController extends Entity{
 	}
 	protected void renderCursor(){
 		if(mainscreen){
+			mainTexture.color[3]  = 1f;
+			optionScreenTex2.color[3] = 0f;	
 			mainScreenTex.color[3] = 1f;
 			optionScreenTex.color[3] = 0f;
 
 			switch (mainMenuPoint){
 			case(0):
-				mainTexture.pos = new double[]{0, -30};
+				mainTexture.pos = new double[]{0, -20};
+				mainTexture.spriteDisplayX = 290;
 				break;
 			case(1):
-				mainTexture.pos = new double[]{0, 130};
+				mainTexture.pos = new double[]{0, 138};
+				mainTexture.spriteDisplayX = 410;
 				break;
 			case(2):
 				mainTexture.pos = new double[]{0, 310};
+				mainTexture.spriteDisplayX = 238;
 				break;
 			}
 		}
+		if(getKey){
+			optionScreenTex2.color[3] = 1f;
+			mainScreenTex.color[3] = 0f;
+			optionScreenTex.color[3] = 0f;
+			mainTexture.color[3]  = 0f;
+		}
 		if(optionscreen){
+			mainTexture.color[3]  = 1f;
+			optionScreenTex2.color[3] = 0f;	
 			optionScreenTex.color[3] = 1f;
 			mainScreenTex.color[3] = 0f;
 			switch (optionMenuPoint){
 			case(0):
-				mainTexture.pos = new double[]{-240, 30};
+				mainTexture.pos = new double[]{-260, 50};
+			mainTexture.spriteDisplayX = 180;
 				break;
 			case(1):
-				mainTexture.pos = new double[]{-240, 130};
+				mainTexture.pos = new double[]{-257, 121};
+				mainTexture.spriteDisplayX = 280;
 				break;
 			case(2):
-				mainTexture.pos = new double[]{-240, 230};
+				mainTexture.pos = new double[]{-260, 192};
+				mainTexture.spriteDisplayX = 380;
 				break;
 			case(3):
-				mainTexture.pos = new double[]{240, 0};
+				mainTexture.pos = new double[]{253, 7};
+			mainTexture.spriteDisplayX = 84;
 				break;
 			case(4):
-				mainTexture.pos = new double[]{240, 80};
+				mainTexture.pos = new double[]{253, 78};
+			mainTexture.spriteDisplayX = 186;
 				break;
 			case(5):
-				mainTexture.pos = new double[]{240, 160};
+				mainTexture.pos = new double[]{253, 150};
+			mainTexture.spriteDisplayX = 180;
 				break;
 			case(6):
-				mainTexture.pos = new double[]{240, 250};
+				mainTexture.pos = new double[]{253, 221};
+			mainTexture.spriteDisplayX = 228;
 				break;
 			case(7):
-				mainTexture.pos = new double[]{0, 280};
+				mainTexture.pos = new double[]{0, 278};
+			mainTexture.spriteDisplayX = 238;
 				break;
 			case(8):
-				mainTexture.pos = new double[]{-0, 360};
+				mainTexture.pos = new double[]{-0, 350};
+			mainTexture.spriteDisplayX = 188;
 				break;
 			}
 		}
@@ -147,6 +176,8 @@ public class MenuController extends Entity{
         			overwriteJson();
         			System.out.println(Keyboard.getEventKey());
         			releaseLock = true;
+					mainscreen = false;
+					optionscreen = true;
         		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_RETURN && !getKey) {
         			if(mainscreen){
@@ -171,6 +202,8 @@ public class MenuController extends Entity{
         						optionMenuPoint==4||optionMenuPoint==5||
         						optionMenuPoint==6){
         					getKey = true;
+        					mainscreen = false;
+        					optionscreen = false;
         				}
         				else if(optionMenuPoint==7){
         					KeyMap.put("Fire", Keyboard.KEY_A);

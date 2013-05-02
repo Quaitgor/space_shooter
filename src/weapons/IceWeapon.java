@@ -1,5 +1,6 @@
 package weapons;
 
+import ent_c.Player;
 import entities.Entity;
 import graphics.GS;
 
@@ -20,6 +21,9 @@ public class IceWeapon extends Weapon {
 	public void fire() {
 		if(counter <= 0){
 			super.fire();
+			if(owner.equals(GS.player1)){
+				((Player)owner).playFireAnimation("projectile/projectilefireIce", 0);
+			}
 			new projectiles.IceProjectile(owner, owner.posX+weaponOffset[0], owner.posY+weaponOffset[1], targetX, targetY, friendly);
 		}
 	}

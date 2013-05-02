@@ -34,7 +34,13 @@ public class FireProjectile extends Offensive {
 			e.printStackTrace();
 		}
 		*/
-		movement = MovementConstructor.newInstance(args);
+		try {
+			movement = MovementConstructor.newInstance(args);
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		friendly = friendOrFoe;
 		addToCollision();
     	

@@ -13,51 +13,38 @@ import graphics.GS;
  *
  */
 public class RandomFlying extends Behave {
-	private boolean once = false;
-	double staytime = 1000;
-	double timer = 1000;
-	double range = 0;
-	int limitX = 0;
-	int limitY = 0;
-	int addX = 0;
-	int addY = 0;
-	int speed = 0;
+	private double rx, ry, oldrx, oldry;
+	private Random rnd;
+	double spriteX, spriteY;
 	
-	public RandomFlying(Moveable getOwner, double staytime, double range, int limitX, int addX, int limitY, int addY, int speed) {
+	public RandomFlying(Moveable getOwner, double staytime) {
 		super(getOwner);
-		this.staytime = staytime;
-		this.range = range;
-		this.timer = this.staytime;
-		this.limitX = limitX;
-		this.limitY = limitY;
-		this.addX = addX;
-		this.addY = addY;
-		this.speed = speed;
+		rnd = new Random();
+		spriteX = owner.mainTexture.spriteDisplayX/2;
+		spriteY = owner.mainTexture.spriteDisplayY/2;
+
+		rx = 480 + rnd.nextDouble()*800;
+		ry = spriteY+ rnd.nextDouble()*(768- spriteY);
 	}
 
 	protected void checkMind() {
-		timer -= owner.delta;
-		if (timer <= 0){
-			Random rnd = new Random();
-			int rx = rnd.nextInt(1280-limitX);
-			int ry = rnd.nextInt(768-limitY);
-			rx += addX;
-			rx -= addY;
-			((TargetPosition)owner.movement).changeTarget(8, rx, ry);
-			timer = staytime;			
-		}
-		if (GS.player1 != null){
-			double x = GS.player1.posX - owner.posX;
-			double y = GS.player1.posY - owner.posY;
-			double distance = Math.sqrt(Math.pow(x,  2)+Math.pow(y, 2));
-			if(distance < range){
-				((Offensive)owner).fire();
+		
+		System.out.println(owner.posX - rx);
+		
+		if(Math.abs(owner.posX - rx) <= 50 || Math.abs(owner.posY - ry) <= 50){
+			oldrx = rx;
+			oldry = ry;
+			while(Math.abs(rx - oldrx) <= 400){
+				rx = 640 + rnd.nextDouble()*640;
+			}
+
+			while(Math.abs(ry - oldry) <= 100){
+				ry = spriteY+ rnd.nextDouble()*(768- spriteY);
 			}
 			
 		}
-		if(owner.posX > 1280 || owner.posX < 0||owner.posY > 768 || owner.posY < 0){
-			timer = 0;
-		}
+		System.out.println(rx);
+		((TargetPosition)owner.movement).changeTarget(rx,  ry);
 	}
 }
 

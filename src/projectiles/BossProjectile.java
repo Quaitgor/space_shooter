@@ -2,7 +2,6 @@ package projectiles;
 
 import movementV2.TargetPosition;
 import entities.*;
-import graphics.GS;
 import graphics.LayerData2;
 
 public class BossProjectile extends Offensive {

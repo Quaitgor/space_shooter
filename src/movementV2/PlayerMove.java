@@ -40,9 +40,6 @@ public class PlayerMove extends Move{
 	protected int moveDown;
 	protected int moveLeft;
 	protected int moveRight;
-	public double hudX;
-	public double hudY;
-	public HUD hud = null;
 	
 	
 	
@@ -53,8 +50,6 @@ public class PlayerMove extends Move{
 		this.player = player;
 		
 		//  get HUDPositon & Control for Player from database
-		hudX = 100;
-		hudY = 50;
 		
 		HashMap<String, Integer> KeyMap = MenuController.getKeyMap();
 		firekey = KeyMap.get("Fire");
@@ -74,7 +69,6 @@ public class PlayerMove extends Move{
 		moveRight = Keyboard.KEY_RIGHT;
 		*/
 		//setup the HUD
-		hud = new HUD(hudX, hudY, this, player);
 		
 	}
 	
@@ -167,6 +161,12 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD3) {
         			((Player)owner).weapon = new IceWeapon(owner, false);
         			((Player)owner).weapon .friendly = true;
+        		}
+        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD9) {
+        			GS.resetGame(0);
+        		}
+        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD8) {
+        			((Player) GS.player1).getDamage(1, null);
         		}
         		// switch booleans for movement
         		if (Keyboard.getEventKey() == moveLeft) {

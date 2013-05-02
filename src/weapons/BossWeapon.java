@@ -10,7 +10,7 @@ public class BossWeapon extends Weapon {
 	
 	public BossWeapon(Entity owner, boolean targetPlayer) {
 		super(owner, targetPlayer);
-		weaponDelay = 300;
+		weaponDelay = 500;
 	}
 
 	/**

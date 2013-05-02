@@ -33,8 +33,8 @@ public class GS {
 	protected Collision colchecker = new Collision();
 	public static Spawner levelgen;
 	public static int level = 1;
-	int fps;
-	long lastFPS;
+	private static double resetTimer;
+	private static boolean resetActive = false;
 	
 	public GS() {
 		start();
@@ -63,6 +63,7 @@ public class GS {
             updateInfo();
             Display.update();
             Display.sync(60);
+            checkReset();
         }
         Display.destroy();
         System.exit(0);
@@ -80,11 +81,22 @@ public class GS {
 		new Stars(640, 384);
 		new MenuController();
 	}
-	public static void resetGame(){
-		deltaUpdater.clearObserver();
-		enemys.clear();
-		friendlys.clear();
-		initGame();
+	public static void checkReset(){
+		if(resetActive){
+			if (resetTimer > 0){
+				resetTimer -= delta;
+			}else{
+				resetActive = false;
+				deltaUpdater.clearObserver();
+				enemys.clear();
+				friendlys.clear();
+				initGame();
+			}
+		}
+	}
+	public static void resetGame(int i){
+		resetTimer = i;
+		resetActive = true;
 	}
 	
 	/**

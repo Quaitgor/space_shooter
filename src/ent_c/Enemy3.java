@@ -12,7 +12,7 @@ public class Enemy3 extends HasMind {
 	public Enemy3(double posX, double posY) {
 		super(posX, posY);
 		setDmg(1);
-		weapon = new DefaultWeapon(this, true);
+		weapon = new InfernoWeapon(this, true);
 		mind = new FireWhenRange(this, 400);
 		movement = new Sway(this, 100, 4, 5.0);
 		mainTexture= new LayerData2(this, "enemy3", 1, 1);
