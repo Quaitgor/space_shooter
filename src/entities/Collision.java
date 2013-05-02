@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import ent_c.Powerup;
 import javax.imageio.ImageIO;
 
 /**
