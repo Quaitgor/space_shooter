@@ -5,23 +5,30 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.glCullFace;
 import static org.lwjgl.opengl.GL11.glEnable;
 
+import java.util.ArrayList;
 import java.util.Vector;
+
+import observer.DeltaUpdater;
+import observer.Observer;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-import observer.DeltaUpdater;
 import ent_c.Enemy1;
-import ent_c.Enemy2;
 import ent_c.Player;
 import entities.Collision;
+import entities.Entity;
 import entities.Moveable;
-import graphics.*;
+import factory.EnemyFactory;
+import factory.Spawn;
+import graphics.GS;
 import junit.framework.TestCase;
 
-public class CollisionTest extends TestCase{
+import java.util.Vector;
+
+public class EnemyFactoryTest extends TestCase{
 	private void initGL(){
         try {
 			Display.setDisplayMode(new DisplayMode(GS.FRAMEWIDTH,GS.FRAMEHEIGHT));
@@ -53,22 +60,47 @@ public class CollisionTest extends TestCase{
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
 	}
-	public void testIntersects(){
-
-		GS.enemys = new Vector<Moveable>();
-		GS.friendlys = new Vector<Moveable>();;
+	public void testCreate(){
 		initGL();
-		GS.deltaUpdater = new DeltaUpdater();
-		Collision c = new Collision();
-		Enemy1 e = new Enemy1(20, 20);
-		//Enemy2 e2 = new Enemy2(20, 20);
-		Player p = new Player(20,20);
-		int Playerhealth = p.health;
-		int Enemyhealth = e.health;
-		e.update(1);
-		p.update(1);
-		c.intersects(e, p);
-		assertTrue(e.health < Enemyhealth);
-		assertTrue(p.health < Playerhealth);
+		class TestSpawn extends Spawn{
+			TestSpawn(String Moveable, double x, double y){
+				this.Moveable = Moveable;
+				this.x = x;
+				this.y = y;
+			}
+		}
+		ArrayList<TestSpawn> al = new ArrayList<TestSpawn>();
+		
+		al.add(new TestSpawn("ent_c.Enemy1", 0.0, 0.0));
+		al.add(new TestSpawn("ent_c.Enemy2", 40.0, 40.0));
+		al.add(new TestSpawn("ent_c.Enemy3", 80.0, 80.0));
+		al.add(new TestSpawn("ent_c.Boss1", 120.0, 120.0));
+		al.add(new TestSpawn("ent_c.Player1", 160.0, 160.0));
+		for(TestSpawn ts : al){
+			EnemyFactory.create(ts.Moveable, ts.x, ts.y);
+		}
+		Vector<Observer> observers = null;
+		try {
+			observers = (Vector<Observer>)GS.deltaUpdater.getClass()
+							.getDeclaredField("observers").get(GS.deltaUpdater);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i=0;i<observers.size();++i){
+			assertTrue(((Entity)observers.get(i)).posX == al.get(i).x);
+			assertTrue(((Entity)observers.get(i)).posY == al.get(i).y);
+			//assertTrue(((Entity)observers.get(i)).posX == al.get(i).x);
+			
+		}
 	}
 }

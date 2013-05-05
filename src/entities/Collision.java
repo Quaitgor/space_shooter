@@ -76,8 +76,8 @@ public class Collision {
 				}
 				
 				if(isHit && enemy.isAlive && friend.isAlive){
-					enemy.getDamage(friend.damage, friend);
-        			friend.getDamage(enemy.damage, enemy);
+					enemy.getDamage(friend.damage);
+        			friend.getDamage(enemy.damage);
 				}
 			}
 		}

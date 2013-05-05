@@ -35,6 +35,8 @@ public class GS {
 	public static int level = 1;
 	private static double resetTimer;
 	private static boolean resetActive = false;
+	public static final int FRAMEWIDTH = 1280;
+	public static final int FRAMEHEIGHT = 768;
 	
 	public GS() {
 		start();
@@ -52,7 +54,7 @@ public class GS {
 		getDelta();
 		// Run Graphics window until close request (X or Alt-F4)
 		// while running send out Delta to DeltaObserver
-		initGL(1280,768);
+		initGL(FRAMEWIDTH,FRAMEHEIGHT);
 		initGame();
         while (isRunning) {
             if (Display.isCloseRequested()) {
@@ -104,8 +106,8 @@ public class GS {
 	 * */
 	public static void startGame(){
 		System.out.println("Starting");
-		//levelgen = new Spawner("boss", deltaUpdater);
-		levelgen = new Spawner("level"+level, deltaUpdater);
+		levelgen = new Spawner("philippboss", deltaUpdater);
+		//levelgen = new Spawner("level"+level, deltaUpdater);
 	}
 	
 	/**

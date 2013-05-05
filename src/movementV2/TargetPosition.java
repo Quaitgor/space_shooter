@@ -12,6 +12,11 @@ import entities.*;
 public class TargetPosition extends Move{
 	private boolean rotation = false;
 	private double speed;
+	private boolean targetReached = false;
+	private double xdiff;
+	private double ydiff;
+	
+	public boolean getTargetReached(){return targetReached;}
 	public TargetPosition(Entity getOwner, double speed, double x, double y, boolean rotation) {
 		super(getOwner);
 		this.speed = speed;
@@ -24,8 +29,9 @@ public class TargetPosition extends Move{
 		changeTarget(x,y);
 	}
 	public void changeTarget(double x, double y){
-		double xdiff = owner.posX -x;
-		double ydiff = owner.posY -y;
+		targetReached = false;
+		xdiff = owner.posX -x;
+		ydiff = owner.posY -y;
 		if (!(xdiff == 0 && ydiff == 0)){
 			double angle = Math.atan(ydiff/xdiff);
 			double reverse = -1;
@@ -43,6 +49,11 @@ public class TargetPosition extends Move{
 	protected void calculateMove(){
 	}
 	protected void makeMove(){
+		xdiff -= Math.abs(nposX);
+		ydiff -= Math.abs(nposY);
+		if((xdiff <= 0.0)&&(ydiff <= 0.0)){
+			targetReached = true;
+		}
 		owner.posX -= nposX;
 		owner.posY -= nposY;
 	}

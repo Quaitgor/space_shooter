@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonReader;
  * Spawnes Enemies and the Player from a Level-File.
  */
 public class Spawner implements Observer{
-	public HashMap<BigDecimal,LevelSet[]> LevelMap;
+	protected HashMap<BigDecimal,Spawn[]> LevelMap;
 	protected double time = 0;
 	protected DeltaUpdater deltaUpdater;
 	
@@ -36,7 +36,7 @@ public class Spawner implements Observer{
 //		TypeToken<List<String>> list = new TypeToken<List<String>>() {};
 		try {
 			LevelMap = g.fromJson(new FileReader("json/level/"+LevelName+".json")
-			, (new TypeToken<HashMap<BigDecimal,LevelSet[]>>(){}).getType());
+			, (new TypeToken<HashMap<BigDecimal,Spawn[]>>(){}).getType());
 		} catch (JsonIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,9 +60,9 @@ public class Spawner implements Observer{
 		//BigDecimal bd = new BigDecimal(delta/1000 + time);
 		//time = ().add(time).setScale(1, RoundingMode.DOWN);
 		if(LevelMap.containsKey(bd)){
-			LevelSet[] currentSet = LevelMap.get(bd);
-			for(LevelSet ls : currentSet){
-				EnemyFactory.create(ls.Movable,ls.x,ls.y);
+			Spawn[] currentSet = LevelMap.get(bd);
+			for(Spawn ls : currentSet){
+				EnemyFactory.create(ls.Moveable,ls.x,ls.y);
 			}
 			LevelMap.remove(bd);
 		}

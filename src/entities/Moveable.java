@@ -59,7 +59,7 @@ public abstract class Moveable extends Entity {
 	 * Damages the Object, subclasses can use the target to identify the object
 	 * making the damage and can use it to act
 	 * */
-	public void getDamage(int damage, Moveable target) {
+	public void getDamage(int damage) {
 		if(isProjectile){
 			health -= 1;
 		}else{

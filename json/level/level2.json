@@ -1,8 +1,6 @@
 {
 	1.0:[
-	{"Movable":"powerups.IcePower","x":400.0,"y":100.0},
-	{"Movable":"powerups.PlasmaPower","x":400.0,"y":200.0},
-	{"Movable":"powerups.InfernoPower","x":400.0,"y":300.0}],
+	{"Movable":"entities.Powerup","x":400.0,"y":100.0}],
 	2.1:[
 	{"Movable":"ent_c.Enemy1","x":1400.0,"y":100.0},
 	{"Movable":"ent_c.Enemy2","x":1400.0,"y":200.0},
