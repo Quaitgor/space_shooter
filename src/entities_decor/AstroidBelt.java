@@ -13,16 +13,17 @@ public class AstroidBelt extends MoveableDecor {
 	
 	public AstroidBelt(double posX, double posY, int factor) {
 		super(posX, posY);
-
-		LayerData2 texture1 = new LayerData2(this, "astroidbelt", 1, 1);
-		texture1.spriteDisplayX *= factor;
-		texture1.spriteDisplayY *= factor;
-		texture1.layer = defaultLayer;
-		addNewLayer(texture1);
+		mainTexture = new LayerData2(this, "astroidbelt", 1, 1);
+		mainTexture.spriteDisplayX *= factor;
+		mainTexture.spriteDisplayY *= factor;
+		mainTexture.layer = defaultLayer;
+		addNewLayer(mainTexture);
 		double speed = 0;
 		if(factor == 2) speed = 0.1;
 		if(factor == 3) speed = 0.4;
 		if(factor == 4) speed = 0.8;
+		this.posX = posX;
+		this.posY = posY; 
 		movement = new InfiniteScroll(this, speed, 0);
 	}
 }
