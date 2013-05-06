@@ -2,26 +2,25 @@ package projectiles;
 
 import movementV2.TargetPosition;
 import entities.*;
-import graphics.GS;
 import graphics.LayerData2;
 
 public class Chargelvl1Projectile extends Offensive {
-	
+
+/**
+ * This is a Projectile with a set graphical design, movement and damage,
+ * depending on the boolean value in the constructor its either friendly or 
+ * enemy
+ * */
 	public Chargelvl1Projectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
 		isProjectile = true;
-		
-		setDmg(40);
-		// get Data from database?
+		health = 3;
+		setDmg(10);
 		hitboxOffset = new int[]{-32, -16, 32, 16};
 		mainTexture = new LayerData2(this, "projectile/chargelvl1", 1, 4);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
-		mainTexture.disableDepth = true;
 		movement = new TargetPosition(this, 12, moveX, moveY, true);
 		friendly = friendOrFoe;
-		addToCollision();
-		//addNewLayer(new LayerData2(this, "projectile/glow", 1,1));
-    	
     	double[][] animationTest = new double[6][6];
     	animationTest[0][0] = 100;
     	animationTest[1][0] = 0;
@@ -42,7 +41,7 @@ public class Chargelvl1Projectile extends Offensive {
     	animationTest[1][5] = 0;
     	animationTest[2][5] = 3;
     	mainTexture.animationList.add(animationTest);
-
 		addNewLayer(mainTexture);
+		addToCollision();
 	}
 }

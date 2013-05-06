@@ -1,7 +1,6 @@
 package weapons;
 
 import entities.Entity;
-import graphics.GS;
 
 /**
  * BossWeapon is an extended Weapon built for firing shots designed for the boss-enemy

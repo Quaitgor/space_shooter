@@ -7,8 +7,6 @@ import entities.*;
 /**
  * Moves towards a randomly determined direction not exceeding a certain angle
  * and rotates with a random speed.
- * @author philipp
- *
  */
 public class RandomStraightTrigRotate extends Move{
 	private double rotation = 0;
@@ -26,8 +24,17 @@ public class RandomStraightTrigRotate extends Move{
 		nposY = Math.sin(ramdomAngle)*randomSpeed;
 		rotation = 2.0 + 4 * r.nextDouble();
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this movement.
+	 * */
 	protected void calculateMove(){
 	}
+	
+	/**
+	 * This method sends the final movement command
+	 * */
 	protected void makeMove(){
 		owner.LayerDatas.firstElement().rotation += rotation;
 		owner.posX += nposX;

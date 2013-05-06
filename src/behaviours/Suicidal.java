@@ -17,6 +17,7 @@ public class Suicidal extends Behave {
 	boolean keepDirection = false;
 	boolean following = false;
 	boolean rotation;
+	double weaponrange = 800;
 	public Suicidal(Moveable getOwner, double range, double maxRange, boolean ratation) {
 		super(getOwner);
 		this.rotation = ratation;
@@ -36,6 +37,9 @@ public class Suicidal extends Behave {
 					double x = GS.player1.posX - owner.posX;
 					double y = GS.player1.posY - owner.posY;
 					double distance = Math.sqrt(Math.pow(x,  2)+Math.pow(y, 2));
+					if(((Offensive)owner).weapon != null && distance < weaponrange && owner.posX > GS.player1.posX){
+						((Offensive)owner).fire();
+					}
 					if(following){
 						((TargetPosition)owner.movement).changeTarget(GS.player1.posX, GS.player1.posY);
 					}

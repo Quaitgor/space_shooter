@@ -1,13 +1,18 @@
 package entities;
 
+import movementV2.KeepDirection;
 import graphics.LayerData2;
-import movementV2.*;
 
+
+/**
+ * Powerup is used as a superclass of every powerup-class
+ * 
+ * */
 public class Powerup extends Mindless {
 	
 	public Powerup(double posX, double posY) {
 		super(posX, posY);
-		movement = new Nothing(this);
+		movement = new KeepDirection(this, 3, 0);
 		mainTexture= new LayerData2(this, "powerup", 1, 8);
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-16, -16, 16, 16};
@@ -41,6 +46,10 @@ public class Powerup extends Mindless {
 		addNewLayer(mainTexture);
 		addToCollision();
 	}
+	/**
+	 * This is called when suitable target has a collision with this object.
+	 * Extended in the classes extending this class.
+	 * */
 	public void pickedUp(Moveable target){
 		posX = -1000;
 		posY = -1000;

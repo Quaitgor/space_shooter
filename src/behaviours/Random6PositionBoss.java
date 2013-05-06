@@ -30,6 +30,12 @@ public class Random6PositionBoss extends Behave{
 		this.throwsMines = throwsMines;
 		owner.movement = new TargetPosition(owner, 7, Positions[5][0], Positions[5][1], false);
 	}
+	public Random6PositionBoss(Moveable getOwner, boolean throwsMines, double[][] Positions) {
+		super(getOwner);
+		this.Positions = Positions;
+		this.throwsMines = throwsMines;
+		owner.movement = new TargetPosition(owner, 7, Positions[5][0], Positions[5][1], false);
+	}
 
 	public void checkMind() {
 		if(((TargetPosition)owner.movement).getTargetReached()){

@@ -22,7 +22,7 @@ import observer.Subject;
  * and overwrites the changes done to the control-configurations.
  */
 public class MenuController extends Entity{
-	private int mainMenuPoint = 0;
+	public int mainMenuPoint = 0;
 	private int optionMenuPoint = 0;
 	private boolean mainscreen = true;
 	private boolean optionscreen = false;
@@ -34,7 +34,6 @@ public class MenuController extends Entity{
 	private LayerData2 mainScreenTex = null;
 	private LayerData2 optionScreenTex = null;
 	private LayerData2 optionScreenTex2 = null;
-	
 	private String[] MenuPositions = {
 			"Fire",
 			"Charge",
@@ -46,8 +45,9 @@ public class MenuController extends Entity{
 	};
 	private static HashMap<String, Integer> KeyMap;
 	private Gson GsonParser = new Gson();
-	
 	public static HashMap<String, Integer> getKeyMap(){return KeyMap;}
+	
+	
 	public MenuController(){
 		super(640,384);
 		System.out.println("created");
@@ -68,26 +68,21 @@ public class MenuController extends Entity{
 		addNewLayer(mainScreenTex);
 		addNewLayer(optionScreenTex);
 		addNewLayer(optionScreenTex2);
-		
-		/*
-		KeyMap = new HashMap<String, Integer>();
-		KeyMap.put("Fire", 20);
-		KeyMap.put("Charge", 20);
-		KeyMap.put("AutoFire", 20);
-		KeyMap.put("Up", 20);
-		KeyMap.put("Down", 20);
-		KeyMap.put("Right", 20);
-		KeyMap.put("Left", 20);
-		*/
 		readJson();
-		System.out.print(KeyMap.toString());
 	}
 
+	/**
+	 * Modified update to include Input and Cursormovement.
+	 * */
 	public void update(double delta) {
 		super.update(delta);
 		checkInput();
 		renderCursor();
 	}
+	
+	/**
+	 * Position and actions of the cursor
+	 * */
 	protected void renderCursor(){
 		if(mainscreen){
 			mainTexture.color[3]  = 1f;
@@ -162,6 +157,10 @@ public class MenuController extends Entity{
 		}
 		
 	}
+	
+	/**
+	 * Actions happening when Keys are pressed
+	 * */
 	protected void checkInput(){
 		while (Keyboard.next()) {
         	if (Keyboard.getEventKeyState()) {
@@ -170,11 +169,9 @@ public class MenuController extends Entity{
         			releaseLock = false;
         		}
         		if(getKey){
-        			// JSON READ WRITE HERE
         			KeyMap.put(MenuPositions[optionMenuPoint]
         					, Keyboard.getEventKey());
         			overwriteJson();
-        			System.out.println(Keyboard.getEventKey());
         			releaseLock = true;
 					mainscreen = false;
 					optionscreen = true;
@@ -218,10 +215,8 @@ public class MenuController extends Entity{
         				else if(optionMenuPoint==8){
         					mainscreen = true;
         					optionscreen = false;
-        					
         				}
         			}
-        			
         		}
         		else if (Keyboard.getEventKey() == Keyboard.KEY_DOWN && !getKey) {
         			if(mainscreen){
@@ -257,8 +252,11 @@ public class MenuController extends Entity{
         		}
         	}
         }
-		
 	}
+	
+	/**
+	 * Method to read the Json file.
+	 * */
 	private void readJson(){
 		try {
 			KeyMap = GsonParser.fromJson(
@@ -275,6 +273,10 @@ public class MenuController extends Entity{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Method to Overwrite a Json file.
+	 * */
 	private void overwriteJson(){
 		try {
 			String einstring = GsonParser.toJson(KeyMap);

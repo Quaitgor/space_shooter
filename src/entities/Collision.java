@@ -1,5 +1,8 @@
 package entities;
 
+import ent_c.Player;
+import graphics.GS;
+
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -70,14 +73,15 @@ public class Collision {
 								((Powerup)enemy).pickedUp(friend);
 							}
 						}
-					}else{
-						System.out.println("already hit");
 					}
 				}
-				
 				if(isHit && enemy.isAlive && friend.isAlive){
 					enemy.getDamage(friend.damage);
-        			friend.getDamage(enemy.damage);
+					if(friend.equals(GS.player1)){
+	        			((Player)friend).getDamage(enemy.damage, enemy);						
+					}else{
+	        			friend.getDamage(enemy.damage);
+					}
 				}
 			}
 		}
@@ -86,7 +90,8 @@ public class Collision {
 	/**
 	 * Method for pixelchecking 2 graphics for collision.
 	 * using 2 retangles to reduce the nessesary computing power and 2 files
-	 * this method checks if 2 non-alpha pixels are colliding.
+	 * this method checks if 2 non-alpha pixels are colliding in the given
+	 * positions of the textures.
 	 * */
 	public boolean isPixelCollide(Rectangle crasher1, File file1, Rectangle crasher2, File file2) {
 		// initialization
@@ -114,7 +119,6 @@ public class Collision {
 		int toty = Math.abs(yend - ystart);
 		// loop through each pixel in the intersection and check
 		// if both are alpha, if not => collision
-
 		boolean check = false;
 		for (int y=1; y < toty-1;y++){
 			int ny = Math.abs(ystart - (int) y1) + y;

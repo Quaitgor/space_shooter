@@ -7,8 +7,6 @@ import entities.*;
 /**
  * Moves straight into the direction determined by the specified angle and
  * rotates with random speed.
- * @author philipp
- *
  */
 public class StraightTrigRotate extends Move{
 	private double rotation = 0;
@@ -21,8 +19,18 @@ public class StraightTrigRotate extends Move{
 		Random r = new Random();
 		rotation = -2.0 + ( 2.0 - -2.0) * r.nextDouble();
 	}
+
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this Movement
+	 * */
 	protected void calculateMove(){
 	}
+
+	/**
+	 * This method sends the final movement command
+	 * */
 	protected void makeMove(){
     	((Offensive)owner).mainTexture.rotation += rotation;
 		owner.posX += nposX;

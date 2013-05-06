@@ -1,13 +1,10 @@
 package entities;
 
-import entities_decor.Explode;
 import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
-
 import java.awt.Rectangle;
 import java.util.Vector;
-
 import movementV2.Move;
 
 /**
@@ -41,6 +38,7 @@ public abstract class Moveable extends Entity {
 		if(movement != null)movement.move();
 		checkHP();
 	}
+	
 	/**
 	 * Adds the Object to the Vectors for friendlys or enemys
 	 * depending on the friendly-boolean
@@ -56,8 +54,7 @@ public abstract class Moveable extends Entity {
 	}
 
 	/**
-	 * Damages the Object, subclasses can use the target to identify the object
-	 * making the damage and can use it to act
+	 * Damages the Object.
 	 * */
 	public void getDamage(int damage) {
 		if(isProjectile){
@@ -75,7 +72,7 @@ public abstract class Moveable extends Entity {
 	}
 	
 	/**
-	 * Checks whether the Moveable is still alive.
+	 * Checks health of the object and calls its death when health < 0.
 	 */
 	protected void checkHP(){
 		if(health <= 0){
@@ -83,13 +80,19 @@ public abstract class Moveable extends Entity {
 			this.death();
 		}
 	}
+	
 	/**
-	 * Unsubscribes the Moveable and detonates it visually.
+	 * Unsubscribes the Moveable and detonates it visually. Overwritten
+	 * by objects to create other death-effects
 	 */
 	protected void death(){
 		unsubscribe();
 		new ExplodeVar(posX, posY, deathSprite);
 	}
+	
+	/**
+	 * Removes the object from the observer and the game
+	 * */
 	protected void unsubscribe(){
 		super.unsubscribe();
 		Vector<Moveable> target = null;

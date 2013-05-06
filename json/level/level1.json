@@ -1,11 +1,73 @@
 {
-	0.4:[
-	{"Movable":"ent_c.Player","x":-100.0,"y":384.0}],
+	
+	3.0:[
+	{"Moveable":"ent_c.Enemy1","x":1400.0,"y":384.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":484.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":584.0}	],
 	
 	
-	1.0:[
-	{"Movable":"ent_c.EnemyDummy","x":500.0,"y":500.0}],
+	10.0:[
+	{"Moveable":"ent_c.Enemy1","x":1400.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":384.0},
 	
-	1.2:[
-	{"Movable":"entities.LevelChanger","x":500.0,"y":500.0}]
+	{"Moveable":"ent_c.Enemy1","x":1400.0,"y":584.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":684.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":484.0}	],
+	
+	
+	
+	13.0:[
+	{"Moveable":"ent_c.Enemy1","x":1400.0,"y":384.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":484.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":584.0}	],
+	
+	14.0:[
+	{"Moveable":"ent_c.Enemy2","x":1400.0,"y":384.0},
+	{"Moveable":"ent_c.Enemy2","x":1450.0,"y":484.0},
+	{"Moveable":"ent_c.Enemy2","x":1450.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy2","x":1500.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy2","x":1500.0,"y":584.0}	],
+	
+	
+	20.0:[
+	{"Moveable":"ent_c.Enemy3","x":1400.0,"y":200.0}	],
+	
+	24.0:[
+	{"Moveable":"powerups.PlasmaTransport","x":1400.0,"y":384.0}	],
+	
+	
+	
+	38.0:[
+	{"Moveable":"ent_c.Enemy1","x":1400.0,"y":384.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":484.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":584.0},
+	{"Moveable":"ent_c.Enemy3","x":1600.0,"y":384.0}	],
+	
+	46.0:[
+	{"Moveable":"ent_c.Enemy1","x":1400.0,"y":384.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":484.0},
+	{"Moveable":"ent_c.Enemy1","x":1450.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy1","x":1500.0,"y":584.0},
+	{"Moveable":"ent_c.Enemy3","x":1600.0,"y":384.0}	],
+	
+	52.0:[
+	{"Moveable":"ent_c.Enemy2","x":1500.0,"y":184.0},
+	{"Moveable":"ent_c.Enemy2","x":1450.0,"y":284.0},
+	{"Moveable":"ent_c.Enemy2","x":1400.0,"y":384.0},
+	{"Moveable":"ent_c.Enemy2","x":1450.0,"y":484.0},
+	{"Moveable":"ent_c.Enemy2","x":1500.0,"y":584.0},
+	{"Moveable":"ent_c.Enemy3","x":1600.0,"y":384.0}	],
+	
+	
+	115.0:[
+	{"Moveable":"entities.LevelChanger","x":1400.0,"y":384.0}
+	]
 }

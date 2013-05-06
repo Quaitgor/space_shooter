@@ -13,6 +13,8 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+
+import ent_c.Player;
 import entities_decor.*;
 import entities.*;
 import factory.*;
@@ -37,11 +39,13 @@ public class GS {
 	private static boolean resetActive = false;
 	public static final int FRAMEWIDTH = 1280;
 	public static final int FRAMEHEIGHT = 768;
+	private static String startlevel = "level1";
 	
-	public GS() {
+	
+	public GS(String level) {
+		GS.startlevel = level;
 		start();
 	}
-    
 	/**
 	 * creates the display with the set options and keeps it open until a close is requested,
 	 * every Frame the Loop inside the method updates the deltaUpdater Observer,
@@ -53,7 +57,6 @@ public class GS {
 		friendlys = new Vector<Moveable>();
 		getDelta();
 		// Run Graphics window until close request (X or Alt-F4)
-		// while running send out Delta to DeltaObserver
 		initGL(FRAMEWIDTH,FRAMEHEIGHT);
 		initGame();
         while (isRunning) {
@@ -72,21 +75,29 @@ public class GS {
     }
 	
 	/**
-	 * Starts the menu and its controler
+	 * Starts the menu and its controller
 	 * */
 	protected static void initGame(){
-		//levelgen = new Spawner("menu", deltaUpdater);
 		new Moon(300, 400);
 		new AstroidBelt(512,400, 2);
 		new AstroidBelt(512,470, 3);
 		new AstroidBelt(1024,640, 4);
 		new Stars(640, 384);
-		new MenuController();
+		MenuController menu = new MenuController();
+		menu.mainMenuPoint = 0;
+		new BlackScreen(640, 384, false);
 	}
+	
+	/**
+	 * Method that resets the game after the timer hits 0
+	 * */
 	public static void checkReset(){
 		if(resetActive){
 			if (resetTimer > 0){
 				resetTimer -= delta;
+				if(resetTimer < 2000){
+					new BlackScreen(640, 384, true);
+				}
 			}else{
 				resetActive = false;
 				deltaUpdater.clearObserver();
@@ -96,6 +107,10 @@ public class GS {
 			}
 		}
 	}
+	
+	/**
+	 * Resets the Game after i time (ms);
+	 * */
 	public static void resetGame(int i){
 		resetTimer = i;
 		resetActive = true;
@@ -106,7 +121,8 @@ public class GS {
 	 * */
 	public static void startGame(){
 		System.out.println("Starting");
-		levelgen = new Spawner("philippboss", deltaUpdater);
+		new Player(-100, 384);
+		levelgen = new Spawner(startlevel, deltaUpdater);
 		//levelgen = new Spawner("level"+level, deltaUpdater);
 	}
 	
@@ -116,29 +132,20 @@ public class GS {
 	 * only friendly vs enemy is checked for collisions.
 	 * */
 	protected void checkCollision(){
-    		for (Moveable friendlys: GS.friendlys){
-    			
-    			Moveable friend = (Moveable) friendlys;
+		for (Moveable friendlys: GS.friendlys){
+			
+			Moveable friend = (Moveable) friendlys;
 
-    			if(friend.isAlive == true){
-            		for (Moveable enemys: GS.enemys){
-            			if(enemys.isAlive == true){
-                			Moveable enemy= (Moveable) enemys;
-                			colchecker.intersects(friend,enemy);
-                		}
-        			}
+			if(friend.isAlive == true){
+        		for (Moveable enemys: GS.enemys){
+        			if(enemys.isAlive == true){
+            			Moveable enemy= (Moveable) enemys;
+            			colchecker.intersects(friend,enemy);
+            		}
     			}
-    		}
-			/*
-    		if(crashed){
-				new Hit(posX, posY);
-				crashed = false;
 			}
-			*/
-			//if(health <= 0) this.unsubscribe();
+		}
 	}
-	
-	
 	
 	/**
 	 * updateInfo() displays information on the gamewindow
@@ -173,17 +180,13 @@ public class GS {
             Display.destroy();
             System.exit(1);
         }
-		GL11.glEnable(GL11.GL_TEXTURE_2D);  
-		//GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glClearDepth(1.0f);
-        //GL11.glEnable(GL11.GL_DEPTH_TEST);
-		//GL11.glDepthFunc(GL11.GL_ADD); //Wenn nicht auskommentiert führt es zu Exception
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glViewport(0,0,width,height);
         GL11.glOrtho(0,width,height,0,0,128);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        //GL11.glBlendEquation( BLENDING_EQUATIONS[blendingEquationIndex]);
 		GL11.glShadeModel(GL11.GL_FLAT);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glEnable(GL11.GL_ALPHA_TEST);

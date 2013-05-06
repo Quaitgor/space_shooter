@@ -4,18 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-
 import observer.DeltaUpdater;
 import observer.Observer;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 
 /**
  * Spawnes Enemies and the Player from a Level-File.
@@ -33,7 +28,6 @@ public class Spawner implements Observer{
 		this.deltaUpdater = deltaUpdater;
 		this.deltaUpdater.register(this);
 		Gson g = new Gson();
-//		TypeToken<List<String>> list = new TypeToken<List<String>>() {};
 		try {
 			LevelMap = g.fromJson(new FileReader("json/level/"+LevelName+".json")
 			, (new TypeToken<HashMap<BigDecimal,Spawn[]>>(){}).getType());
@@ -57,8 +51,6 @@ public class Spawner implements Observer{
 		time += delta/1000;
 		BigDecimal bd = new BigDecimal(time);
 		bd = bd.setScale(1, RoundingMode.DOWN);
-		//BigDecimal bd = new BigDecimal(delta/1000 + time);
-		//time = ().add(time).setScale(1, RoundingMode.DOWN);
 		if(LevelMap.containsKey(bd)){
 			Spawn[] currentSet = LevelMap.get(bd);
 			for(Spawn ls : currentSet){

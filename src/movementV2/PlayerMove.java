@@ -5,15 +5,13 @@ import java.util.HashMap;
 
 import org.lwjgl.input.Keyboard;
 
-import weapons.*;
 import ent_c.Player;
 import entities.*;
 import graphics.GS;
-import graphics.LayerData2;
 
 /**
- * PlayerMove is the movement Strategy Pattern the Player uses
- * this movement pattern does not only control movement of the player,
+ * PlayerMove is the movement Strategy Pattern the Player uses.
+ * This movement does not only control movement of the player,
  * it is used to control the weapon and general input to the player object.
  * */
 public class PlayerMove extends Move{
@@ -31,7 +29,6 @@ public class PlayerMove extends Move{
 	protected boolean movingRight = false;
 	protected boolean movingDown= false;
 	public double chargeTime = 2000;
-	
 	//keybinding
 	protected int firekey;
 	protected int chargekey;
@@ -40,16 +37,11 @@ public class PlayerMove extends Move{
 	protected int moveDown;
 	protected int moveLeft;
 	protected int moveRight;
-	
-	
-	
 
 	public PlayerMove(Entity owner, int player){
 		super(owner);
 		this.owner = owner;
 		this.player = player;
-		
-		//  get HUDPositon & Control for Player from database
 		
 		HashMap<String, Integer> KeyMap = MenuController.getKeyMap();
 		firekey = KeyMap.get("Fire");
@@ -59,23 +51,14 @@ public class PlayerMove extends Move{
 		moveDown = KeyMap.get("Down");
 		moveLeft = KeyMap.get("Left");
 		moveRight = KeyMap.get("Right");
-		/*
-		firekey = Keyboard.KEY_A;
-		chargekey = Keyboard.KEY_S;
-		keepFiring = Keyboard.KEY_D;
-		moveUp = Keyboard.KEY_UP;
-		moveDown = Keyboard.KEY_DOWN;
-		moveLeft = Keyboard.KEY_LEFT;
-		moveRight = Keyboard.KEY_RIGHT;
-		*/
-		//setup the HUD
-		
 	}
 	
 	/**
-	 * calulateMove() grabs all relevant Input of the user and calulates movement and weaponcontrol for the player Object
+	 * This method grabs all relevant Input of the user and calulates movement
+	 * and weaponcontrol for the Player.
 	 * */
 	protected void calculateMove(){
+		// Movement Controls
 		speedX = 0;
 		speedY = 0;
     	int tempAccel = 1;
@@ -130,45 +113,26 @@ public class PlayerMove extends Move{
     		if(nposY < 1) reverse = -1;
     		nposY = reverse*maxSpeed;
     	}
-    	
-    	//Weapon Controls for Delay and Charge
+    	//Weapon Controls
     	if (fastshot){
     		((Player)owner).fire();
     	}
-    	
     	if (charging){
     		if(chargedelta < chargeTime)chargedelta += owner.delta;
 			if(chargedelta > chargeTime)chargedelta = chargeTime;
     	}
     	
     	/**
-    	 * The Events inside while(Keyboard.next()) fire once when key pressed/released
-    	 *  
-    	 *  Keyboard.getEventKeyState() == true  => when Key Pressed
-    	 *  Keyboard.getEventKeyState() == false => when Key Released
+    	 * The Events inside while(Keyboard.next()) fire once when key pressed/released.
+    	 *  - Keyboard.getEventKeyState() == true  => when Key Pressed.
+    	 *  - Keyboard.getEventKeyState() == false => when Key Released.
     	 * */
         while (Keyboard.next()) {
 
         	if (Keyboard.getEventKeyState()) {
-        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
-        			((Player)owner).changeWeapon(new InfernoWeapon(owner, false));
-        			((Player)owner).weapon .friendly = true;
-        		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD2) {
-        			((Player)owner).weapon = new PlasmaWeapon(owner, false);
-        			((Player)owner).weapon .friendly = true;
-        		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD3) {
-        			((Player)owner).weapon = new IceWeapon(owner, false);
-        			((Player)owner).weapon .friendly = true;
-        		}
         		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD9) {
         			GS.resetGame(0);
         		}
-        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD8) {
-        			((Player) GS.player1).getDamage(1, null);
-        		}
-        		// switch booleans for movement
         		if (Keyboard.getEventKey() == moveLeft) {
                 	movingLeft = true;
                 }
@@ -181,7 +145,6 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == moveDown) {
                 	movingDown = true;
                 }
-        		// Weapon Controls for charging, firing and Fastshot
         		if (Keyboard.getEventKey() == firekey) {
         			if (!fastshot && !charging) {
         				((Player)owner).fire();
@@ -198,7 +161,6 @@ public class PlayerMove extends Move{
         			}
         		}
         	}else{
-        		// Movement Keys released booleans
         		if (Keyboard.getEventKey() == moveLeft) {
                 	movingLeft = false;
                 }
@@ -211,7 +173,6 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == moveDown) {
                 	movingDown = false;
                 }
-        		// Weapon controls when Keys released for Charging and Fastshot
         		if (Keyboard.getEventKey() == chargekey) {
         			if (!fastshot) {
         				System.out.println("released Charge");
@@ -232,7 +193,7 @@ public class PlayerMove extends Move{
 	}
 	
 	/**
-	 * makeMove() executes the calulated movements & stops the player from leaving the window
+	 * this method executes the calulated movements & prevents the player from leaving the window
 	 * */
 	protected void makeMove(){
 

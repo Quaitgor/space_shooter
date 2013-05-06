@@ -15,7 +15,7 @@ public class Mine extends HasMind {
 		setDmg(1);
 		weapon = new DefaultWeapon(this,false);
 		mind = new Suicidal(this, 400, 200, false);
-		movement = new Straight(this, 5);
+		movement = new KeepDirection(this, 5, 0);
 		mainTexture= new LayerData2(this, "mines", 1, 4);
 
     	double[][] animationTest = new double[6][6];

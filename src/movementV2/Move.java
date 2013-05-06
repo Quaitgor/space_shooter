@@ -25,6 +25,15 @@ public abstract class Move {
 		makeMove();
 	};
 	
+	/**
+	 * this method is called before making a visible movement,
+	 * in this method objects extending this class will calulate before they
+	 * make any change visible to the player with makeMove()
+	 * */
 	protected abstract void calculateMove();
+	/**
+	 * this method is called after calulateMove and is the final step
+	 * where to the player visible actions happen.
+	 * */
 	protected abstract void makeMove();
 }

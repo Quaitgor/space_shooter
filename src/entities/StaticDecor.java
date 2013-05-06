@@ -7,7 +7,5 @@ public class StaticDecor extends Entity {
 	protected int defaultLayer = 62;
 	public StaticDecor(double newPosX, double newPosY) {
 		super(newPosX, newPosY);
-		// TODO Auto-generated constructor stub
 	}
-
 }

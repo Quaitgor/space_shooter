@@ -1,13 +1,9 @@
 package movementV2;
 
-import java.util.Random;
-
 import entities.*;
 
 /**
  * Moves towards the specified location and can rotate appropriately.
- * @author philipp
- *
  */
 public class TargetPosition extends Move{
 	private boolean rotation = false;
@@ -24,10 +20,20 @@ public class TargetPosition extends Move{
 		changeTarget(x, y);
 		
 	}
+	
+	/**
+	 * With this method a new target on the screen can be defined, the object
+	 * will move toward that object. The speed can be adjusted
+	 * */
 	public void changeTarget(double speed, double x, double y){
 		this.speed = speed;
 		changeTarget(x,y);
 	}
+	
+	/**
+	 * With this method a new target on the screen can be defined, the object
+	 * will move toward that object
+	 * */
 	public void changeTarget(double x, double y){
 		targetReached = false;
 		xdiff = owner.posX -x;
@@ -46,14 +52,22 @@ public class TargetPosition extends Move{
 			}
 		}
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * */
 	protected void calculateMove(){
-	}
-	protected void makeMove(){
 		xdiff -= Math.abs(nposX);
 		ydiff -= Math.abs(nposY);
 		if((xdiff <= 0.0)&&(ydiff <= 0.0)){
 			targetReached = true;
 		}
+	}
+	
+	/**
+	 * This method sends the final movement command
+	 * */
+	protected void makeMove(){
 		owner.posX -= nposX;
 		owner.posY -= nposY;
 	}

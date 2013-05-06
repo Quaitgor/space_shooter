@@ -5,15 +5,6 @@ import java.lang.reflect.InvocationTargetException;
  * Creates objects from strings.
  */
 public class EnemyFactory{
-	/*
-	public static Gson GsonParser = new Gson();
-//	public static HashMap<String, Enemy> GeneratedEnemies = new HashMap<String, Enemy>();
-	static {
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(Weapon.class, new WeaponAdapter());
-		GsonParser = builder.create();
-	}
-	*/
 	/**
 	 * Creates an object from a given string and places it in the right position.
 	 * @param EnemyName

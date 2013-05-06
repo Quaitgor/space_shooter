@@ -36,6 +36,7 @@ public class Player extends Offensive {
 	public Player(double posX, double posY) {
 		super(posX, posY);
 		r = new Random();
+		setDmg(500);
 		GS.player1 = this;
 		weapon = new InfernoWeapon(this, true);
 		weapon.weaponOffset = new double[]{-100, -35};
@@ -43,7 +44,6 @@ public class Player extends Offensive {
 		weaponOffset = new double[]{80, 1};
 		changeWeapon(new DefaultWeapon(this, false));
 		changeWeapon2(new ChargeWeapon(this, false));
-		//movement = new PlayerMove(this, 1);
 		movement = new TargetPosition(this, 2, 120, 384, false);
 		mainTexture = new LayerData2(this, "player", 1, 1);
 		mainTexture.layer= defaultLayer;
@@ -84,9 +84,10 @@ public class Player extends Offensive {
 		addNewLayer(projectileFire);
 	}
 
-	public void getDamage(int damage, Moveable target) {
+	public void getDamage(int damage, Moveable enemy) {
 		if(shieldCharges > 0){
 			playerHit();
+			new ExplodeVar(enemy.posX, enemy.posY, "explosion/shieldexplosion");
 		}else{
 			isDying = true;
 		}
@@ -127,7 +128,7 @@ public class Player extends Offensive {
 			}
 		}else{
 			unsubscribe();
-			GS.resetGame(2000);
+			GS.resetGame(4000);
 		}
 	}
 	public void changeWeapon(Weapon newWeapon){

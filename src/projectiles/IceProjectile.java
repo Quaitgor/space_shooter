@@ -2,8 +2,6 @@ package projectiles;
 
 import movementV2.TargetPosition;
 import entities.*;
-import entities_decor.Explode;
-import graphics.GS;
 import graphics.LayerData2;
 
 /**
@@ -16,16 +14,13 @@ public class IceProjectile extends Offensive {
 	public IceProjectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
 		isProjectile = true;
-		setDmg(50);
+		setDmg(10);
 		hitboxOffset = new int[]{-16, -16, 20, 16};
 		mainTexture = new LayerData2(this, "projectile/ice", 8, 2);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
-		mainTexture.disableDepth = true;
 		movement = new TargetPosition(this, 8, moveX, moveY, true);
 		friendly = friendOrFoe;
 		deathSprite = "explosion/iceexplosion";
-		addToCollision();
-
     	double[][] animationTest = new double[3][11];
     	animationTest[0][0] = 80;
     	animationTest[1][0] = 0;
@@ -61,12 +56,12 @@ public class IceProjectile extends Offensive {
     	animationTest[1][10] = 4;
     	animationTest[2][10] = 1;
     	mainTexture.animationList.add(animationTest);
-    	
 		addNewLayer(mainTexture);
+		addToCollision();
 	}
 	
 	/**
-	 * The iceProjectile has a modified death, it spawns 6 small icefragments
+	 * The IceProjectile has a modified death, it spawns 6 small icefragments
 	 * that have a limited livetime, after which they destroy themselve.
 	 * */
 	protected void death(){

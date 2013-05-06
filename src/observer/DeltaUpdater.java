@@ -55,6 +55,9 @@ public class DeltaUpdater implements Subject{
 		return observers.size();
 	}
 	
+	/**
+	 * this Method clears the Observers Vector, used as a reset-method
+	 * */
 	public void clearObserver(){
 		observers.clear();
 	}

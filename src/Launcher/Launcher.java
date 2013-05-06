@@ -1,14 +1,12 @@
 package Launcher;
-import observer.*;
 import graphics.*;
 
 /**
- * Initializes all necessary objects and starts the games menu.
+ * This class is the start of the game, the String in GS defines the level
+ * where the game will start.
  */
 public class Launcher {
-	public static GS graphicSync;
 	public static void main(String[] args) {
-		//Spawner LevelSpawner = new Spawner("level1", deltaUpdater);
-		GS graphicSync = new GS();
+		new GS("level1");
 	}
 }

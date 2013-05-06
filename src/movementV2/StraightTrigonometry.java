@@ -4,8 +4,6 @@ import entities.Entity;
 
 /**
  * Moves straight into the direction determined by the specified angle.
- * @author philipp
- *
  */
 public class StraightTrigonometry extends Move{
 	
@@ -15,8 +13,17 @@ public class StraightTrigonometry extends Move{
 		nposX = Math.cos(angle)*speed;
 		nposY = Math.sin(angle)*speed;
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this Movement
+	 * */
 	protected void calculateMove(){
 	}
+	
+	/**
+	 * This method sends the final movement command
+	 * */
 	protected void makeMove(){
 		owner.posX += nposX;
 		owner.posY += nposY;

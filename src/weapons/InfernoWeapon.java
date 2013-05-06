@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 
 import projectiles.FireProjectile;
 import movementV2.Move;
-import movementV2.RandomStraightTrig;
 import movementV2.SinusWave;
 import movementV2.StraightAhead;
 import ent_c.Player;

@@ -2,11 +2,9 @@ package entities_decor;
 
 import entities.*;
 import graphics.LayerData2;
-import observer.Subject;
-import movementV2.*;
 
 /**
- * Stars appearing as a visual background that does not interact with
+ * Black Screen appearing as a visual background that does not interact with
  * the rest of the game.
  */
 public class Stars extends StaticDecor {

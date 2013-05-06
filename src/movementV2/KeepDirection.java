@@ -1,28 +1,29 @@
 package movementV2;
 
-import java.util.Random;
-
 import entities.Entity;
 
 /**
- * Moves always in the same direction.
- * @author philipp
- *
+ * This movement moves an object to the set location and keeps it moving
  */
 public class KeepDirection extends Move{
-	//private int testdelta = 0;
-	public boolean randomRotate = false;
-	private double rotation = 0;
 	
 	public KeepDirection(Entity getOwner, double nposX, double nposY) {
 		super(getOwner);
-		nposX = nposX;
-		nposY = nposY;
+		this.nposX = nposX;
+		this.nposY = nposY;
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this movement.
+	 * */
 	protected void calculateMove(){
 	}
+	
+	/**
+	 * This method sends the final movement command
+	 * */
 	protected void makeMove(){
-//    	if (randomRotate) owner.LayerDatas.get(0).rotation += rotation;
 		owner.posX -= nposX;
 		owner.posY -= nposY;
 	}

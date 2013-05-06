@@ -3,9 +3,7 @@ package movementV2;
 import entities.Entity;
 
 /**
- * Imitates a sin-wave stretched with the specified multiplicator.
- * @author philipp
- *
+ * this movement imitates a sin-wave stretched with the specified multiplicator.
  */
 public class SinusWave extends Move {
 	private double distanceToOrigin;
@@ -17,9 +15,18 @@ public class SinusWave extends Move {
 		nposX = speed;
 		this.sinusMultiplicator = sinusMultiplicator;
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this movement.
+	 * */
 	public void calculateMove() {
 
 	}
+	
+	/**
+	 * This method sends the final movement command.
+	 * */
 	public void makeMove() {
 		distanceToOrigin += nposX;
 		owner.posX += nposX;

@@ -9,7 +9,6 @@ import graphics.LayerData2;
  * HUD means Head-up-Display, a visual element to display status information
  * about the player-controlled Ship.
  * HUD sets up the graphical elements of the HUD.
- * The HUD itself is controlled by a PlayerMove-Object
  * */
 public class HUD extends Entity{
 	private LayerData2 int_BG;
@@ -18,6 +17,8 @@ public class HUD extends Entity{
 	public LayerData2 int_BBarGlow;
 	public LayerData2 int_Dot1;
 	public LayerData2 int_Dot2;
+	public LayerData2 offline;
+	public LayerData2 online;
 	private PlayerMove owner;
 	public float[] defaultColor;
 	public double hideBBarValue = -194;
@@ -25,11 +26,12 @@ public class HUD extends Entity{
 	public double shieldRechargeTime = 12000;
 	public double shieldRechargeLeft = 0;
 	public int checkShieldCharges = 0;
-	private int player = 1;
+	private double messagetimer = 300;
+	private double messagetimerC;
+	private boolean messageoff = false;
 	
 	public HUD(double newPosX, double newPosY, Move owner, int player) {
 		super(newPosX, newPosY);
-		this.player = player;
 		defaultColor = new float[]{0.5f, 1.0f, 0.5f, 1.0f};
 		int scale = 2;
 		this.owner = ((PlayerMove)owner);
@@ -68,12 +70,24 @@ public class HUD extends Entity{
 		int_Dot2.pos = new double[]{ 54, 10};
 		int_Dot2.color = new float[]{1f, 1f, 1f, 1f};
 
+
+		offline = new LayerData2(this, "interface/warning", 1, 1);
+		offline.layer = 8;
+		offline.pos = new double[]{ 550, 10};
+		offline.color[3] = 0f;
+		online = new LayerData2(this, "interface/online", 1, 1);
+		online.layer = 8;
+		online.pos = new double[]{ 550, 10};
+		online.color[3] = 0f;
+		
 		addNewLayer(int_BG);
 		addNewLayer(int_BBar);
 		addNewLayer(int_BBarGlow);
 		addNewLayer(int_SBar);
 		addNewLayer(int_Dot1);
 		addNewLayer(int_Dot2);
+		addNewLayer(offline);
+		addNewLayer(online);
 	}
 	
 	/**
@@ -90,23 +104,46 @@ public class HUD extends Entity{
 	 */
 	protected void check(){
 		Player x = (Player) owner.owner;
+		if(messagetimerC >= 0){
+			messagetimerC -= delta;
+		}else{
+			if(online.color[3] != 0f)online.color[3] = 0f;
+		}
 		if (checkShieldCharges != x.shieldCharges){
 			shieldRechargeLeft = 0;
 			checkShieldCharges = x.shieldCharges;
 			if (x.shieldCharges < 2){
-				int_Dot2.color = new float[]{1.0f, 1.0f, 1.0f, 0.0f};
+				if(int_Dot2.color[3] != 0.0f)int_Dot2.color[3] = 0.0f;
 			}
 			if (x.shieldCharges < 1){
-				int_Dot1.color = new float[]{1.0f, 1.0f, 1.0f, 0.0f};
+				if(int_Dot1.color[3] != 0.0f)int_Dot1.color[3] = 0.0f;
+				if(online.color[3] != 0.0f)online.color[3] = 0.0f;
+				messagetimerC = 0;
+			}
+			if(x.shieldCharges > 0){
+				if(offline.color[3] != 0.0f)offline.color[3] = 0.0f;
 			}
 		}
 		if (x.shieldCharges < 2){
 			shieldRechargeLeft += delta;
+			if(x.shieldCharges == 0 && messagetimerC < 0){
+				if(!messageoff){
+					if(offline.color[3] != 0.75f)offline.color[3] = 0.75f;
+					messageoff = true;
+					messagetimerC += messagetimer;
+				}else{
+					if(offline.color[3] != 0.0f)offline.color[3] = 0.0f;
+					messageoff = false;
+					messagetimerC += messagetimer;
+				}
+			}
 			double percentt = 100/shieldRechargeTime;
 			double percent = percentt * shieldRechargeLeft/100;
 			double smallBarPos = hideSBarValue -(hideSBarValue * percent);
 			int_SBar.pos = new double[]{smallBarPos, 0.0};
 			if(shieldRechargeLeft >= shieldRechargeTime){
+				online.color[3] = 0.75f;
+				messagetimerC += messagetimer*5;
 				if(x.shieldCharges == 1){
 					int_Dot2.color = new float[]{1f, 1f, 1f, 1f};
 				}

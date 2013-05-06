@@ -2,9 +2,7 @@ package projectiles;
 
 import movementV2.TargetPosition;
 import entities.*;
-import entities_decor.Explode;
 import entities_decor.SmallIceExplode;
-import graphics.GS;
 import graphics.LayerData2;
 
 /**
@@ -17,25 +15,25 @@ public class IceProjectileSmall extends Offensive {
 	
 	/**
 	 * the small iceProjectile has a special livetime, it destroys itself
-	 * after the set time
+	 * after the set time.
 	 * */
 	public IceProjectileSmall(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
 		isProjectile = true;
 		isProjectile = true;
-		setDmg(10);
+		setDmg(5);
 		dontPixelCheck = true;
 		hitboxOffset = new int[]{-16, -16, 20, 16};
 		mainTexture = new LayerData2(this, "projectile/smallice", 1, 1);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1.0f};
 		movement = new TargetPosition(this, 4, moveX, moveY, true);
 		friendly = friendOrFoe;
-		addToCollision();
 		addNewLayer(mainTexture);
+		addToCollision();
 	}
 	
 	/**
-	 * modified update to include the livetime
+	 * Modified update to include the livetime
 	 * */
 	public void update(double delta){
 		super.update(delta);

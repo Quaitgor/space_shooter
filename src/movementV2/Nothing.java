@@ -1,14 +1,11 @@
 package movementV2;
 
-import java.util.Random;
-
 import entities.Entity;
-import graphics.GS;
 
 /**
  * Does not move at all.
- * @author philipp
- *
+ * Used when an object has to move absolutly nothing.
+ * Used for DummyObjects for testing purposes.
  */
 public class Nothing extends Move{
 	

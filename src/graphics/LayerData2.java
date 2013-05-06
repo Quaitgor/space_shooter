@@ -23,10 +23,11 @@ import entities.Entity;
 
 
 /**
- * LayerData (V2) is the Main Texture Handler of this Program
- * LayerData saves and controls the data for the animation, texture, size and color for single layer of Graphic on an object.
+ * LayerData (V2) is the Main Texture Handler of this Game.
+ * LayerData saves and controls the data for the animation, texture, size and
+ * color for a single layer of Graphic on an object.
  * Together with other LayerData an Object can be build with multiple layers of textures, 
- * each individual in size color and position and its own sets of animation
+ * each individual in size color and position and its own sets of animation.
  */
 
 public class LayerData2 {
@@ -68,7 +69,7 @@ public class LayerData2 {
     	this.spritesH = v;
     	this.texturepath = texturepath;
     	// if this texture is a texture with multiple sprites the layerData
-    	// gets a diffrent pixelcheck file in the hitbox folder
+    	// gets a different pixelcheck file (collision) in the hitbox folder
     	if(h > 1 || v > 1){
     		collisionTexPath = "hitbox/"+texturepath;
     	}else{
@@ -81,7 +82,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * setupTexture calulates important variables and saves them, normaly executed only once
+	 * This method calulates important variables and saves them, normaly executed only once
 	 * */
 	private void setupTexture() {
 		BufferedImage bimg = null;
@@ -101,6 +102,10 @@ public class LayerData2 {
     	spriteDisplayX = spriteWidth;
     	spriteDisplayY = spriteHeight;
 	}
+	
+	/**
+	 * This method allows changing the Texture.
+	 * */
 	public void changeTexture(String texturepath){
 		if(this.texturepath != texturepath){
 	    	this.texturepath = texturepath;
@@ -110,7 +115,8 @@ public class LayerData2 {
 	}
 
 	/**
-	 * calulateSprite readjusts the texture on the sprite thats been selected with spriteH & spriteV
+	 * Readjusts the texture on the sprite thats been selected with spriteH & spriteV.
+	 * This method is called when the sprite has changed (ex. Animation).
 	 * */
 	protected void calculateSprite(){
 		texX =  (float)((double)(spriteV* imageWidth/spritesH) /  imageWidth);
@@ -120,7 +126,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * drawLayer draws checks the animation(if any) and draws the according sprite
+	 * Checks the animation(if any) and the drawThisLayer().
 	 * */
 	public void drawLayer(){
 		if(!disableAnimation){
@@ -131,6 +137,11 @@ public class LayerData2 {
 		if(insideScreen())drawThisLayer();
 		
 	}
+	
+	/**
+	 * Checks if the owner of this LayerData is still visibile (used to stop calulating
+	 * the render process if not visible)
+	 * */
 	protected boolean insideScreen(){
 		if(owner.posX-this.spriteDisplayX/2 > 1280 || owner.posX+this.spriteDisplayX/2 < 0|| owner.posY-this.spriteDisplayY/2 > 768 || owner.posY+this.spriteDisplayY/2 < 0){
 			return false;
@@ -139,8 +150,7 @@ public class LayerData2 {
 		}
 	}
 	/**
-	 * checkAnimation checks if another Sprite needs to be set for the next draw, it uses the animationList
-	 * to check for any change needed
+	 * Checks if another Sprite needs to be set for the next draw using the animationList
 	 * */
 	protected void checkAnimation(){
 		int tempSpriteX = spriteH;
@@ -169,8 +179,8 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * drawThisLayer is the draw command to GL to draw a textured quad with the
-	 * texture provided (and with the correct selected sprite)
+	 * The draw command to GL to draw a textured quad with the
+	 * texture provided (and with the correct selected sprite).
 	 * */
 	protected void drawThisLayer(){
 		// Draw the layer final step
@@ -183,7 +193,6 @@ public class LayerData2 {
         int temp2 = (int)spriteDisplayY;
         glTranslatef(-temp/2, -temp2/2, -layer);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, tex.getTextureID());
-        //GL11.glColor3f(glC[0], glC[1], glC[2]);
         GL11.glColor4f(color[0], color[1], color[2], color[3]);
         glBegin(GL_QUADS);
         {
@@ -203,7 +212,8 @@ public class LayerData2 {
 	
 	/**
 	 * changeSprite is a shorthand method to change spriteH and spriteV
-	 * and execute calculateSprite in one command
+	 * and execute calculateSprite in one command.
+	 * (Ex. in a 2x2 Texture => changeSprite(2,2) will select lower right sprite.
 	 * */
 	public void changeSprite(int h, int v){
 		this.spriteH = h;

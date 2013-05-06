@@ -1,13 +1,9 @@
 package movementV2;
 
-import java.util.Random;
-
 import entities.Entity;
 
 /**
- * Moves straight ahead.
- * @author philipp
- *
+ * This movement moves the object on the X axis on a set speed.
  */
 public class StraightAhead extends Move{
 	
@@ -16,8 +12,17 @@ public class StraightAhead extends Move{
 		nposX = speed;
 		nposY = 0;
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this movement.
+	 * */
 	protected void calculateMove(){
 	}
+	
+	/**
+	 * This method sends the final movement command
+	 * */
 	protected void makeMove(){
 		owner.posX -= nposX;
 		owner.posY -= nposY;

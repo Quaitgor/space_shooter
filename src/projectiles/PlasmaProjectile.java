@@ -2,7 +2,6 @@ package projectiles;
 
 import movementV2.TargetPosition;
 import entities.*;
-import entities_decor.ExplodeVar;
 import graphics.LayerData2;
 
 /**
@@ -15,15 +14,14 @@ public class PlasmaProjectile extends Offensive {
 	public PlasmaProjectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);
 		isProjectile = true;
-		setDmg(80);
+		health = 2;
+		setDmg(20);
 		mainTexture = new LayerData2(this, "projectile/plasma", 4, 1);
 		hitboxOffset = new int[]{-16, -16, 20, 16};
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
 		movement = new TargetPosition(this, 8, moveX, moveY, true);
 		friendly = friendOrFoe;
 		deathSprite = "explosion/plasmaexplosion";
-		addToCollision();
-
     	double[][] animationTest = new double[3][3];
     	animationTest[0][0] = 100;
     	animationTest[1][0] = 1;
@@ -35,7 +33,7 @@ public class PlasmaProjectile extends Offensive {
     	animationTest[1][2] = 1;
     	animationTest[2][2] = 0;
     	mainTexture.animationList.add(animationTest);
-
 		addNewLayer(mainTexture);
+		addToCollision();
 	}
 }

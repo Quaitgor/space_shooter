@@ -1,13 +1,6 @@
 package entities;
 
 import java.awt.Rectangle;
-import java.util.Vector;
-
-import org.lwjgl.opengl.GL11;
-
-import entities_decor.Explode;
-
-import graphics.GS;
 import weapons.Weapon;
 
 /**
@@ -41,24 +34,6 @@ public abstract class Offensive extends Moveable{
 		hitbox.y = (int)(posY)+hitboxOffset[1];
 		hitbox.width = (int)(posX)+hitboxOffset[2];
 		hitbox.height= (int)(posY)+hitboxOffset[3];
-		//temp texturebg for hitbox
-		/*
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor4f(1f,1f,1f,0.5f);
-        GL11.glBegin(GL11.GL_QUADS);
-        {
-        	GL11.glTexCoord2f(0, 0);
-        	GL11.glVertex2f(hitbox.x, hitbox.y);
-        	GL11.glTexCoord2f(0, 1);
-        	GL11.glVertex2f(hitbox.x, hitbox.height);
-        	GL11.glTexCoord2f(1, 1);
-        	GL11.glVertex2f(hitbox.width, hitbox.height);
-        	GL11.glTexCoord2f(1, 0);
-        	GL11.glVertex2f(hitbox.width, hitbox.y);
-        }
-        GL11.glEnd();
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-		*/
 	}
 
 	/**
@@ -68,13 +43,21 @@ public abstract class Offensive extends Moveable{
 	public void fire(){
 		this.weapon.fire();
 	}
+	
+	/**
+	 * Removes this object from the Observer and the game.
+	 * */
 	public void unsubscribe(){
 		super.unsubscribe();
 		weapon = null;
 	}
-	public void changeWeapon(Weapon newWeapon){
+	
+	/**
+	 * With this a new weapon can be switched
+	 * */
+	public void changeWeapon(Weapon newWeapon, boolean friendlyToPlayer){
 		this.weapon = newWeapon;
-		weapon.friendly = true;
+		weapon.friendly = friendlyToPlayer;
 	}
 
 }

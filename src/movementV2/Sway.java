@@ -1,11 +1,11 @@
 package movementV2;
 
-import java.util.Random;
-
 import entities.Entity;
-import graphics.GS;
 
-//cn
+/**
+ * This Movementpattern has a swaying motion included to the movement speed.
+ * The swaying can changed horizontal or vertical with the axis-boolean.
+ * */
 public class Sway extends Move{
 	//private int testdelta = 0;
 	public double sway, originalX, originalY, range, maxSpeed = 5.0, speed;
@@ -22,6 +22,11 @@ public class Sway extends Move{
 		originalX = owner.posX;
 		originalY = owner.posY;
 	}
+	
+	/**
+	 * This method makes nessesary recalulation before moving anything.
+	 * Not needed in this Movement
+	 * */
 	protected void calculateMove(){
 		if(!reverse){
 			if(sway > -1* maxSpeed)sway -= 0.2;
@@ -29,9 +34,11 @@ public class Sway extends Move{
 		if(reverse){
 			if(sway < maxSpeed)sway += 0.2;
 		}
-
-		
 	}
+	
+	/**
+	 * This method sends the final movement command and checks the swaymotions direction
+	 * */
 	protected void makeMove(){
 		if(axis){
 			nposX = speed;
