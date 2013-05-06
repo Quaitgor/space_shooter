@@ -5,11 +5,9 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.glCullFace;
 import static org.lwjgl.opengl.GL11.glEnable;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import observer.DeltaUpdater;
-import observer.Observer;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -19,16 +17,12 @@ import org.lwjgl.opengl.GL11;
 import ent_c.Enemy1;
 import ent_c.Player;
 import entities.Collision;
-import entities.Entity;
 import entities.Moveable;
-import factory.EnemyFactory;
-import factory.Spawn;
+import factory.Spawner;
 import graphics.GS;
 import junit.framework.TestCase;
 
-import java.util.Vector;
-
-public class EnemyFactoryTest extends TestCase{
+public class SpawnerTest extends TestCase{
 	private void initGL(){
         try {
 			Display.setDisplayMode(new DisplayMode(GS.FRAMEWIDTH,GS.FRAMEHEIGHT));
@@ -60,47 +54,14 @@ public class EnemyFactoryTest extends TestCase{
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
 	}
-	public void testCreate(){
+	public void testIntersects(){
+
+		GS.enemys = new Vector<Moveable>();
+		GS.friendlys = new Vector<Moveable>();;
 		initGL();
-		class TestSpawn extends Spawn{
-			TestSpawn(String Moveable, double x, double y){
-				this.Moveable = Moveable;
-				this.x = x;
-				this.y = y;
-			}
-		}
-		TestSpawn[] al = {
-			new TestSpawn("ent_c.Enemy1", 0.0, 0.0),
-			new TestSpawn("ent_c.Enemy2", 40.0, 40.0),
-			new TestSpawn("ent_c.Enemy3", 80.0, 80.0),
-			new TestSpawn("ent_c.Boss1", 120.0, 120.0),
-			new TestSpawn("ent_c.Player1", 160.0, 160.0)
-		};
-		for(TestSpawn ts : al){
-			EnemyFactory.create(ts.Moveable, ts.x, ts.y);
-		}
-		Vector<Observer> observers = null;
-		try {
-			observers = (Vector<Observer>)GS.deltaUpdater.getClass()
-							.getDeclaredField("observers").get(GS.deltaUpdater);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for(int i=0;i<observers.size();++i){
-			assertTrue(((Entity)observers.get(i)).posX == al[i].x);
-			assertTrue(((Entity)observers.get(i)).posY == al[i].y);
-			//assertTrue(((Entity)observers.get(i)).posX == al.get(i).x);
-			
-		}
+		GS.deltaUpdater = new DeltaUpdater();
+		Spawner s = new Spawner("testlevel", GS.deltaUpdater);
+		assertTrue(e.health < Enemyhealth);
+		assertTrue(p.health < Playerhealth);
 	}
 }
