@@ -1,4 +1,8 @@
 {
 	0.4:[
-	{"Moveable":"ent_c.Player","x":-100.0,"y":384.0}]
+	{"Moveable":"ent_c.Enemy1","x":0.0,"y":0.0},
+	{"Moveable":"ent_c.Enemy2","x":40.0,"y":40.0},
+	{"Moveable":"ent_c.Enemy3","x":80.0,"y":80.0},
+	{"Moveable":"ent_c.Boss1","x":120.0,"y":120.0},
+	{"Moveable":"ent_c.Player","x":160.0,"y":160.0}]
 }

@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.glCullFace;
 import static org.lwjgl.opengl.GL11.glEnable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -61,7 +62,11 @@ public class EnemyFactoryTest extends TestCase{
         GL11.glLoadIdentity();
 	}
 	public void testCreate(){
+		GS.enemys = new Vector<Moveable>();
+		GS.friendlys = new Vector<Moveable>();;
 		initGL();
+		GS.deltaUpdater = new DeltaUpdater();
+
 		class TestSpawn extends Spawn{
 			TestSpawn(String Moveable, double x, double y){
 				this.Moveable = Moveable;
@@ -69,20 +74,22 @@ public class EnemyFactoryTest extends TestCase{
 				this.y = y;
 			}
 		}
-		TestSpawn[] al = {
+		TestSpawn[] TestSpawnArray = {
 			new TestSpawn("ent_c.Enemy1", 0.0, 0.0),
 			new TestSpawn("ent_c.Enemy2", 40.0, 40.0),
 			new TestSpawn("ent_c.Enemy3", 80.0, 80.0),
 			new TestSpawn("ent_c.Boss1", 120.0, 120.0),
-			new TestSpawn("ent_c.Player1", 160.0, 160.0)
+			new TestSpawn("ent_c.Player", 160.0, 160.0)
 		};
-		for(TestSpawn ts : al){
+		for(TestSpawn ts : TestSpawnArray){
 			EnemyFactory.create(ts.Moveable, ts.x, ts.y);
 		}
 		Vector<Observer> observers = null;
 		try {
-			observers = (Vector<Observer>)GS.deltaUpdater.getClass()
-							.getDeclaredField("observers").get(GS.deltaUpdater);
+			Field observerField = DeltaUpdater.class
+					.getDeclaredField("observers");
+			observerField.setAccessible(true);
+			observers = (Vector<Observer>)observerField.get(GS.deltaUpdater);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,9 +103,12 @@ public class EnemyFactoryTest extends TestCase{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		assertTrue(observers.size() == TestSpawnArray.length);
 		for(int i=0;i<observers.size();++i){
-			assertTrue(((Entity)observers.get(i)).posX == al[i].x);
-			assertTrue(((Entity)observers.get(i)).posY == al[i].y);
+			assertTrue(((Entity)observers.get(i)).getClass().getName()
+					.equals(TestSpawnArray[i].Moveable));
+			assertTrue(((Entity)observers.get(i)).posX == TestSpawnArray[i].x);
+			assertTrue(((Entity)observers.get(i)).posY == TestSpawnArray[i].y);
 			//assertTrue(((Entity)observers.get(i)).posX == al.get(i).x);
 			
 		}
