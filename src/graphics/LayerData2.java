@@ -23,11 +23,11 @@ import entities.Entity;
 
 
 /**
- * LayerData (V2) is the Main Texture Handler of this Game.
+ * The main texture handler.
  * LayerData saves and controls the data for the animation, texture, size and
- * color for a single layer of Graphic on an object.
- * Together with other LayerData an Object can be build with multiple layers of textures, 
- * each individual in size color and position and its own sets of animation.
+ * color for a single layer of graphics on an Entity.
+ * Together with other LayerData an Entity can be built with multiple textures 
+ * layers, each individually in size, color, position and its own sets of animation.
  */
 
 public class LayerData2 {
@@ -82,7 +82,8 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * This method calulates important variables and saves them, normaly executed only once
+	 * calculates important variables concerning a texture and saves them.
+	 * Usually executed only once.
 	 * */
 	private void setupTexture() {
 		BufferedImage bimg = null;
@@ -104,7 +105,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * This method allows changing the Texture.
+	 * changes the texture.
 	 * */
 	public void changeTexture(String texturepath){
 		if(this.texturepath != texturepath){
@@ -115,8 +116,8 @@ public class LayerData2 {
 	}
 
 	/**
-	 * Readjusts the texture on the sprite thats been selected with spriteH & spriteV.
-	 * This method is called when the sprite has changed (ex. Animation).
+	 * Readjusts the texture on the sprite that has been selected with spriteH 
+	 * & spriteV.It is called when the sprite has changed (ex. Animation).
 	 * */
 	protected void calculateSprite(){
 		texX =  (float)((double)(spriteV* imageWidth/spritesH) /  imageWidth);
@@ -126,7 +127,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * Checks the animation(if any) and the drawThisLayer().
+	 * Checks the animation(if any) and then calls drawThisLayer().
 	 * */
 	public void drawLayer(){
 		if(!disableAnimation){
@@ -139,8 +140,8 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * Checks if the owner of this LayerData is still visibile (used to stop calulating
-	 * the render process if not visible)
+	 * Checks if the owner of the LayerData is still visible and stops
+	 * calculating the render process if not.
 	 * */
 	protected boolean insideScreen(){
 		if(owner.posX-this.spriteDisplayX/2 > 1280 || owner.posX+this.spriteDisplayX/2 < 0|| owner.posY-this.spriteDisplayY/2 > 768 || owner.posY+this.spriteDisplayY/2 < 0){
@@ -150,7 +151,7 @@ public class LayerData2 {
 		}
 	}
 	/**
-	 * Checks if another Sprite needs to be set for the next draw using the animationList
+	 * Checks if another sprite needs to be set for the next draw using the animationList
 	 * */
 	protected void checkAnimation(){
 		int tempSpriteX = spriteH;
@@ -179,7 +180,7 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * The draw command to GL to draw a textured quad with the
+	 * The draw command to GL which draws a textured square with the
 	 * texture provided (and with the correct selected sprite).
 	 * */
 	protected void drawThisLayer(){
@@ -211,9 +212,9 @@ public class LayerData2 {
 	}
 	
 	/**
-	 * changeSprite is a shorthand method to change spriteH and spriteV
-	 * and execute calculateSprite in one command.
-	 * (Ex. in a 2x2 Texture => changeSprite(2,2) will select lower right sprite.
+	 * a shorthand method to change spriteH and spriteV and execute calculateSprite
+	 * in one command. (Ex. in a 2x2 Texture => changeSprite(2,2) will select the
+	 * lower right sprite.
 	 * */
 	public void changeSprite(int h, int v){
 		this.spriteH = h;
@@ -221,23 +222,23 @@ public class LayerData2 {
 		calculateSprite();
 	}
 	/**
-	 * setSpriteDisplaySize changes the displayed size of the object,
-	 * shorthand method to change both in one command
+	 * changes the displayed size of the object,
+	 * shorthand method to change both in one command..
 	 * */
 	public void setSpriteDisplaySize(double x, double y){
 		spriteDisplayX = x;
 		spriteDisplayY = y;
 	}
 	/**
-	 * getPosX calulates its position relative to the position of its owner
-	 * (without this, the texturelayer will not move together with its owner and will be seperate)
+	 * calculates its position relative to the position of its owner
+	 * (without it the texture layer will not move together with its owner)
 	 * */
 	public double getPosX(){
 		return owner.posX + pos[0];
 	}
 	/**
-	 * getPosY calulates its position relative to the position of its owner
-	 * (without this, the texturelayer will not move together with its owner and will be seperate)
+	 * calculates its position relative to the position of its owner
+	 * (without it the texture layer will not move together with its owner)
 	 * */
 	public double getPosY(){
 		return owner.posY + pos[1];

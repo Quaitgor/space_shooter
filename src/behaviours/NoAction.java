@@ -3,9 +3,8 @@ package behaviours;
 import entities.Moveable;
 
 /**
- * Deos nothing.
- * @author philipp
- *
+ * Does nothing. Only to use for HasMind-Objects if the owner does not need a
+ * mind, Mindless-Class should be initialized.
  */
 public class NoAction extends Behave{
 

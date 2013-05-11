@@ -5,10 +5,8 @@ import entities.*;
 import graphics.GS;
 
 /**
- * Attempts to fly the owner into the player upon reaching the specified range
- * and thereby killing him.
- * @author philipp
- *
+ * Attempts to fly the owner towards the player upon reaching the specified
+ * distance and thereby killing him.
  */
 public class Suicidal extends Behave {
 	private boolean once = false;

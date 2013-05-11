@@ -21,7 +21,7 @@ public class Spawner implements Observer{
 	protected DeltaUpdater deltaUpdater;
 	
 	/**
-	 * Parses the Json-File corresponding to the given level, and registers the
+	 * Parses the Json-File corresponding to the given levelname, and registers the
 	 * object at the deltaUpdater to receive updates.
 	 */
 	public Spawner(String LevelName, DeltaUpdater deltaUpdater){

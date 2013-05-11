@@ -72,7 +72,7 @@ public class MenuController extends Entity{
 	}
 
 	/**
-	 * Modified update to include Input and Cursormovement.
+	 * Receives new delta-values, checks Keyboard-inputs and renders the Cursor.
 	 * */
 	public void update(double delta) {
 		super.update(delta);
@@ -81,7 +81,7 @@ public class MenuController extends Entity{
 	}
 	
 	/**
-	 * Position and actions of the cursor
+	 * Position and actions of the cursor.
 	 * */
 	protected void renderCursor(){
 		if(mainscreen){
@@ -159,7 +159,7 @@ public class MenuController extends Entity{
 	}
 	
 	/**
-	 * Actions happening when Keys are pressed
+	 * Actions happening when Keys are pressed.
 	 * */
 	protected void checkInput(){
 		while (Keyboard.next()) {
@@ -255,7 +255,7 @@ public class MenuController extends Entity{
 	}
 	
 	/**
-	 * Method to read the Json file.
+	 * Method to read the JSON-file.
 	 * */
 	private void readJson(){
 		try {

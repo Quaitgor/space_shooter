@@ -7,9 +7,6 @@ import java.lang.reflect.InvocationTargetException;
 public class EnemyFactory{
 	/**
 	 * Creates an object from a given string and places it in the right position.
-	 * @param EnemyName
-	 * @param posX
-	 * @param posY
 	 */
 	public static void create(String EnemyName, double posX, double posY){
 		try {

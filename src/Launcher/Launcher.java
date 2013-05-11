@@ -2,8 +2,8 @@ package Launcher;
 import graphics.*;
 
 /**
- * This class is the start of the game, the String in GS defines the level
- * where the game will start.
+ * Starts the game. The String passed to GS specifies the level which will be 
+ * initialized first.
  */
 public class Launcher {
 	public static void main(String[] args) {

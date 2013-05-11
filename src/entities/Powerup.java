@@ -5,8 +5,7 @@ import graphics.LayerData2;
 
 
 /**
- * Powerup is used as a superclass of every powerup-class
- * 
+ * An item that changes the players weapon on pickup.
  * */
 public class Powerup extends Mindless {
 	
@@ -47,8 +46,7 @@ public class Powerup extends Mindless {
 		addToCollision();
 	}
 	/**
-	 * This is called when suitable target has a collision with this object.
-	 * Extended in the classes extending this class.
+	 * Is called when suitable target has a collision with the powerup.
 	 * */
 	public void pickedUp(Moveable target){
 		posX = -1000;

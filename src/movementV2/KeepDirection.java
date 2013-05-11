@@ -3,7 +3,7 @@ package movementV2;
 import entities.Entity;
 
 /**
- * This movement moves an object to the set location and keeps it moving
+ * moves an Moveable to the specified position and keeps it moving.
  */
 public class KeepDirection extends Move{
 	
@@ -14,14 +14,14 @@ public class KeepDirection extends Move{
 	}
 	
 	/**
-	 * This method makes nessesary recalulation before moving anything.
+	 * does necessary calculations before moving anything.
 	 * Not needed in this movement.
 	 * */
 	protected void calculateMove(){
 	}
 	
 	/**
-	 * This method sends the final movement command
+	 * sends the final movement command
 	 * */
 	protected void makeMove(){
 		owner.posX -= nposX;

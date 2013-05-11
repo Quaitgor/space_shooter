@@ -8,8 +8,8 @@ import java.util.Vector;
 import movementV2.Move;
 
 /**
- * Moveable is a non-static Entity which through the Strategy Pattern is able
- * to be moved across the screen in different and changeable patterns. 
+ * Moveable is a non-static Entity which is able to move across the screen in 
+ * different and changeable patterns. 
  * */
 public abstract class Moveable extends Entity {
 	public boolean dontPixelCheck = false;
@@ -41,7 +41,7 @@ public abstract class Moveable extends Entity {
 	
 	/**
 	 * Adds the Object to the Vectors for friendlys or enemys
-	 * depending on the friendly-boolean
+	 * depending on the friendly-boolean.
 	 * */
 	public void addToCollision(){
 		Vector<Moveable> target = null;
@@ -72,7 +72,7 @@ public abstract class Moveable extends Entity {
 	}
 	
 	/**
-	 * Checks health of the object and calls its death when health < 0.
+	 * Checks health of the Moveable and calls death() when health is below 0.
 	 */
 	protected void checkHP(){
 		if(health <= 0){
@@ -82,8 +82,7 @@ public abstract class Moveable extends Entity {
 	}
 	
 	/**
-	 * Unsubscribes the Moveable and detonates it visually. Overwritten
-	 * by objects to create other death-effects
+	 * Unsubscribes the Moveable and detonates it visually.
 	 */
 	protected void death(){
 		unsubscribe();
@@ -91,7 +90,7 @@ public abstract class Moveable extends Entity {
 	}
 	
 	/**
-	 * Removes the object from the observer and the game
+	 * Removes the object from the DeltaUpdater and the game.
 	 * */
 	protected void unsubscribe(){
 		super.unsubscribe();

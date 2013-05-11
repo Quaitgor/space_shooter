@@ -16,8 +16,8 @@ public abstract class Offensive extends Moveable{
 		hitbox = new Rectangle();
 	}
 	/**
-	 * Update is extended to include sending the Delta to the weapon
-	 * and update the hitbox of the object.
+	 * Receives new delta-value and sends it to the weapon
+	 * and updates the hitbox of the Offensive.
 	 * @see Moveable.update(double);
 	 */
 	public void update(double delta){
@@ -27,7 +27,7 @@ public abstract class Offensive extends Moveable{
         
 	}
 	/**
-	 * Updates the Hitboxes, to move them wit the object itself
+	 * Updates the Hitboxes, to move them with the Offensive.
 	 * */
 	protected void updateHitbox(){
 		hitbox.x = (int)(posX)+ hitboxOffset[0];
@@ -53,7 +53,7 @@ public abstract class Offensive extends Moveable{
 	}
 	
 	/**
-	 * With this a new weapon can be switched
+	 * Replaces the current weapon with the new one.
 	 * */
 	public void changeWeapon(Weapon newWeapon, boolean friendlyToPlayer){
 		this.weapon = newWeapon;

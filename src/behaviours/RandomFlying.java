@@ -8,16 +8,14 @@ import graphics.GS;
 
 /**
  * Regularely changes the owners movement-pattern towards a randomly determined
- * direction and fires after reaching the specified distance to the player.
- * @author philipp
- *
+ * direction and fires towards the player after reaching the specified distance.
  */
 public class RandomFlying extends Behave {
 	private double rx, ry, oldrx, oldry;
 	private Random rnd;
 	double spriteX, spriteY;
 	
-	public RandomFlying(Moveable getOwner, double staytime) {
+	public RandomFlying(Moveable getOwner) {
 		super(getOwner);
 		rnd = new Random();
 		spriteX = owner.mainTexture.spriteDisplayX/2;

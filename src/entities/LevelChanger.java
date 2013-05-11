@@ -1,8 +1,7 @@
 package entities;
 
 /**
- * A special object that can be generated with the factory.
- * It changes the level when created.
+ * Used in level.json-files to initiate the next Level.
  * */
 import factory.Spawner;
 import graphics.GS;

@@ -20,8 +20,9 @@ import entities.*;
 import factory.*;
 
 /**
- * GS is the Graphics-Synchronizer, GS controls the speed of the game, and keeps every element in sync
- * GS creates the Display and sets basic options for the Graphics and its resolution and speed
+ * GS is the Graphics-Synchronizer, GS controls the speed of the game, and keeps
+ * every element in sync. GS creates the Display and sets basic options for the 
+ * Graphics and its resolution and speed.
  * */
 public class GS {	
     public static boolean isRunning = true;
@@ -47,9 +48,9 @@ public class GS {
 		start();
 	}
 	/**
-	 * creates the display with the set options and keeps it open until a close is requested,
-	 * every Frame the Loop inside the method updates the deltaUpdater Observer,
-	 * which in turn updates every graphical element with the Observer Pattern
+	 * Creates the display keeps it open until a close is requested, every frame
+	 * the loop inside the method updates the deltaUpdater Observer, which in
+	 * turn updates every graphical element.
 	 * */
 	public void start() {
 		deltaUpdater = new DeltaUpdater();
@@ -75,7 +76,7 @@ public class GS {
     }
 	
 	/**
-	 * Starts the menu and its controller
+	 * Starts the menu and its controller.
 	 * */
 	protected static void initGame(){
 		new Moon(300, 400);
@@ -89,7 +90,7 @@ public class GS {
 	}
 	
 	/**
-	 * Method that resets the game after the timer hits 0
+	 * resets the game after the timer hits 0.
 	 * */
 	public static void checkReset(){
 		if(resetActive){
@@ -109,7 +110,7 @@ public class GS {
 	}
 	
 	/**
-	 * Resets the Game after i time (ms);
+	 * Resets the Game after specified time in milliseconds.
 	 * */
 	public static void resetGame(int i){
 		resetTimer = i;
@@ -117,7 +118,7 @@ public class GS {
 	}
 	
 	/**
-	 * creates the levelgenerator and starts the game itself
+	 * creates the levelgenerator and starts the game.
 	 * */
 	public static void startGame(){
 		System.out.println("Starting");
@@ -127,9 +128,9 @@ public class GS {
 	}
 	
 	/**
-	 * checks if any object is making contact with another object
-	 * objects are either friendly (player-side) or enemys, 
-	 * only friendly vs enemy is checked for collisions.
+	 * checks if any Moveable is colliding another Moveable
+	 * Moveables are either part of the friendly- (player-side) or enemys-Vector 
+	 * and only friendly vs. enemy is checked for collisions.
 	 * */
 	protected void checkCollision(){
 		for (Moveable friendlys: GS.friendlys){
@@ -148,16 +149,16 @@ public class GS {
 	}
 	
 	/**
-	 * updateInfo() displays information on the gamewindow
+	 * displays information on the games window.
 	 * */
 	public void updateInfo() {
 		Display.setTitle("ObsCount: " + deltaUpdater.getObserverNumber());
 	}
 	
 	/**
-	 * render() prepares the screen for the next frame and calulates
-	 * the timedifference since the last calulation (delta) and
-	 * updates the deltaUpdater with this delta
+	 * prepares the screen for the next frame and calculates the time difference
+	 * since the last calculation,, which is called delta and sends it to the 
+	 * deltaUpdater.
 	 * */
 	private void render(){
     	GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -167,7 +168,7 @@ public class GS {
 	}
 	
 	/**
-	 * initGL() sets up GL options and prepares the screen for starting the game 
+	 * sets up GL options and prepares the screen for starting the game.
 	 * */
 	private void initGL(int width, int height){
         try {
@@ -198,7 +199,7 @@ public class GS {
 	}
 	
 	/**
-	 * getDelta() calulates the time since last calulation (delta) and returns it
+	 * Calculates the time since last calculation called delta and returns it.
 	 * */
     private static double getDelta() {
         long currentTime = getTime();
@@ -209,7 +210,7 @@ public class GS {
     }
     
     /**
-     * getTime() grabs the system Time and returns it
+     * grabs the system time and returns it.
      * */
     private static long getTime() {
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
