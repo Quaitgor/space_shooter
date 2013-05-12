@@ -57,7 +57,6 @@ public class Boss extends HasMind {
 				double ry = r.nextInt(64);
 				double rxp = -1 + 2*r.nextInt(2);
 				double ryp = -1 + 2*r.nextInt(2);
-				System.out.println(rx +" / "+ry +" / "+rxp +" / "+ryp);
 				new ExplodeVar(posX+(rxp*rx), posY+(ryp*ry), deathSprite);
 				deathTimer = 0;
 				deathExplosions--;

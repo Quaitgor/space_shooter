@@ -38,7 +38,6 @@ public class Chargelvl3Projectile extends Offensive {
     	animationTest[1][3] = 0;
     	animationTest[2][3] = 3;
     	mainTexture.animationList.add(animationTest);
-    	System.out.println(delta);
 		addNewLayer(mainTexture);
 		addToCollision();
 	}

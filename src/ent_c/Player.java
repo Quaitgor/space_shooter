@@ -128,7 +128,6 @@ public class Player extends Offensive {
 				double ry = r.nextInt(32);
 				double rxp = -1 + 2*r.nextInt(2);
 				double ryp = -1 + 2*r.nextInt(2);
-				System.out.println(rx +" / "+ry +" / "+rxp +" / "+ryp);
 				new ExplodeVar(posX+(rxp*rx), posY+(ryp*ry), deathSprite);
 				deathTimer = 0;
 				deathExplosions--;
@@ -172,7 +171,6 @@ public class Player extends Offensive {
 		projectileFire.color[3]= 1.0f;
 		if(projectileFire.texturepath != texturepath){
 			projectileFire.changeTexture(texturepath);
-			System.out.println("texchange");
 		}
 		projectileFire.currentAnimation = aniNumber;
 		projectileFire.deactivateAfter = true;

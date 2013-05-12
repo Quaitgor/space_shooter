@@ -26,9 +26,6 @@ public class RandomFlying extends Behave {
 	}
 
 	protected void checkMind() {
-		
-		System.out.println(owner.posX - rx);
-		
 		if(Math.abs(owner.posX - rx) <= 50 || Math.abs(owner.posY - ry) <= 50){
 			oldrx = rx;
 			oldry = ry;
@@ -41,7 +38,6 @@ public class RandomFlying extends Behave {
 			}
 			
 		}
-		System.out.println(rx);
 		((TargetPosition)owner.movement).changeTarget(rx,  ry);
 	}
 }

@@ -13,7 +13,6 @@ public class InfernoPower extends Powerup{
 	
 	public InfernoPower(double posX, double posY) {
 		super(posX, posY);
-		System.out.println("created inf "+posX+" / "+posY);
 	}
 
 
