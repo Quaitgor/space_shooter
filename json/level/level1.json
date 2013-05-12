@@ -67,7 +67,7 @@
 	{"Moveable":"ent_c.Enemy3","x":1600.0,"y":384.0}	],
 	
 	
-	115.0:[
+	62.0:[
 	{"Moveable":"entities.LevelChanger","x":1400.0,"y":384.0}
 	]
 }

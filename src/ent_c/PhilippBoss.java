@@ -5,7 +5,6 @@ import java.util.Random;
 import behaviours.Behave;
 import behaviours.FireWhenRange;
 import behaviours.NoAction;
-import behaviours.RandomFlying;
 import entities.HasMind;
 import entities.Offensive;
 import entities_decor.ExplodeVar;
@@ -24,18 +23,15 @@ public class PhilippBoss extends HasMind {
 		super(posX, posY);
 		r = new Random();
 		setDmg(200);
-		health = 8000;
+		health = 4000;
 		weapon = new BossWeapon(this, true);
 		weapon.weaponOffset = new double[]{-100, -35};
-		//mind = new RandomFlying(this, 2000, 1200, 740, 740, 0, 0, 8);
 		mind = new behaviours.Random6PositionBoss(this,true);
-		//movement = new Nothing(this);
 		mainTexture= new LayerData2(this, "boss1", 1, 1);
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-172, -76, 172, 76};
 		addNewLayer(mainTexture);
-		//mind = new RandomFlying(this, 1);
-		movement = new TargetPosition(this, 8, 800, 400, false);
+		movement = new TargetPosition(this, 5, 800, 400, false);
 		addToCollision();
 	}
 

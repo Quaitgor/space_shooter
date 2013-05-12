@@ -13,7 +13,7 @@ public class Mine extends HasMind {
 	public Mine(double posX, double posY) {
 		super(posX, posY);
 		setDmg(1);
-		weapon = new DefaultWeapon(this,false);
+		weapon = null;
 		mind = new Suicidal(this, 400, 200, false);
 		movement = new KeepDirection(this, 5, 0);
 		mainTexture= new LayerData2(this, "mines", 1, 4);

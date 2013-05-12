@@ -12,7 +12,7 @@ public class EnemyDefaultWeapon extends Weapon {
 	
 	public EnemyDefaultWeapon(Entity owner, boolean targetPlayer, int level) {
 		super(owner, targetPlayer);
-		weaponDelay = 500;
+		weaponDelay = 800;
 		weaponlevel = level;
 	}
 	

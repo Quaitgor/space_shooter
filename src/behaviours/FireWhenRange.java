@@ -4,7 +4,9 @@ import entities.*;
 import graphics.GS;
 
 /**
- * Fires as soon as the owner has reached the specified distance to the player.
+ * Fires when the owner has reached the specified distance to the player.
+ * @author philipp
+ *
  */
 public class FireWhenRange extends Behave {
 	private boolean once = false;

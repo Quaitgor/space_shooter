@@ -8,6 +8,8 @@ import entities.Offensive;
 
 /**
  * Makes the owner move on an E-shaped path and shoot rockets.
+ * @author philipp
+ *
  */
 public class Boss extends Behave{
 	private double timeTillNextAction = 1500;
@@ -37,6 +39,7 @@ public class Boss extends Behave{
 	};
 	public Boss(Moveable getOwner) {
 		super(getOwner);
+//		owner.movement = new StraightTrigonometry(owner, 5, 180);
 	}
 
 	public void checkMind() {
