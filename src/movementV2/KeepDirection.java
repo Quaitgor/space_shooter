@@ -14,14 +14,13 @@ public class KeepDirection extends Move{
 	}
 	
 	/**
-	 * does necessary calculations before moving anything.
 	 * Not needed in this movement.
 	 * */
 	protected void calculateMove(){
 	}
 	
 	/**
-	 * sends the final movement command
+	 * @see Move.makeMove()
 	 * */
 	protected void makeMove(){
 		owner.posX -= nposX;

@@ -10,7 +10,7 @@ public class Chargelvl3Projectile extends Offensive {
 /**
  * This is a Projectile with a set graphical design, movement and damage,
  * depending on the boolean value in the constructor its either friendly or 
- * enemy
+ * enemy.
  * */
 	public Chargelvl3Projectile(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
 		super(posX, posY);

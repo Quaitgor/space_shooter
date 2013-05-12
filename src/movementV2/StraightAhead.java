@@ -3,7 +3,7 @@ package movementV2;
 import entities.Entity;
 
 /**
- * This movement moves the object on the X axis on a set speed.
+ * moves the object on the X axis whith the specified speed.
  */
 public class StraightAhead extends Move{
 	
@@ -14,14 +14,13 @@ public class StraightAhead extends Move{
 	}
 	
 	/**
-	 * This method makes nessesary recalulation before moving anything.
 	 * Not needed in this movement.
 	 * */
 	protected void calculateMove(){
 	}
 	
 	/**
-	 * This method sends the final movement command
+	 * @see Move.makeMove()
 	 * */
 	protected void makeMove(){
 		owner.posX -= nposX;

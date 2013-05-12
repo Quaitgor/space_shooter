@@ -22,7 +22,7 @@ public class StraightTrigonometry extends Move{
 	}
 	
 	/**
-	 * This method sends the final movement command
+	 * @see Move.makeMove()
 	 * */
 	protected void makeMove(){
 		owner.posX += nposX;

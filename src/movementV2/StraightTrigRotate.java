@@ -22,14 +22,13 @@ public class StraightTrigRotate extends Move{
 
 	
 	/**
-	 * This method makes nessesary recalulation before moving anything.
 	 * Not needed in this Movement
 	 * */
 	protected void calculateMove(){
 	}
 
 	/**
-	 * This method sends the final movement command
+	 * @see Move.makeMove()
 	 * */
 	protected void makeMove(){
     	((Offensive)owner).mainTexture.rotation += rotation;

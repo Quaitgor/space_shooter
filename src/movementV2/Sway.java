@@ -3,7 +3,7 @@ package movementV2;
 import entities.Entity;
 
 /**
- * This Movementpattern has a swaying motion included to the movement speed.
+ * has a swaying motion.
  * The swaying can changed horizontal or vertical with the axis-boolean.
  * */
 public class Sway extends Move{
@@ -24,7 +24,6 @@ public class Sway extends Move{
 	}
 	
 	/**
-	 * This method makes nessesary recalulation before moving anything.
 	 * Not needed in this Movement
 	 * */
 	protected void calculateMove(){
@@ -37,7 +36,8 @@ public class Sway extends Move{
 	}
 	
 	/**
-	 * This method sends the final movement command and checks the swaymotions direction
+	 * @see Move.makeMove()
+	 * and checks the swaymotions direction
 	 * */
 	protected void makeMove(){
 		if(axis){

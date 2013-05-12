@@ -1,9 +1,7 @@
 package observer;
 
 /**
- * Subject is interface for an Observer-Object.
- * New Observers (like DeltaUpdater class) can be built when other
- * Objects implement this interface.
+ * central interface of the Observer-Pattern. Also called Observable.
  * */
 public interface Subject {
 

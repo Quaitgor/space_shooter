@@ -10,9 +10,7 @@ import entities.*;
 import graphics.GS;
 
 /**
- * PlayerMove is the movement Strategy Pattern the Player uses.
- * This movement does not only control movement of the player,
- * it is used to control the weapon and general input to the player object.
+ * used to control the weapon and general input to the player object.
  * */
 public class PlayerMove extends Move{
 	public Entity owner;
@@ -54,8 +52,8 @@ public class PlayerMove extends Move{
 	}
 	
 	/**
-	 * This method grabs all relevant Input of the user and calulates movement
-	 * and weaponcontrol for the Player.
+	 * grabs all relevant input of the user and calculates movement
+	 * and weapon control for the player.
 	 * */
 	protected void calculateMove(){
 		// Movement Controls
@@ -122,7 +120,7 @@ public class PlayerMove extends Move{
 			if(chargedelta > chargeTime)chargedelta = chargeTime;
     	}
     	
-    	/**
+    	/*
     	 * The Events inside while(Keyboard.next()) fire once when key pressed/released.
     	 *  - Keyboard.getEventKeyState() == true  => when Key Pressed.
     	 *  - Keyboard.getEventKeyState() == false => when Key Released.
@@ -193,7 +191,8 @@ public class PlayerMove extends Move{
 	}
 	
 	/**
-	 * this method executes the calulated movements & prevents the player from leaving the window
+	 * ralizes the calculated movements & prevents the player from 
+	 * leaving the window
 	 * */
 	protected void makeMove(){
 

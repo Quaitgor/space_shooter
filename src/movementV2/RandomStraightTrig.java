@@ -5,7 +5,7 @@ import java.util.Random;
 import entities.Entity;
 
 /**
- * Moves towards a randomly determined direction not exceeding a certain angle.
+ * Moves towards a randomly determined direction not exceeding the specified angle.
  */
 public class RandomStraightTrig extends Move{
 
@@ -24,14 +24,13 @@ public class RandomStraightTrig extends Move{
 	}
 	
 	/**
-	 * This method makes nessesary recalulation before moving anything.
 	 * Not needed in this movement.
 	 * */
 	protected void calculateMove(){
 	}
 	
 	/**
-	 * This method sends the final movement command
+	 * @see Move.makeMove()
 	 * */
 	protected void makeMove(){
 		owner.posX += nposX;
