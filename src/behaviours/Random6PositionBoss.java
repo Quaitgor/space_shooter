@@ -2,7 +2,7 @@ package behaviours;
 
 import java.util.Random;
 
-import movementV2.TargetPosition;
+import movement.TargetPosition;
 import ent_c.Mine;
 import entities.Moveable;
 import entities.Offensive;

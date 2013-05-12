@@ -1,6 +1,6 @@
 package projectiles;
 
-import movementV2.TargetPosition;
+import movement.TargetPosition;
 import entities.*;
 import entities_decor.ExplodeVar;
 import graphics.LayerData2;

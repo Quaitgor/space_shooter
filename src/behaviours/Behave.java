@@ -1,6 +1,6 @@
 package behaviours;
 
-import movementV2.Move;
+import movement.Move;
 import entities.Moveable;
 
 /**

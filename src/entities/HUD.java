@@ -1,8 +1,8 @@
 package entities;
 
 import ent_c.Player;
-import movementV2.Move;
-import movementV2.PlayerMove;
+import movement.Move;
+import movement.PlayerMove;
 import graphics.LayerData2;
 
 /**

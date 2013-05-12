@@ -3,7 +3,7 @@ package ent_c;
 import behaviours.*;
 import entities.HasMind;
 import graphics.LayerData2;
-import movementV2.*;
+import movement.*;
 
 
 /**

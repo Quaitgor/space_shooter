@@ -5,7 +5,8 @@ import graphics.GS;
 import graphics.LayerData2;
 import java.awt.Rectangle;
 import java.util.Vector;
-import movementV2.Move;
+
+import movement.Move;
 
 /**
  * Moveable is a non-static Entity which through the Strategy Pattern is able

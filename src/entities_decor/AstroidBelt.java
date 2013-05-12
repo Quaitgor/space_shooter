@@ -2,7 +2,7 @@ package entities_decor;
 
 import entities.*;
 import graphics.LayerData2;
-import movementV2.*;
+import movement.*;
 
 /**
  * An asteroid belt appearing as a visual background which does not interact with

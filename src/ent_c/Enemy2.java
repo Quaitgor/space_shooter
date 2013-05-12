@@ -1,6 +1,6 @@
 package ent_c;
 
-import movementV2.Sway;
+import movement.Sway;
 import behaviours.*;
 import entities.HasMind;
 import graphics.LayerData2;

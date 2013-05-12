@@ -9,7 +9,7 @@ import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
 import weapons.*;
-import movementV2.*;
+import movement.*;
 
 /**
  * Player extens Offensive, together with the movement Strategy Pattern the User can control this Object.

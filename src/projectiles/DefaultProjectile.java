@@ -1,6 +1,6 @@
 package projectiles;
 
-import movementV2.TargetPosition;
+import movement.TargetPosition;
 import entities.*;
 import graphics.LayerData2;
 

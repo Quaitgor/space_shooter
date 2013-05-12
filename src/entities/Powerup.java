@@ -1,6 +1,6 @@
 package entities;
 
-import movementV2.KeepDirection;
+import movement.KeepDirection;
 import graphics.LayerData2;
 
 

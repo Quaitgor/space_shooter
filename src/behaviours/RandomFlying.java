@@ -2,7 +2,7 @@ package behaviours;
 
 import java.util.Random;
 
-import movementV2.*;
+import movement.*;
 import entities.*;
 import graphics.GS;
 

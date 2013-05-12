@@ -40,8 +40,8 @@ public class MenuController extends Entity{
 			"AutoFire",
 			"Up",
 			"Down",
-			"Right",
-			"Left"
+			"Left",
+			"Right"
 	};
 	private static HashMap<String, Integer> KeyMap;
 	private Gson GsonParser = new Gson();

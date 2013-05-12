@@ -7,7 +7,7 @@ import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
 import weapons.*;
-import movementV2.*;
+import movement.*;
 
 
 /**

@@ -3,8 +3,8 @@ package projectiles;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import movementV2.Move;
-import movementV2.TargetPosition;
+import movement.Move;
+import movement.TargetPosition;
 import entities.*;
 import graphics.GS;
 import graphics.LayerData2;

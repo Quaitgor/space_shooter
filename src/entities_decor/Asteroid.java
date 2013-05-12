@@ -4,7 +4,7 @@ import java.util.Random;
 
 import entities.*;
 import graphics.LayerData2;
-import movementV2.*;
+import movement.*;
 
 /**
  * An asteroid flying randomly in random speed and rotation.

@@ -1,6 +1,6 @@
 package behaviours;
 
-import movementV2.TargetPosition;
+import movement.TargetPosition;
 import entities.*;
 import graphics.GS;
 

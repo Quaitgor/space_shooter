@@ -3,9 +3,9 @@ package weapons;
 import java.lang.reflect.Constructor;
 
 import projectiles.FireProjectile;
-import movementV2.Move;
-import movementV2.SinusWave;
-import movementV2.StraightAhead;
+import movement.Move;
+import movement.SinusWave;
+import movement.StraightAhead;
 import ent_c.Player;
 import entities.Entity;
 import graphics.GS;
