@@ -33,7 +33,6 @@ public class Asteroid extends MoveableDecor {
 		texture1.layer = defaultLayer-1;
 		addNewLayer(texture1);
 
-		double randomValue = 2 + ( 6 - 2) * r.nextDouble();
 		movement = new RandomStraightTrig(this, 5);
 	}
 }

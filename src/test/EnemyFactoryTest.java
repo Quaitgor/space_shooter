@@ -6,7 +6,6 @@ import static org.lwjgl.opengl.GL11.glCullFace;
 import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import observer.DeltaUpdater;
@@ -17,9 +16,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-import ent_c.Enemy1;
-import ent_c.Player;
-import entities.Collision;
 import entities.Entity;
 import entities.Moveable;
 import factory.EnemyFactory;
@@ -27,7 +23,6 @@ import factory.Spawn;
 import graphics.GS;
 import junit.framework.TestCase;
 
-import java.util.Vector;
 
 public class EnemyFactoryTest extends TestCase{
 	private void initGL(){

@@ -9,7 +9,8 @@ import observer.*;
 
 /**
  * Entitiy is the superclass of every class which produces some visual effect.
- * Every subclass will have the ability to render and display itself.
+ * Every subclass extending this class will have the ability to render and
+ * display itself.
  */
 public abstract class Entity implements Observer {
 	public double delta;
@@ -28,7 +29,8 @@ public abstract class Entity implements Observer {
 	public boolean isAlive = true;
 
 	/**
-	 * Initializes and registers itself at the observer.
+	 * With the creation of an entity the object registers itself with the 
+	 * observer
 	 * */
 	public Entity(double newPosX, double newPosY){
 		this.deltaUpdater = GS.deltaUpdater;
@@ -64,7 +66,6 @@ public abstract class Entity implements Observer {
 	 * Commands every graphical Layer to draw itself according to its setup.
 	 * */
 	public void draw(){
-		//draw all texturelayers
 		for(int i=0;i<LayerDatas.size();i++){
 			LayerData2 o = LayerDatas.get(i);
 			o.drawLayer();

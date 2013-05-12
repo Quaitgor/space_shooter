@@ -2,7 +2,6 @@ package entities_decor;
 
 import entities.*;
 import graphics.LayerData2;
-import observer.Subject;
 
 /**
  * A small explosion, used for the small ice projectile, it removes 

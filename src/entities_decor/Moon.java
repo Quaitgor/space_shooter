@@ -2,7 +2,6 @@ package entities_decor;
 
 import entities.StaticDecor;
 import graphics.LayerData2;
-import observer.Subject;
 
 /**
  * A Moon appearing as a visual background which does not interact with

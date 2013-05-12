@@ -3,11 +3,10 @@ package observer;
 import java.util.Vector;
 
 /**
- * the observable encapsulating the delta value. It is the central class of the
- * Observer-Pattern and therefore Observer objects can register themselves at
- * DeltaUpdater and will receive the updated delta value during every loop cycle
- * to keep the game synchronized.
-*/
+ * DeltaUpdater is the Observer for the delta, objects registering with this object get updated delta values,
+ * needed to keep this game in sync. The observer pattern allows easy access to get the delta and send it out to all
+ * objects that need it, and at the same time allows each object registered to the observer to unregister itself, removing
+ * */
 public class DeltaUpdater implements Subject{
 	
 	private static Vector<Observer> observers;
@@ -18,14 +17,14 @@ public class DeltaUpdater implements Subject{
 	}
 
 	/**
-	 * adds the Observer to the observers-vector, which means it is registered.
+	 * register() adds the object to the vector and the objects will get updated delta values
 	 * */
 	public void register(Observer newObserver) {
 		observers.add(newObserver);
 	}
 
 	/**
-	 * removes the Observer from the observers-vector and thereby unregisters it.
+	 * unregister() removes the object from the list and stopping the delta update for that object
 	 * */
 	public void unregister(Observer deleteObserver) {
 		int observerIndex = observers.indexOf(deleteObserver);
@@ -33,7 +32,7 @@ public class DeltaUpdater implements Subject{
 	}
 
 	/**
-	 * sends updated delta values to each registered observer in the observers-vector.
+	 * notifyObserver() sends updated delta values to each registered observer in the vector
 	 * */
 	public void notifyObserver() {
 		for(int i=0;i<observers.size();i++){
@@ -42,21 +41,22 @@ public class DeltaUpdater implements Subject{
 	}
 
 	/**
-	 * updates the delta and sends the new value to each Observer.
+	 * setDelta updates the delta and sends the new value to each observer with the notifyObserver() method
 	 * */
 	public void setDelta(double delta){
 		this.delta = delta;
 		notifyObserver();
 	}
 	/**
-	 * returns the number of registered Observers.
+	 * getObserverNumber returns the number of observers that are registered to the DeltaUpdater,
+	 * used for statistics only
 	 * */
 	public int getObserverNumber(){
 		return observers.size();
 	}
 	
 	/**
-	 * resets the observers-vector.
+	 * this Method clears the Observers Vector, used as a reset-method
 	 * */
 	public void clearObserver(){
 		observers.clear();

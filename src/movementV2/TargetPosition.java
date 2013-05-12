@@ -22,7 +22,8 @@ public class TargetPosition extends Move{
 	}
 	
 	/**
-	 * used to specify a new target on the screen and the speed. 
+	 * With this method a new target on the screen can be defined, the object
+	 * will move toward that object. The speed can be adjusted
 	 * */
 	public void changeTarget(double speed, double x, double y){
 		this.speed = speed;
@@ -30,7 +31,8 @@ public class TargetPosition extends Move{
 	}
 	
 	/**
-	 * used to specify a new target on the screen.
+	 * With this method a new target on the screen can be defined, the object
+	 * will move toward that object
 	 * */
 	public void changeTarget(double x, double y){
 		targetReached = false;
@@ -52,7 +54,7 @@ public class TargetPosition extends Move{
 	}
 	
 	/**
-	 * This method makes necessary recalculation before moving anything.
+	 * This method makes nessesary recalulation before moving anything.
 	 * */
 	protected void calculateMove(){
 		xdiff -= Math.abs(nposX);
@@ -63,7 +65,7 @@ public class TargetPosition extends Move{
 	}
 	
 	/**
-	 * @see Move.makeMove()
+	 * This method sends the final movement command
 	 * */
 	protected void makeMove(){
 		owner.posX -= nposX;

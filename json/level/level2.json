@@ -3,7 +3,7 @@
 	{"Moveable":"powerups.IceTransport","x":1400.0,"y":384.0}	],
 	
 	6.0:[
-	{"Moveable":"ent_c.PhilippBoss","x":1400.0,"y":200.0}],
+	{"Moveable":"ent_c.Boss","x":1400.0,"y":200.0}],
 	
 	20.0:[
 	{"Moveable":"powerups.InfernoTransport","x":1400.0,"y":384.0}	]

@@ -2,17 +2,13 @@ package behaviours;
 
 import java.util.Random;
 
-import movementV2.Move;
-import movementV2.StraightTrigonometry;
 import movementV2.TargetPosition;
 import ent_c.Mine;
 import entities.Moveable;
 import entities.Offensive;
 
 /**
- * Makes the owner move on an E-shaped path and shoot rockets.
- * @author philipp
- *
+ * Makes the owner move on an E-shaped path and spawn mines.
  */
 public class Random6PositionBoss extends Behave{
 	private Random RandomInts = new Random();

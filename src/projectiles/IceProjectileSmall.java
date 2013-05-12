@@ -14,7 +14,7 @@ public class IceProjectileSmall extends Offensive {
 	private double livetime = 500;
 	
 	/**
-	 * the small iceProjectile has a special lifetime, it destroys itself
+	 * the small iceProjectile has a special livetime, it destroys itself
 	 * after the set time.
 	 * */
 	public IceProjectileSmall(Entity owner, double posX, double posY, double moveX, double moveY, boolean friendOrFoe) {
@@ -33,7 +33,7 @@ public class IceProjectileSmall extends Offensive {
 	}
 	
 	/**
-	 * Modified update to include the lifetime
+	 * Modified update to include the livetime
 	 * */
 	public void update(double delta){
 		super.update(delta);

@@ -8,6 +8,7 @@ import graphics.LayerData2;
 /**
  * HUD means Head-up-Display, a visual element to display status information
  * about the player-controlled Ship.
+ * HUD sets up the graphical elements of the HUD.
  * */
 public class HUD extends Entity{
 	private LayerData2 int_BG;
@@ -90,7 +91,7 @@ public class HUD extends Entity{
 	}
 	
 	/**
-	 * Receives updates and calls check().
+	 * modified Update, calling check().
 	 */
 	public void update(double delta){
 		super.update(delta);
@@ -99,7 +100,7 @@ public class HUD extends Entity{
 	
 	/**
 	 * Updates the bar of the recharcheable shield
-	 * and the charging bar for the weapon.
+	 * and the chargeing bar for the weapon.
 	 */
 	protected void check(){
 		Player x = (Player) owner.owner;

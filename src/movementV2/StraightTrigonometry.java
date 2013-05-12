@@ -15,14 +15,14 @@ public class StraightTrigonometry extends Move{
 	}
 	
 	/**
-	 * This method makes nessesary recalulation before moving anything.
+	 * This method makes necessary recalulation before moving anything.
 	 * Not needed in this Movement
 	 * */
 	protected void calculateMove(){
 	}
 	
 	/**
-	 * @see Move.makeMove()
+	 * This method sends the final movement command
 	 * */
 	protected void makeMove(){
 		owner.posX += nposX;

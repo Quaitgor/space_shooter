@@ -14,7 +14,6 @@ import org.lwjgl.opengl.GL11;
 
 import observer.DeltaUpdater;
 import ent_c.Enemy1;
-import ent_c.Enemy2;
 import ent_c.Player;
 import entities.Collision;
 import entities.Moveable;

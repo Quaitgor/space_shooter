@@ -5,6 +5,9 @@ import entities.HasMind;
 import graphics.LayerData2;
 import weapons.*;
 
+/**
+ * An Enemy that uses Random Positioning to annoy the player.
+ * */
 public class Enemy3 extends HasMind {
 	int defaultLayer = 40;
 	
@@ -13,8 +16,6 @@ public class Enemy3 extends HasMind {
 		setDmg(1);
 		health = 150;
 		weapon = new EnemyDefaultWeapon(this, true, 2);
-		//mind = new FireWhenRange(this, 400);
-		//movement = new Sway(this, 100, 4, 5.0);
 		double[][] pos =  new double[][]{
 				{1200.0, 162.0},
 				{1200.0, 384.0},

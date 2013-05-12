@@ -3,12 +3,13 @@ package observer;
 /**
  * Implementing classes receive updates on the delta value.
  * 
- * Required to fulfill the Observer-pattern
+ * required to fulfill the Observer-pattern
  * */
 public interface Observer {
 
 	/**
-	 * Used by DeltaUpdater to send each registered object the new delta-value.
+	 * update() is the method that every registered Object needs to recieve the updated delta.
+	 * With this method the DeltaUpdater can send to each object the new value of delta
 	 * */
 	public void update(double delta);
 }

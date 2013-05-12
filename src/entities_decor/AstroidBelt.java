@@ -2,7 +2,6 @@ package entities_decor;
 
 import entities.*;
 import graphics.LayerData2;
-import observer.Subject;
 import movementV2.*;
 
 /**

@@ -3,8 +3,7 @@ package powerups;
 import ent_c.Transporter;
 
 /**
- * This is a WeaponUpgrade that changes the Weapon of the object picking it up
- * to a set weapon. It extends the Powerup class.
+ * This extends the Transporter Class to include a defined Upgrade and drop it on death.
  * */
 public class PlasmaTransport extends Transporter{
 	

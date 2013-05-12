@@ -6,7 +6,7 @@ import graphics.LayerData2;
 
 
 /**
- * clones the main texture of its owner and moves both textures.
+ * this Movement clones the Maintexture of its owner and moves both textures.
  * when a Texture completely leaves the screen it resets.
  * Used with the asteroid belts.
  * Condition for the texture:
@@ -30,13 +30,14 @@ public class InfiniteScroll extends Move{
 	}
 	
 	/**
+	 * This method makes necessary recalulation before moving anything.
 	 * Not needed in this movement.
 	 * */
 	protected void calculateMove(){
 	}
 
 	/**
-	 * @see Move.makeMove()
+	 * This method sends the final movement command
 	 * */
 	protected void makeMove(){
 

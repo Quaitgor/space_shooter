@@ -5,8 +5,6 @@ import graphics.GS;
 
 /**
  * Fires when the owner has reached the specified distance to the player.
- * @author philipp
- *
  */
 public class FireWhenRange extends Behave {
 	private boolean once = false;

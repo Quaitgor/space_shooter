@@ -5,7 +5,7 @@ import java.util.Random;
 import entities.*;
 
 /**
- * Moves towards a randomly determined direction not exceeding the specified angle
+ * Moves towards a randomly determined direction not exceeding a certain angle
  * and rotates with a random speed.
  */
 public class RandomStraightTrigRotate extends Move{
@@ -26,13 +26,14 @@ public class RandomStraightTrigRotate extends Move{
 	}
 	
 	/**
+	 * This method makes necessary recalulation before moving anything.
 	 * Not needed in this movement.
 	 * */
 	protected void calculateMove(){
 	}
 	
 	/**
-	 * @see Move.makeMove()
+	 * This method sends the final movement command
 	 * */
 	protected void makeMove(){
 		owner.LayerDatas.firstElement().rotation += rotation;

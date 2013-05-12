@@ -6,7 +6,8 @@ import entities.Moveable;
 /**
  * Defines the Behaviour of its owner.
  * Usually used to regularly change the owners movement-pattern and delaying the 
- * frequency in which he fires his weapon.
+ * frequency with which he fires his weapon.
+ *
  */
 public abstract class Behave {
 	protected Moveable owner;

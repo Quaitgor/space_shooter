@@ -2,14 +2,12 @@ package ent_c;
 
 import java.util.Random;
 
-import entities.Entity;
 import entities.HUD;
 import entities.Moveable;
 import entities.Offensive;
 import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
-import observer.Subject;
 import weapons.*;
 import movementV2.*;
 
@@ -83,7 +81,10 @@ public class Player extends Offensive {
     	projectileFire.disableAnimation = true;
 		addNewLayer(projectileFire);
 	}
-
+	
+	/**
+	 * Custom getDamage to allow for shield damage and custom death when player is hit.
+	 * */
 	public void getDamage(int damage, Moveable enemy) {
 		if(shieldCharges > 0){
 			playerHit();
@@ -93,10 +94,16 @@ public class Player extends Offensive {
 		}
 		
 	}
+	/**
+	 * Custom checkHP for the player
+	 * */
 	protected void checkHP(){
 		if(isDying)death();
 	}
 
+	/**
+	 * Custom update to allow change of movement to PlayerMove after the initial flight inside the screen.
+	 * */
 	public void update(double delta){
 		super.update(delta);
 		secondWeapon.update(delta);
@@ -109,6 +116,9 @@ public class Player extends Offensive {
 		}
 	}
 
+	/**
+	 * Custom death animation and reset of the game on player death.
+	 * */
 	protected void death(){
 		deathTimer += delta;
 		movement = new Nothing(this);
@@ -131,20 +141,33 @@ public class Player extends Offensive {
 			GS.resetGame(4000);
 		}
 	}
+	
+	/**
+	 * Method that changes the weapon and sets it to friendly at the same time.
+	 * */
 	public void changeWeapon(Weapon newWeapon){
 		this.weapon = newWeapon;
 		weapon.friendly = true;
 	}
-	
+
+	/**
+	 * Method that changes the second weapon and sets it to friendly at the same time.
+	 * */
 	public void changeWeapon2(Weapon newWeapon){
 		this.secondWeapon = newWeapon;
 		secondWeapon.friendly = true;
 	}
-	
+
+	/**
+	 * Same as fire(), but for the second Weapon.
+	 * */
 	public void chargeFire(){
 		this.secondWeapon.fire();
 	}
 	
+	/**
+	 * special method for the player to play firing animations on the player. Only graphical.
+	 * */
 	public void playFireAnimation(String texturepath, int aniNumber){
 		projectileFire.color[3]= 1.0f;
 		if(projectileFire.texturepath != texturepath){
@@ -156,6 +179,9 @@ public class Player extends Offensive {
 		projectileFire.disableAnimation = false;
 	}
 	
+	/**
+	 * method to make a hit on the player, seperate from getDamage() for testing purposes.
+	 * */
 	public void playerHit(){
 		if (shieldCharges > 0) {
 			shieldCharges -= 1;

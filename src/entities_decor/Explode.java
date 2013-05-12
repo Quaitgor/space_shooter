@@ -2,7 +2,6 @@ package entities_decor;
 
 import entities.*;
 import graphics.LayerData2;
-import observer.Subject;
 
 /**
  * An explosion that plays once and removes itself after the animation.

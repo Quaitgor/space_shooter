@@ -61,8 +61,8 @@ public class IceProjectile extends Offensive {
 	}
 	
 	/**
-	 * The IceProjectile has a modified death, it spawns 6 small ice fragments
-	 * that have a limited lifetime, after which they destroy themselves.
+	 * The IceProjectile has a modified death, it spawns 6 small icefragments
+	 * that have a limited livetime, after which they destroy themselve.
 	 * */
 	protected void death(){
 		super.death();

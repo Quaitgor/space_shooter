@@ -3,10 +3,12 @@ package ent_c;
 import behaviours.*;
 import entities.HasMind;
 import graphics.LayerData2;
-import observer.Subject;
-import weapons.*;
 import movementV2.*;
 
+
+/**
+ * An enemy that doesnt shoot, but flys a straight line. Attempts to suicide-crash into the player when near enough.
+ * */
 public class Mine extends HasMind {
 	int defaultLayer = 40;
 	

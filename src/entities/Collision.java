@@ -11,21 +11,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Checks every frame of the game if entities are colliding and causes the
- * required effect.
+ * This Class checks every frame of the game if objects are colliding and
+ * acts depening on the objects.
  * The collision is checked in 3 steps:
- * First: it checks whether the position and size information of the entities intersect.
- * Second: it checks whether the hitboxes ( a smaller rectangle than the entities
- * texture) collide.
- * Third: it checks whether the colored pixels of the entities overlap.
+ * First: it checks if the objects themselve intersect
+ * Second: it checks if the hitboxes ( a smaller rectangle than the objects
+ * themselve) collide
+ * Third: it checks if the pixels of the objects collide
  * 
- * With the 3 step testing, the computing power intense pixel-check is delayed
- * until the entities are very close together.
+ * With the 3 step testing the computing power intense pixel check is delayed
+ * until the objects are closer together.
  * */
 public class Collision {
 	
 	/**
-	 * checks whether the position and size information of the entities intersect.
+	 * 
 	 * */
 	public void intersects(Moveable friend, Moveable enemy) {
 		double twidth = friend.mainTexture.spriteDisplayX;
@@ -62,7 +62,13 @@ public class Collision {
 				
 				if(!enemy.alreadyHit.contains(friend)){
 					if(friend.dontPixelCheck || enemy.dontPixelCheck){
-						isHit = true;
+						if(!enemy.isPowerup){
+							isHit = true;
+						}else{
+							if(!friend.isProjectile){
+								((Powerup)enemy).pickedUp(friend);
+							}
+						}
 					}
 					else if (isPixelCollide(crasher1, file1, crasher2, file2)){
 						enemy.alreadyHit.add(friend);
@@ -88,8 +94,10 @@ public class Collision {
 	}
 	
 	/**
-	 * Checks if 2 non-alpha pixels of either texture share the same
-	 * position.
+	 * Method for pixelchecking 2 graphics for collision.
+	 * using 2 retangles to reduce the nessesary computing power and 2 files
+	 * this method checks if 2 non-alpha pixels are colliding in the given
+	 * positions of the textures.
 	 * */
 	public boolean isPixelCollide(Rectangle crasher1, File file1, Rectangle crasher2, File file2) {
 		// initialization

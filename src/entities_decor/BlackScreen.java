@@ -4,8 +4,7 @@ import entities.*;
 import graphics.LayerData2;
 
 /**
- * Stars appearing as a visual background that does not interact with
- * the rest of the game.
+ * Special version of the starts that blocks every visiual. used as a fade-in effect for the game.
  */
 public class BlackScreen extends StaticDecor {
 	private double countdown = 40;

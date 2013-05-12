@@ -1,12 +1,14 @@
 package ent_c;
 
-import powerups.DefaultPower;
 import movementV2.Sway;
 import behaviours.*;
 import entities.HasMind;
 import graphics.LayerData2;
 import weapons.*;
 
+/**
+ * An flying object that transports the powerups. the subclasses of this class spawn the upgrades on death.
+ * */
 public class Transporter extends HasMind {
 	int defaultLayer = 40;
 	
@@ -24,7 +26,4 @@ public class Transporter extends HasMind {
 		addToCollision();
 	}
 	
-	/**
-	 * Spawns an upgrade on death.
-	 * */
 }

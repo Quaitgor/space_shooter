@@ -2,11 +2,10 @@ package entities_decor;
 
 import entities.*;
 import graphics.LayerData2;
-import observer.Subject;
 
 /**
  * An explosion that plays once and removes itself after the animation.
- * The explosions graphic can be defined with the constructor (for diffrent
+ * The explosions graphic can be defined with the constructor (for different
  * versions of the same explosiongraphic)
  * */
 public class ExplodeVar extends Entity {

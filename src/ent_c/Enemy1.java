@@ -6,6 +6,9 @@ import entities.HasMind;
 import graphics.LayerData2;
 import weapons.*;
 
+/**
+ * An Enemy that flys a straight line and attemps to suicide-crash into the player when near enough.
+ * */
 public class Enemy1 extends HasMind {
 	int defaultLayer = 40;
 	

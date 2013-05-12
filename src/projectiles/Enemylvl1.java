@@ -7,7 +7,7 @@ import graphics.LayerData2;
 /**
  * This is a Projectile with a set graphical design, movement and damage,
  * depending on the boolean value in the constructor its either friendly or 
- * enemy.
+ * enemy
  * */
 public class Enemylvl1 extends Offensive {
 	

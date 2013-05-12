@@ -2,24 +2,25 @@ package ent_c;
 
 import java.util.Random;
 
-import behaviours.Behave;
-import behaviours.FireWhenRange;
-import behaviours.NoAction;
 import entities.HasMind;
-import entities.Offensive;
 import entities_decor.ExplodeVar;
 import graphics.GS;
 import graphics.LayerData2;
 import weapons.*;
 import movementV2.*;
 
-public class PhilippBoss extends HasMind {
+
+/**
+ * An Enemy that has much higher health and serves as a boss.
+ * it Spawns mines and flys a Random Position pattern.
+ * */
+public class Boss extends HasMind {
 	int defaultLayer = 40;
 	protected double deathTimer;
 	protected double deathExplosions = 80;
 	protected Random r;
 	
-	public PhilippBoss(double posX, double posY) {
+	public Boss(double posX, double posY) {
 		super(posX, posY);
 		r = new Random();
 		setDmg(200);
@@ -35,12 +36,18 @@ public class PhilippBoss extends HasMind {
 		addToCollision();
 	}
 
+	/**
+	 * Custom checkHP to use the custom Death.
+	 * */
 	protected void checkHP(){
 		if(health <= 0){
 			death();
 		}
 	}
 	
+	/**
+	 * Custom Death animation.
+	 * */
 	protected void death(){
 		deathTimer += delta;
 		movement = new Nothing(this);
@@ -60,6 +67,7 @@ public class PhilippBoss extends HasMind {
 			}
 		}else{
 			unsubscribe();
+			GS.resetGame(4000);
 		}
 	}
 }

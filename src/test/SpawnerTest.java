@@ -25,9 +25,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import ent_c.Enemy1;
-import ent_c.Player;
-import entities.Collision;
 import entities.Entity;
 import entities.Moveable;
 import factory.Spawn;

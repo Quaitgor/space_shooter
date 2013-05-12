@@ -6,6 +6,9 @@ import entities.HasMind;
 import graphics.LayerData2;
 import weapons.*;
 
+/**
+ * An Enemy that has a swaying movement and more health than the default enemy.
+ * */
 public class Enemy2 extends HasMind {
 	int defaultLayer = 40;
 	
