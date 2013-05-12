@@ -4,7 +4,15 @@ import observer.DeltaUpdater;
 import observer.Observer;
 import junit.framework.TestCase;
 
+/**
+ * Tests the DeltaUpdater class.
+ */
 public class DeltaUpdaterTest extends TestCase{
+	
+	/**
+	 * Uses every ability of the DeltaUpdater and checks whether it has produced
+	 * the right effect.
+	 */
 	public void testDeltaUpdater(){
 		DeltaUpdater deltaUpdater = new DeltaUpdater();
 		class TestObserver implements Observer{

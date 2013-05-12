@@ -20,6 +20,9 @@ import entities.Moveable;
 import graphics.*;
 import junit.framework.TestCase;
 
+/**
+ * Tests the DeltaUpdater class.
+ */
 public class CollisionTest extends TestCase{
 	private void initGL(){
         try {
@@ -52,6 +55,11 @@ public class CollisionTest extends TestCase{
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
 	}
+	
+	/**
+	 * Creates two Moveables, places them in the same position and checks whether
+	 * Collision has recognized and realized the intersection.
+	 */
 	public void testIntersects(){
 
 		GS.enemys = new Vector<Moveable>();

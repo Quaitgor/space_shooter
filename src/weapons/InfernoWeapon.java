@@ -11,7 +11,7 @@ import entities.Entity;
 import graphics.GS;
 
 /**
- * InfernoWeapon is an extended Weapon built for firing a fireshot, built out of 5 projectiles, moving in a pattern
+ * Fires five FireProjectiles straight ahead.
  * */
 public class InfernoWeapon extends Weapon {
 	
@@ -21,8 +21,8 @@ public class InfernoWeapon extends Weapon {
 	}
 
 	/**
-	 * Firing 5 Fire Projectiles at once if the weapon is ready (delay),
-	 * each modified to a certain movement pattern. they fly as a bundle of projectiles.
+	 * Fires five FireProjectiles straight ahead, while the outer ones move up
+	 * and down.
 	 * With an added graphical firing-effect if the owner is the player.
 	 * */
 	public void fire() {

@@ -4,8 +4,7 @@ import ent_c.Player;
 import entities.Entity;
 
 /**
- * ChargeWeapon is an extended Weapon built for shooting variable Shots, depending on its owners chargelevel.
- * this weapon fires diffrent types of shots when the firecommand is fired.
+ * shoots variable Projectiles, depending on its owners chargelevel.
  * It is designed for the player and not for enemys.
  * */
 public class ChargeWeapon extends Weapon {
@@ -16,7 +15,7 @@ public class ChargeWeapon extends Weapon {
 	}
 
 	/**
-	 * Fires one Projectile, depending on the chargelevel of its owner.
+	 * Fires one Projectile, depending on the chargelevel of the player.
 	 * */
 	public void fire() {
 		if(counter <= 0){

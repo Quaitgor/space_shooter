@@ -32,6 +32,9 @@ import factory.Spawner;
 import graphics.GS;
 import junit.framework.TestCase;
 
+/**
+ * Tests the Spawner class.
+ */
 public class SpawnerTest extends TestCase{
 	private void initGL(){
         try {
@@ -64,6 +67,10 @@ public class SpawnerTest extends TestCase{
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
 	}
+	/**
+	 * lets an instance of Spawner spawn testlevel.json and checks whether the
+	 * specified Moveables have been created and are in the right position.
+	 */
 	public void testSpawning(){
 
 		GS.enemys = new Vector<Moveable>();

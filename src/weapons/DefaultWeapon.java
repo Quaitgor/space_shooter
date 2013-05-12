@@ -5,8 +5,7 @@ import entities.Entity;
 import graphics.GS;
 
 /**
- * DefaultWeapon is an extended Weapon built for firing an small Projectile,
- * its the default weapon of the player
+ * fires an small Projectile, its the default weapon of the player
  * */
 public class DefaultWeapon extends Weapon {
 	
@@ -16,7 +15,7 @@ public class DefaultWeapon extends Weapon {
 	}
 	
 	/**
-	 * Fires one small, fast projectile.
+	 * Fires one small, fast Projectile.
 	 * With an added graphical firing-effect if the owner is the player.
 	 * */
 	public void fire() {

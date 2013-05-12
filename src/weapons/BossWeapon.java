@@ -3,7 +3,7 @@ package weapons;
 import entities.Entity;
 
 /**
- * BossWeapon is an extended Weapon built for firing shots designed for the boss-enemy
+ * built for firing shots designed for the boss-enemy.
  * */
 public class BossWeapon extends Weapon {
 	
@@ -13,7 +13,7 @@ public class BossWeapon extends Weapon {
 	}
 
 	/**
-	 * Fires the projectile
+	 * Fires the projectile.
 	 * */
 	public void fire() {
 		if(counter <= 0){

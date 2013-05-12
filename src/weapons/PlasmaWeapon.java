@@ -5,7 +5,7 @@ import entities.Entity;
 import graphics.GS;
 
 /**
- * PlasmaWeapon is an extended Weapon built for firing a plasma shot with 3 Projectiles.
+ * fires three PlasmaProjectiles.
  * */
 public class PlasmaWeapon extends Weapon {
 	
@@ -15,7 +15,7 @@ public class PlasmaWeapon extends Weapon {
 	}
 
 	/**
-	 * Firing 3 projectils at once, if the weapon is ready (delay).
+	 * Fires 3 projectiles at once, if the weapon is ready (delay).
 	 * With an added graphical firing-effect if the owner is the player.
 	 * */
 	public void fire() {

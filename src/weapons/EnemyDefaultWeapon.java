@@ -3,13 +3,15 @@ package weapons;
 import entities.Entity;
 
 /**
- * DefaultWeapon is an extended Weapon built for firing an small Projectile,
- * its the default weapon of the enemy.
- * With the level in the constructor the type of projectile is defined.
+ * fires a small Projectile, its the default weapon of the enemy.
+ * With the level in the constructor the type of Projectile is defined.
  * */
 public class EnemyDefaultWeapon extends Weapon {
 	private int weaponlevel;
 	
+	/**
+	 * @param level defines the type of the Projectile.
+	 */
 	public EnemyDefaultWeapon(Entity owner, boolean targetPlayer, int level) {
 		super(owner, targetPlayer);
 		weaponDelay = 800;
@@ -17,7 +19,7 @@ public class EnemyDefaultWeapon extends Weapon {
 	}
 	
 	/**
-	 * Fires one projectile.
+	 * Fires one Projectile.
 	 * */
 	public void fire() {
 		if(counter <= 0){

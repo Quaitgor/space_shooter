@@ -5,7 +5,7 @@ import entities.Entity;
 import graphics.GS;
 
 /**
- * IceWeapon is an extended Weapon built for firing an Ice Projectile.
+ * fires an IceProjectile.
  * */
 public class IceWeapon extends Weapon {
 	

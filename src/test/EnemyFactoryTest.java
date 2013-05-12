@@ -23,7 +23,9 @@ import factory.Spawn;
 import graphics.GS;
 import junit.framework.TestCase;
 
-
+/**
+ * Tests the EnemyFactory class.
+ */
 public class EnemyFactoryTest extends TestCase{
 	private void initGL(){
         try {
@@ -56,6 +58,12 @@ public class EnemyFactoryTest extends TestCase{
         glCullFace(GL_BACK);
         GL11.glLoadIdentity();
 	}
+	
+	/**
+	 * commands the EnemyFactory to create many different Moveables and checks
+	 * whether the specified Moveables have been created and are in the right
+	 * position.
+	 */
 	public void testCreate(){
 		GS.enemys = new Vector<Moveable>();
 		GS.friendlys = new Vector<Moveable>();;
