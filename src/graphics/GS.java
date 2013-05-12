@@ -120,7 +120,6 @@ public class GS {
 	 * creates the levelgenerator and starts the game itself
 	 * */
 	public static void startGame(){
-		System.out.println("Starting");
 		new Player(-100, 384);
 		levelgen = new Spawner(startlevel, deltaUpdater);
 		//levelgen = new Spawner("level"+level, deltaUpdater);

@@ -26,7 +26,6 @@ public class BlackScreen extends StaticDecor {
 	public void update(double delta){
 		super.update(delta);
 		timer -= delta;
-		System.out.println(timer);
 		if(timer < 0){
 			if(!reverse)this.tex.color[3] -= 0.02f;
 			if(reverse)this.tex.color[3] += 0.02f;

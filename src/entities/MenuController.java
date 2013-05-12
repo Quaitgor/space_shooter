@@ -50,7 +50,6 @@ public class MenuController extends Entity{
 	
 	public MenuController(){
 		super(640,384);
-		System.out.println("created");
 		mainTexture = new LayerData2(this, "selector", 1, 1);
 		mainTexture.layer = 60;
 		mainScreenTex = new LayerData2(this, "mainscreen", 1, 1);
@@ -280,7 +279,6 @@ public class MenuController extends Entity{
 	private void overwriteJson(){
 		try {
 			String einstring = GsonParser.toJson(KeyMap);
-			System.out.print(einstring);
 			FileWriter fw = new FileWriter("json/keyconfiguration.json");
 			fw.write(einstring);
 			fw.close();

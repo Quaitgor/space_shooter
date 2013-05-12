@@ -175,7 +175,6 @@ public class PlayerMove extends Move{
                 }
         		if (Keyboard.getEventKey() == chargekey) {
         			if (!fastshot) {
-        				System.out.println("released Charge");
             			charging = false;
             			((Player)owner).chargeLevel = chargedelta;
             			((Player)owner).chargeFire();
@@ -185,7 +184,6 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == keepFiring) {
         			if(!charging){
             			this.fastshot = false;
-            			System.out.println("keeFiring released");
         			}
         		}
         	}

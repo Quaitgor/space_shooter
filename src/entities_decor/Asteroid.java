@@ -20,7 +20,6 @@ public class Asteroid extends MoveableDecor {
 		int X = 1;
 		int Y = 1;
 		int randomTex = r.nextInt(7)+2;
-		System.out.println(randomTex);
 		tex = "deco/astro"+randomTex;
 		if(randomTex >= 4 && randomTex <= 9){
 			X *= 2;
