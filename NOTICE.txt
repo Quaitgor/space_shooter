@@ -1,0 +1,13 @@
+   ===================================================================================
+   ==  Notices and attributions required by libraries that the project depends on   ==
+   ===================================================================================
+
+space_shooter depends on the following projects of which the rights belong to their respective owners:
+
+Lightweight Java Game Library Project (http://www.lwjgl.org/license.php)
+
+JUnit 3 (https://github.com/junit-team/junit/blob/master/LICENSE.txt)
+
+Slick2d (http://www.slick2d.org/documentation/license-bsd/)
+
+google-gson (http://www.apache.org/licenses/LICENSE-2.0; https://code.google.com/p/google-gson/)
