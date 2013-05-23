@@ -9,10 +9,16 @@ import graphics.LayerData2;
  * 
  * */
 public class Powerup extends Mindless {
+	protected boolean stays = true;
 	
 	public Powerup(double posX, double posY) {
 		super(posX, posY);
+		
+
 		movement = new KeepDirection(this, 3, 0);
+		if(stays)movement = new KeepDirection(this, 0, 0);
+		
+		
 		mainTexture= new LayerData2(this, "powerup", 1, 8);
 		mainTexture.layer= defaultLayer;
 		hitboxOffset = new int[]{-16, -16, 16, 16};
@@ -51,8 +57,9 @@ public class Powerup extends Mindless {
 	 * Extended in the classes extending this class.
 	 * */
 	public void pickedUp(Moveable target){
-		posX = -1000;
-		posY = -1000;
+		if(!stays)posX = -1000;
+		if(!stays)posY = -1000;
+		if(stays)this.alreadyHit.clear();
 	}
 	
 }
