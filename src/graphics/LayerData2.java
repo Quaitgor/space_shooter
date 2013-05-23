@@ -9,6 +9,8 @@ import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2f;
+
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import entities.Entity;
+import entities.Offensive;
 
 
 /**
@@ -62,6 +65,10 @@ public class LayerData2 {
     public boolean disableAnimation = false;
     public boolean deactivateAfter = false;
     public String collisionTexPath = "";
+	protected int[] hitboxOffset;
+	protected Rectangle hitbox;
+    public boolean showHitbox = false;
+    public boolean drawBoundary  = false;
     
 	public LayerData2(Entity moveable, String texturepath, int h, int v) {
 		this.owner = moveable;
@@ -79,6 +86,8 @@ public class LayerData2 {
     	setupTexture();
     	calculateSprite();
     	animationList = new ArrayList<double[][]>();
+    	hitboxOffset = new int[]{1,1,1,1};
+    	hitbox = new Rectangle();
 	}
 	
 	/**
@@ -152,6 +161,12 @@ public class LayerData2 {
 	/**
 	 * Checks if another Sprite needs to be set for the next draw using the animationList
 	 * */
+	public void updateHitbox(int[] hitboxOffsets){
+		hitbox.x = (int) this.spriteDisplayX/2+hitboxOffsets[0];
+		hitbox.y = (int) this.spriteDisplayY/2+hitboxOffsets[1];
+		hitbox.width = (int) this.spriteDisplayX/2+hitboxOffsets[2];
+		hitbox.height= (int) this.spriteDisplayY/2+hitboxOffsets[3];
+	}
 	protected void checkAnimation(){
 		int tempSpriteX = spriteH;
 		int tempSpriteY = spriteV;
@@ -206,10 +221,45 @@ public class LayerData2 {
         	glVertex2f( (int)spriteDisplayX, 0);
         }
         glEnd();
+		if(showHitbox){
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glColor4f(1f,0.2f,0.2f,1.0f);
+            glTranslatef(0,0, -10);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glTexCoord2f(0, 0);
+				GL11.glVertex2f(hitbox.x, hitbox.y);
+				GL11.glTexCoord2f(0, 1);
+				GL11.glVertex2f(hitbox.x, hitbox.height);
+				GL11.glTexCoord2f(1, 1);
+				GL11.glVertex2f(hitbox.width, hitbox.height);
+				GL11.glTexCoord2f(1, 0);
+				GL11.glVertex2f(hitbox.width, hitbox.y);
+			}
+			GL11.glEnd();
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+		}
+        if(drawBoundary){
+    		GL11.glDisable(GL11.GL_TEXTURE_2D);
+            GL11.glColor4f(0.4f, 0.2f, 0.8f, 1f);
+            glTranslatef(0,0, -9);
+            glBegin(GL_QUADS);
+            {
+            	glTexCoord2f(texX, texY);
+            	glVertex2f(0, 0);
+            	glTexCoord2f(texX, texYp);
+            	glVertex2f(0, (int)spriteDisplayY);
+            	glTexCoord2f(texXp, texYp);
+            	glVertex2f( (int)spriteDisplayX, (int)spriteDisplayY);
+            	glTexCoord2f(texXp, texY);
+            	glVertex2f( (int)spriteDisplayX, 0);
+            }
+            glEnd();
+    		GL11.glEnable(GL11.GL_TEXTURE_2D);
+        }
         if (!disableDepth) GL11.glDisable(GL11.GL_DEPTH_TEST);
         glPopMatrix();
 	}
-	
 	/**
 	 * changeSprite is a shorthand method to change spriteH and spriteV
 	 * and execute calculateSprite in one command.

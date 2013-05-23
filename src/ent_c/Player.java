@@ -30,6 +30,8 @@ public class Player extends Offensive {
 	protected boolean isDying = false;
 	private boolean flyIn = true;
 	public HUD hud = null;
+	public LayerData2 mainTexture2;
+	public LayerData2 mainTexture3;
 	
 	public Player(double posX, double posY) {
 		super(posX, posY);
@@ -43,9 +45,20 @@ public class Player extends Offensive {
 		changeWeapon(new DefaultWeapon(this, false));
 		changeWeapon2(new ChargeWeapon(this, false));
 		movement = new TargetPosition(this, 2, 120, 384, false);
+		
+
 		mainTexture = new LayerData2(this, "player", 1, 1);
 		mainTexture.layer= defaultLayer;
 		addNewLayer(mainTexture);
+		mainTexture2 = new LayerData2(this, "playerl2", 1, 1);
+		mainTexture2.layer= defaultLayer+1;
+		addNewLayer(mainTexture2);
+		mainTexture3 = new LayerData2(this, "playerl3", 1, 1);
+		mainTexture3.layer= defaultLayer+2;
+		addNewLayer(mainTexture3);
+		
+		
+		
 		friendly = true;
 		addToCollision();
 		hitboxOffset = new int[]{-68, -22, 68, 18};

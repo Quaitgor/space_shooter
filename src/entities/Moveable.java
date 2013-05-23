@@ -25,6 +25,9 @@ public abstract class Moveable extends Entity {
 	public int health = 1;
 	protected String deathSprite = "explosion/explosion";
 	protected Vector<Moveable> alreadyHit;
+
+	public boolean showHitbox = false;
+	
 	
 	public Moveable(double newPosX, double newPosY) {
 		super(newPosX, newPosY);
@@ -94,7 +97,7 @@ public abstract class Moveable extends Entity {
 	/**
 	 * Removes the object from the observer and the game
 	 * */
-	protected void unsubscribe(){
+	public void unsubscribe(){
 		super.unsubscribe();
 		Vector<Moveable> target = null;
 		if(friendly){

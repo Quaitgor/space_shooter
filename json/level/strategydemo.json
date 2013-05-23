@@ -1,0 +1,8 @@
+{
+	0.1:[
+	{"Moveable":"powerups.IcePower","x":400.0,"y":284.0},
+	{"Moveable":"powerups.InfernoPower","x":400.0,"y":384.0},
+	{"Moveable":"powerups.PlasmaPower","x":400.0,"y":484.0},
+	{"Moveable":"powerups.DefaultPower","x":400.0,"y":584.0}	]
+	
+}

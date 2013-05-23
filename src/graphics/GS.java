@@ -39,12 +39,14 @@ public class GS {
 	private static boolean resetActive = false;
 	public static final int FRAMEWIDTH = 1280;
 	public static final int FRAMEHEIGHT = 768;
-	private static String startlevel = "level1";
-	
+	private static String startlevel = "empty";
+
+	public static boolean enableBoundarys = false;
+	public static boolean enableHitbox= false;
 	
 	public GS(String level) {
 		GS.startlevel = level;
-		GS.startlevel = "demo1";
+		GS.startlevel = "empty";
 		start();
 	}
 	/**
@@ -84,9 +86,10 @@ public class GS {
 		new AstroidBelt(512,470, 3);
 		new AstroidBelt(1024,640, 4);
 		new Stars(640, 384);
-		MenuController menu = new MenuController();
-		menu.mainMenuPoint = 0;
+		//MenuController menu = new MenuController();
+		//menu.mainMenuPoint = 0;
 		new BlackScreen(640, 384, false);
+		startGame();
 	}
 	
 	/**
@@ -124,6 +127,17 @@ public class GS {
 		new Player(-100, 384);
 		levelgen = new Spawner(startlevel, deltaUpdater);
 		//levelgen = new Spawner("level"+level, deltaUpdater);
+	}
+	
+	public static void customReset(){
+		for(int i=0;i<enemys.size();i++){
+			enemys.elementAt(i).unsubscribe();
+		}
+		for(int i=0;i<friendlys.size();i++){
+			if(!player1.equals(friendlys.elementAt(i))){
+				friendlys.elementAt(i).unsubscribe();
+			}
+		}
 	}
 	
 	/**
@@ -214,4 +228,20 @@ public class GS {
     private static long getTime() {
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
     }
+
+	public static void enableBoundarys() {
+		if(enableBoundarys){
+			enableBoundarys = false;
+		}else{
+			enableBoundarys = true;
+		}
+	}
+	public static void enableHitboxes() {
+		if(enableHitbox){
+			enableHitbox = false;
+		}else{
+			enableHitbox = true;
+		}
+	}
+    
 }

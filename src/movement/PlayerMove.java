@@ -5,8 +5,11 @@ import java.util.HashMap;
 
 import org.lwjgl.input.Keyboard;
 
+import powerups.IcePower;
+
 import ent_c.Player;
 import entities.*;
+import factory.Spawner;
 import graphics.GS;
 
 /**
@@ -37,27 +40,90 @@ public class PlayerMove extends Move{
 	protected int moveDown;
 	protected int moveLeft;
 	protected int moveRight;
+	
+	protected boolean strategyPres = false;
+	protected boolean layerDataPres = true;
 
 	public PlayerMove(Entity owner, int player){
 		super(owner);
 		this.owner = owner;
 		this.player = player;
 		
-		HashMap<String, Integer> KeyMap = MenuController.getKeyMap();
-		firekey = KeyMap.get("Fire");
-		chargekey = KeyMap.get("Charge");
-		keepFiring = KeyMap.get("AutoFire");
-		moveUp = KeyMap.get("Up");
-		moveDown = KeyMap.get("Down");
-		moveLeft = KeyMap.get("Left");
-		moveRight = KeyMap.get("Right");
+		firekey = Keyboard.KEY_A;
+		chargekey = Keyboard.KEY_S;
+		keepFiring = Keyboard.KEY_D;
+		moveUp = Keyboard.KEY_UP;
+		moveDown = Keyboard.KEY_DOWN;
+		moveLeft = Keyboard.KEY_LEFT;
+		moveRight =  Keyboard.KEY_RIGHT;
 	}
 	
 	/**
 	 * This method grabs all relevant Input of the user and calulates movement
 	 * and weaponcontrol for the Player.
 	 * */
+	protected void switchControl(int number){
+		layerDataPres = false;
+		strategyPres = false;
+		switch(number){
+		case Keyboard.KEY_F1:
+			strategyPres = true;
+			System.out.println("Strategy Presentation");
+			GS.levelgen = new Spawner("strategydemo", GS.deltaUpdater);
+			break;
+		case Keyboard.KEY_F2:
+			layerDataPres = true;
+			System.out.println("Layer Presentation");
+			break;
+		}
+	}
+	
 	protected void calculateMove(){
+		
+		double timer = 2;
+		// Presentation Code
+
+		if (Keyboard.isKeyDown(Keyboard.KEY_F11)){
+			GS.customReset();
+		}
+		if(layerDataPres){
+			if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8)){
+    			((Player)owner).mainTexture3.spriteDisplayY -= timer;
+    		} 
+			if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
+    			((Player)owner).mainTexture3.spriteDisplayY += timer;
+    		}
+			if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4)){
+    			((Player)owner).mainTexture3.spriteDisplayX -= timer;
+    		}
+			if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)){
+    			((Player)owner).mainTexture3.spriteDisplayX += timer;
+    		}
+			
+
+			if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7)){
+    			((Player)owner).mainTexture2.rotation += timer;
+    		}
+			if (Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)){
+    			((Player)owner).mainTexture2.rotation -= timer;
+    		}
+			
+			
+			if (Keyboard.isKeyDown(Keyboard.KEY_ADD)){
+    			((Player)owner).mainTexture2.pos[1] += timer;
+    			((Player)owner).mainTexture3.pos[1] -= timer;
+    		}
+			if (Keyboard.isKeyDown(Keyboard.KEY_SUBTRACT)){
+    			((Player)owner).mainTexture2.pos[1] -= timer;
+    			((Player)owner).mainTexture3.pos[1] += timer;
+    		}
+		}
+		// Presentation Code End
+		
+		
+		
+		
+		
 		// Movement Controls
 		speedX = 0;
 		speedY = 0;
@@ -128,9 +194,24 @@ public class PlayerMove extends Move{
     	 *  - Keyboard.getEventKeyState() == false => when Key Released.
     	 * */
         while (Keyboard.next()) {
-
         	if (Keyboard.getEventKeyState()) {
-        		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD9) {
+
+        		// Presentation Code
+        		if (Keyboard.getEventKey() == Keyboard.KEY_F1 ||Keyboard.getEventKey() == Keyboard.KEY_F2 || Keyboard.getEventKey() == Keyboard.KEY_F3) {
+        			switchControl(Keyboard.getEventKey());
+        		}
+        		if(layerDataPres){
+            		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD1) {
+            			GS.enableBoundarys();
+            		}
+            		if (Keyboard.getEventKey() == Keyboard.KEY_NUMPAD3) {
+            			GS.enableHitboxes();
+            		}
+        		}
+        		
+        		// Presentation Code End
+
+        		if (Keyboard.getEventKey() == Keyboard.KEY_F12) {
         			GS.resetGame(0);
         		}
         		if (Keyboard.getEventKey() == moveLeft) {
@@ -161,6 +242,7 @@ public class PlayerMove extends Move{
         			}
         		}
         	}else{
+        		
         		if (Keyboard.getEventKey() == moveLeft) {
                 	movingLeft = false;
                 }

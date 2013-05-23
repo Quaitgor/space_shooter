@@ -21,7 +21,7 @@ public class Powerup extends Mindless {
 		
 		mainTexture= new LayerData2(this, "powerup", 1, 8);
 		mainTexture.layer= defaultLayer;
-		hitboxOffset = new int[]{-16, -16, 16, 16};
+		hitboxOffset = new int[]{-20, -16, 20, 16};
 		isPowerup = true;
     	double[][] animationTest = new double[8][8];
     	animationTest[0][0] = 200;
@@ -57,9 +57,8 @@ public class Powerup extends Mindless {
 	 * Extended in the classes extending this class.
 	 * */
 	public void pickedUp(Moveable target){
-		if(!stays)posX = -1000;
-		if(!stays)posY = -1000;
-		if(stays)this.alreadyHit.clear();
+		posX = -1000;
+		posY = -1000;
 	}
 	
 }

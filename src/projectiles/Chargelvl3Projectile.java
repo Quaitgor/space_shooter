@@ -17,7 +17,7 @@ public class Chargelvl3Projectile extends Offensive {
 		isProjectile = true;
 		health = 20;
 		setDmg(40);
-		hitboxOffset = new int[]{-0, -114, 100, 114};
+		hitboxOffset = new int[]{-0, -114, 128, 114};
 		mainTexture = new LayerData2(this, "projectile/chargelvl3", 1, 4);
 		mainTexture.color = new float[]{1f, 1f, 1f, 1f};
 		movement = new TargetPosition(this, 12, moveX, moveY, true);

@@ -1,6 +1,17 @@
 package entities;
 
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glTexCoord2f;
+import static org.lwjgl.opengl.GL11.glVertex2f;
+
+import graphics.GS;
+
 import java.awt.Rectangle;
+
+import org.lwjgl.opengl.GL11;
+
 import weapons.Weapon;
 
 /**
@@ -11,6 +22,9 @@ public abstract class Offensive extends Moveable{
 	public double[] weaponOffset = new double[]{0,0};
 	protected double destroyTimer = 0;
 
+	public boolean showBoundary = true;
+	
+	
 	public Offensive(double newPosX, double newPosY) {
 		super(newPosX, newPosY);
 		hitbox = new Rectangle();
@@ -22,6 +36,17 @@ public abstract class Offensive extends Moveable{
 	 */
 	public void update(double delta){
 		updateHitbox();
+		if(GS.enableBoundarys){
+			mainTexture.drawBoundary = true;
+		}else{
+			mainTexture.drawBoundary = false;
+		}
+		if(GS.enableHitbox){
+			mainTexture.updateHitbox(hitboxOffset);
+			mainTexture.showHitbox = true;
+		}else{
+			mainTexture.showHitbox = false;
+		}
 		super.update(delta);
 		if(weapon != null)weapon.update(delta);
         
