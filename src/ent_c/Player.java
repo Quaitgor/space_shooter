@@ -22,7 +22,9 @@ public class Player extends Offensive {
 	private int defaultLayer = 40;
 	public int shieldCharges = 2;
 	public Weapon secondWeapon;
-	public double chargeLevel = 0;
+	private Weapon chargeUpWeapon;
+	public boolean secondWeaponSwitch = true;
+	public boolean secondWeaponDisabled = false;
 	public LayerData2 projectileFire;
 	protected Random r;
 	protected double deathTimer;
@@ -38,12 +40,13 @@ public class Player extends Offensive {
 		r = new Random();
 		setDmg(500);
 		GS.player1 = this;
-		weapon = new InfernoWeapon(this, true);
-		weapon.weaponOffset = new double[]{-100, -35};
-		weapon.friendly = true;
 		weaponOffset = new double[]{80, 1};
+		chargeUpWeapon = new ChargeWeapon(this, false);
+		chargeUpWeapon.friendly = true;
 		changeWeapon(new DefaultWeapon(this, false));
-		changeWeapon2(new ChargeWeapon(this, false));
+		changeWeapon2(chargeUpWeapon);
+
+		secondWeapon.weaponOffset = new double[]{40,0};
 		movement = new TargetPosition(this, 2, 120, 384, false);
 		
 

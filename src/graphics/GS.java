@@ -46,7 +46,6 @@ public class GS {
 	
 	public GS(String level) {
 		GS.startlevel = level;
-		GS.startlevel = "empty";
 		start();
 	}
 	/**

@@ -28,6 +28,7 @@ public abstract class Weapon {
 	 * */
 	public void update(double delta){
 		if(counter > 0)counter -= delta;
+		if(counter < delta && counter > 0) counter = 0;
 	}
 	
 	/**

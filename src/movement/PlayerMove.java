@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 
 import powerups.IcePower;
+import weapons.ChargeWeapon;
 
 import ent_c.Player;
 import entities.*;
@@ -20,8 +21,9 @@ import graphics.GS;
 public class PlayerMove extends Move{
 	public Entity owner;
 	protected int player;
-	protected boolean charging = false;
-	public double chargedelta = 0;
+	protected boolean charging1 = false;
+	protected boolean charging2 = false;
+	protected double releaseChargeKey = 0;
 	protected boolean fastshot = false;
 	protected double maxSpeed = 7.5;
 	protected double speedX = 0;
@@ -31,7 +33,6 @@ public class PlayerMove extends Move{
 	protected boolean movingUp = false;
 	protected boolean movingRight = false;
 	protected boolean movingDown= false;
-	public double chargeTime = 2000;
 	//keybinding
 	protected int firekey;
 	protected int chargekey;
@@ -183,9 +184,8 @@ public class PlayerMove extends Move{
     	if (fastshot){
     		((Player)owner).fire();
     	}
-    	if (charging){
-    		if(chargedelta < chargeTime)chargedelta += owner.delta;
-			if(chargedelta > chargeTime)chargedelta = chargeTime;
+    	if (charging1 || charging2){
+    		 ((ChargeWeapon)((Player)owner).secondWeapon).chargingWeapon();
     	}
     	
     	/**
@@ -227,22 +227,26 @@ public class PlayerMove extends Move{
                 	movingDown = true;
                 }
         		if (Keyboard.getEventKey() == firekey) {
-        			if (!fastshot && !charging) {
+        			if (!fastshot && !charging1 && !charging2) {
         				((Player)owner).fire();
         			}
         		}
         		if (Keyboard.getEventKey() == keepFiring) {
-        			if(!charging){
+        			if(!charging1 && !charging2){
             			this.fastshot = true;
         			}
         		}
-        		if (Keyboard.getEventKey() == chargekey) {
+        		if (Keyboard.getEventKey() == chargekey || Keyboard.getEventKey() == Keyboard.KEY_F) {
         			if(!fastshot) {
-        				charging = true;
+        				if(Keyboard.getEventKey() == chargekey){
+            				charging1 = true;
+        				}
+        				if(Keyboard.getEventKey() == Keyboard.KEY_F){
+            				charging2 = true;
+        				}
         			}
         		}
         	}else{
-        		
         		if (Keyboard.getEventKey() == moveLeft) {
                 	movingLeft = false;
                 }
@@ -255,17 +259,29 @@ public class PlayerMove extends Move{
         		if (Keyboard.getEventKey() == moveDown) {
                 	movingDown = false;
                 }
-        		if (Keyboard.getEventKey() == chargekey) {
+        		if (Keyboard.getEventKey() == chargekey || Keyboard.getEventKey() == Keyboard.KEY_F) {
         			if (!fastshot) {
-        				System.out.println("released Charge");
-            			charging = false;
-            			((Player)owner).chargeLevel = chargedelta;
-            			((Player)owner).chargeFire();
-            			chargedelta = 0;
+        				if(Keyboard.getEventKey() == chargekey){
+                			charging1 = false;
+                			releaseChargeKey = chargekey;
+        				}
+        				if(Keyboard.getEventKey() == Keyboard.KEY_F){
+                			charging2 = false;
+                			releaseChargeKey = Keyboard.KEY_F;
+        				}
+        				if(!charging1 && !charging2){
+        					if(releaseChargeKey == chargekey){
+        						((ChargeWeapon)((Player)owner).secondWeapon).burstSwitch = false;
+        					}
+        					if(releaseChargeKey == Keyboard.KEY_F){
+        						((ChargeWeapon)((Player)owner).secondWeapon).burstSwitch = true;
+        					}
+    						((Player)owner).chargeFire();
+        				}
         			}
         		}
         		if (Keyboard.getEventKey() == keepFiring) {
-        			if(!charging){
+        			if(!charging1 && !charging2){
             			this.fastshot = false;
             			System.out.println("keeFiring released");
         			}
