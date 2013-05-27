@@ -7,6 +7,6 @@ import graphics.*;
  */
 public class Launcher {
 	public static void main(String[] args) {
-		new GS("level1");
+		new GS("empty");
 	}
 }

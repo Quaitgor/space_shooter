@@ -1,5 +1,6 @@
 package entities;
 
+import weapons.ChargeWeapon;
 import ent_c.Player;
 import movement.Move;
 import movement.PlayerMove;
@@ -56,7 +57,7 @@ public class HUD extends Entity{
 		int_BBar.layer = 10;
 		int_BBar.color = defaultColor;
 		int_BBar.pos[0] = hideBBarValue;
-		int_BBar.color = new float[]{0.5f, 0.5f, 0.5f, 1.0f};
+		int_BBar.color = new float[]{0.5f, 1.0f, 0.0f, 1.0f};
 		int_Dot1 = new LayerData2(this, "interface/int_Dot", 1, 1);
 		int_Dot1.spriteDisplayX *= scale;
 		int_Dot1.spriteDisplayY *= scale;
@@ -157,27 +158,42 @@ public class HUD extends Entity{
 			if(int_SBar.pos[0] > hideSBarValue) int_SBar.pos[0] += hideSBarValue/20;			
 		}
 		
+		
+		
+		
+		
+		
 		//Charged Shot Bar Code
-		if(owner.chargedelta <= 2000 && owner.chargedelta != 0){
-			double percentage = 100/owner.chargeTime;
-			double percent = percentage * owner.chargedelta/100;
+		//if(((Player)owner.owner).chargeLevel <= 2000 && ((Player)owner.owner).chargeLevel != 0){
+			//double percentage = 100/owner.chargeTime;
+			//double percent = percentage * ((Player)owner.owner).chargeLevel/100;
+			double percent = ((ChargeWeapon)((Player)owner.owner).secondWeapon).interfaceBarPercent/100;
+
 			double bigBarPos = hideBBarValue -(hideBBarValue * percent);
+
+			int_BBar.pos = new double[]{bigBarPos, 0.0};
+			/*
+			float[] color = int_BBar.color;
 			if (percent*100 >= 60) {
-    			float[] color = int_BBar.color;
     			if (color[0] < 1.0f) color[0] += 0.01f;
     			if (color[1] > 0.5f) color[1] -= 0.01f;
+			}else{
+    			if (color[0] > 1.0f) color[0] -= 0.01f;
+    			if (color[1] < 0.5f) color[1] += 0.01f;
+				
 			}
+			/*
+			
 			if(percent*100 >= 95 && percent*100 < 100){
 				if(int_BBarGlow.color[3] < 1.0f) int_BBarGlow.color[3] += 0.10f;
 			}
 			if(percent*100 >= 100){
 				if(int_BBarGlow.color[3] > 0.0f) int_BBarGlow.color[3] -= 0.01f;
 			}
-			int_BBar.pos = new double[]{bigBarPos, 0.0};
 		}else{
 			System.arraycopy(defaultColor, 0,int_BBar.color, 0, defaultColor.length );
 			int_BBar.pos = new double[]{hideBBarValue, 0.0};
 			int_BBarGlow.color[3] = 0.0f;
-		}
+		}*/
 	}
 }
